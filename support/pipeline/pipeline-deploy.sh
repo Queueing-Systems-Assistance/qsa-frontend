@@ -12,10 +12,10 @@ dockerLogin() {
 dockerBuildPushQSAFrontend() {
   sudo docker build \
   -f ./support/docker/Dockerfile \
-  -t zoltanszilagyicse/qsa-application-frontend:latest \
-  -t zoltanszilagyicse/qsa-application-frontend:1.0."$TRAVIS_BUILD_NUMBER" . || exit
-  sudo docker push zoltanszilagyicse/qsa-application-frontend:latest || exit
-  sudo docker push zoltanszilagyicse/qsa-application-frontend:1.0."$TRAVIS_BUILD_NUMBER" || exit
+  -t queueingsystemsassistance/qsa-application-frontend:latest \
+  -t queueingsystemsassistance/qsa-application-frontend:1.0."$TRAVIS_BUILD_NUMBER" . || exit
+  sudo docker push queueingsystemsassistance/qsa-application-frontend:latest || exit
+  sudo docker push queueingsystemsassistance/qsa-application-frontend:1.0."$TRAVIS_BUILD_NUMBER" || exit
 }
 
 dockerLogin
