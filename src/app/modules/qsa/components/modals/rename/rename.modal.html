@@ -1,0 +1,23 @@
+<div class="modal-header">
+	<h4 class="modal-title">{{ 'rename' | translate}}</h4>
+	<button (click)="activeModal.dismiss()"
+	        aria-label="Close"
+	        class="close"
+	        type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<form>
+		<div class="form-group">
+			<label class="col-form-label" for="rename-input">{{ 'newName' | translate}}:</label>
+			<input [formControl]="formControl" class="form-control" id="rename-input" placeholder="{{ 'tabName' | translate}}" type="text">
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button (click)="activeModal.close(formControl.value)"
+	        class="btn btn-outline-primary"
+	        type="button">OK
+	</button>
+</div>

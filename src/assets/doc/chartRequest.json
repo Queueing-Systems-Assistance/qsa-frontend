@@ -1,0 +1,18 @@
+{
+	"xAxis": {
+		"from": "1",
+		"to": "5",
+		"steps": "0.5",
+		"featureId": "Lambda"
+	},
+	"systemWeb": {
+		"features": {
+			"Mu": "6",
+			"Lambda": "5",
+			"n": "1",
+			"r": "6",
+			"t": "7"
+		},
+		"systemId": "systemMM1"
+	}
+}

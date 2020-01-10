@@ -1,0 +1,43 @@
+<div [formGroup]="systemInputForm">
+	<h6>{{systemInputsTitle}}</h6>
+	<div *ngIf="systemInputFormName" [formGroupName]="systemInputFormName">
+		<div *ngFor="let nonRequiredSystemInput of systemFeatures" class="input-group mb-2">
+			<ng-template #nonRequiredSystemViewInputTooltip><span [innerHTML]="nonRequiredSystemInput.description"></span></ng-template>
+			<div [ngbTooltip]="nonRequiredSystemViewInputTooltip"
+			     class="input-group-prepend">
+					<span [innerHTML]="nonRequiredSystemInput.name"
+					      class="input-group-text"></span>
+			</div>
+			<input (click)="$event.target.select()"
+			       [systemFeature]="nonRequiredSystemInput"
+			       class="form-control"
+			       formControlName="{{nonRequiredSystemInput.id}}"
+			       id="{{nonRequiredSystemInput.id}}"
+			       min="0"
+			       name="{{nonRequiredSystemInput.id}}"
+			       numbersOnly
+			       placeholder="{{ 'value' | translate}}"
+			       type="number">
+		</div>
+	</div>
+	<div *ngIf="!systemInputFormName">
+		<div *ngFor="let nonRequiredSystemInput of systemFeatures" class="input-group mb-2">
+			<ng-template #nonRequiredSystemViewInputTooltip><span [innerHTML]="nonRequiredSystemInput.description"></span></ng-template>
+			<div [ngbTooltip]="nonRequiredSystemViewInputTooltip"
+			     class="input-group-prepend">
+				    <span [innerHTML]="nonRequiredSystemInput.name"
+				          class="input-group-text"></span>
+			</div>
+			<input (click)="$event.target.select()"
+			       [systemFeature]="nonRequiredSystemInput"
+			       class="form-control"
+			       formControlName="{{nonRequiredSystemInput.id}}"
+			       id="{{nonRequiredSystemInput.id}}"
+			       min="0"
+			       name="{{nonRequiredSystemInput.id}}"
+			       numbersOnly
+			       placeholder="{{ 'value' | translate}}"
+			       type="number">
+		</div>
+	</div>
+</div>

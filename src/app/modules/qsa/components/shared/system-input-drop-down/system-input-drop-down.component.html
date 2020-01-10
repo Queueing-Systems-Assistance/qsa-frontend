@@ -1,0 +1,31 @@
+<div [formGroup]="formGroup">
+    <div [formGroupName]="'xAxis'" class="input-group">
+        <ng-template #selectedSystemViewInputTooltip>
+            <span [innerHTML]="tooltip"></span>
+        </ng-template>
+        <div [ngbTooltip]="selectedSystemViewInputTooltip"
+             class="input-group-prepend">
+            <span class="input-group-text">{{ 'xAxis' | translate }}</span>
+        </div>
+        <ng-select
+                (change)="onChange.emit()"
+                [clearable]="true"
+                [items]="systemFeatures"
+                [searchable]="false"
+                bindLabel="name"
+                bindValue="id"
+                labelForId="xAxisInputSelect"
+                class="custom-select-ng"
+                formControlName="featureId"
+                placeholder="{{ 'selectAValue' | translate}}">
+            <ng-template let-item="item"
+                         ng-label-tmp>
+                <span [innerHTML]="item.name"></span>
+            </ng-template>
+            <ng-template let-item="item"
+                         ng-option-tmp>
+                <span [innerHTML]="item.name" [id]="item.id"></span>
+            </ng-template>
+        </ng-select>
+    </div>
+</div>

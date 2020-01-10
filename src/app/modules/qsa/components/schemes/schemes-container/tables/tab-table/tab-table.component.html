@@ -1,0 +1,41 @@
+<div class="card card-system shadow-sm mt-2">
+	<div class="table-responsive">
+		<div class="card-header">
+			<div class="float-right">
+				<button aria-expanded="false"
+				        aria-haspopup="true"
+				        class="btn btn-light dropdown-toggle"
+				        data-toggle="dropdown"
+				        id="btnGroupDropTabTable"
+				        type="button">
+				</button>
+				<div aria-labelledby="btnGroupDropTabTable"
+				     class="dropdown-menu">
+					<a (click)="exportToCSV()"
+					   class="dropdown-item cursor-pointer">{{ 'exportToCSV' | translate}}</a>
+				</div>
+			</div>
+			<h6 class="mt-2" id="tabTableTitle">{{systemView.name}}</h6>
+		</div>
+
+		<table class="table table-md table-bordered table-system-properties" aria-describedby="tabTableTitle">
+			<thead>
+			<tr>
+				<th class="card-header font-weight-bold"
+				    scope="col">{{ 'parameter' | translate}}</th>
+				<th class="card-header font-weight-bold"
+				    scope="col">{{ 'value' | translate}}</th>
+				<th class="card-header font-weight-bold"
+				    scope="col">{{ 'description' | translate}}</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr *ngFor="let systemFeatureValue of systemTableView.systemFeatureValues">
+				<td><span [innerHTML]="systemFeatureValue.systemFeature.name"></span></td>
+				<td>{{systemFeatureValue.values[0] == 'NaN' ? ("cannotCalculate" | translate) : (+systemFeatureValue.values[0] | number) }}</td>
+				<td><span [innerHTML]="systemFeatureValue.systemFeature.description"></span></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

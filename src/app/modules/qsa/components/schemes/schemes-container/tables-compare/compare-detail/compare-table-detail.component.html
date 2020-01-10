@@ -1,0 +1,12 @@
+<main class="container flex-fill"
+      role="main">
+    <compare-table-selection-component
+            [currentTab]="this.currentTab"
+            (onTableCompareCreated)="onTableCompareCreated($event)"
+            *ngIf="!isTableCompareView()">
+    </compare-table-selection-component>
+    <compare-table-component
+            [tableViewCompare]="tableViewCompare"
+            *ngIf="isTableCompareView()">
+    </compare-table-component>
+</main>

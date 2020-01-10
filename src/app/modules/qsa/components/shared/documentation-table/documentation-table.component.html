@@ -1,0 +1,20 @@
+<table *ngIf="body" class="table table-sm">
+	<thead>
+	<tr>
+		<th class="table-name" scope="col">{{ 'name' | translate}}</th>
+		<th class="table-required" scope="col"></th>
+		<th class="table-dataType" scope="col">{{ 'dataType' | translate}}</th>
+		<th class="table-description" scope="col">{{ 'description' | translate}}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr *ngFor="let element of body">
+		<td class="table-name"><code class="code-highlight">{{element.name}}</code></td>
+		<td class="table-required">
+			<button *ngIf="element.required" class="btn btn-sm btn-danger" disabled>{{ 'required' | translate}}</button>
+		</td>
+		<td class="table-dataType">{{element.dataType}}</td>
+		<td class="table-description"><span [innerHTML]="element.descriptionKey | translate"></span></td>
+	</tr>
+	</tbody>
+</table>

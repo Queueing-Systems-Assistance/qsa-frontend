@@ -1,0 +1,12 @@
+<div class="card-body">
+    <div class="img-system-empty my-0 font-weight-normal mt-1">
+        <img [src]="'assets/res/warning.svg'"
+             alt="Empty icon"
+             class="img-system-empty-content">
+    </div>
+    <h6 class="text-center my-0 font-weight-normal mt-3">{{ 'errorSystemsLoad' | translate}}</h6>
+    <div class="text-center mt-3">
+        <button (click)="loadSystemViewsList()"
+                class="btn btn-primary">{{ 'reload' | translate}}</button>
+    </div>
+</div>

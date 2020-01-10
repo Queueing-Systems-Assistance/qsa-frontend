@@ -1,0 +1,18 @@
+<div class="row">
+    <div *ngIf="data.examples[0]"
+         [className]="data.examples[1] ? 'col col-lg-6 col-12' : 'col'">
+        <json-view-component
+                [cardTitle]="'request'"
+                [example]="data.examples[0]"
+                [loadedExamples]="loadedExamples">
+        </json-view-component>
+    </div>
+    <div *ngIf="data.examples[1]"
+         [className]="data.examples[0] ? 'col col-lg-6 col-12' : 'col'">
+        <json-view-component
+                [cardTitle]="'response'"
+                [example]="data.examples[1]"
+                [loadedExamples]="loadedExamples">
+        </json-view-component>
+    </div>
+</div>

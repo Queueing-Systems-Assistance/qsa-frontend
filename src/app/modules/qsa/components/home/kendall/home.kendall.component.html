@@ -1,0 +1,50 @@
+<h2 class="my-0 font-weight-normal text-left mb-2">{{ 'kendallTitle' | translate}}</h2>
+<p [innerHTML]="'kendallDescription' | translate" class="my-0 font-weight-normal text-left mt-1"></p>
+<div class="list-group shadow-sm mt-4 mb-4">
+    <a class="list-group-item">
+        <h5 class="my-0 font-weight-normal text-center mt-4 mb-4">
+            <span (mouseover)="selectKendallCharacter(KendallCharacters.A)"
+                  [className]="getClassesForKendallCharacters(KendallCharacters.A)">A</span> /
+            <span (mouseover)="selectKendallCharacter(KendallCharacters.B)"
+                  [className]="getClassesForKendallCharacters(KendallCharacters.B)">B</span> /
+            <span (mouseover)="selectKendallCharacter(KendallCharacters.c)"
+                  [className]="getClassesForKendallCharacters(KendallCharacters.c)">c</span> /
+            <span (mouseover)="selectKendallCharacter(KendallCharacters.K)"
+                  [className]="getClassesForKendallCharacters(KendallCharacters.K)">K</span> /
+            <span (mouseover)="selectKendallCharacter(KendallCharacters.n)"
+                  [className]="getClassesForKendallCharacters(KendallCharacters.n)">n</span> /
+            <span (mouseover)="selectKendallCharacter(KendallCharacters.D)"
+                  [className]="getClassesForKendallCharacters(KendallCharacters.D)">D</span>
+        </h5>
+    </a>
+    <a (mouseover)="selectKendallCharacter(KendallCharacters.A)"
+       [className]="getClassesForKendallList(KendallCharacters.A)"
+       [innerHTML]="'kendallDescriptionListItems_A' | translate">
+        <p class="my-0 font-weight-normal text-left mt-1"></p>
+    </a>
+    <a (mouseover)="selectKendallCharacter(KendallCharacters.B)"
+       [className]="getClassesForKendallList(KendallCharacters.B)"
+       [innerHTML]="'kendallDescriptionListItems_B' | translate">
+        <p class="my-0 font-weight-normal text-left mt-1"></p>
+    </a>
+    <a (mouseover)="selectKendallCharacter(KendallCharacters.c)"
+       [className]="getClassesForKendallList(KendallCharacters.c)"
+       [innerHTML]="'kendallDescriptionListItems_c' | translate">
+        <p class="my-0 font-weight-normal text-left mt-1"></p>
+    </a>
+    <a (mouseover)="selectKendallCharacter(KendallCharacters.K)"
+       [className]="getClassesForKendallList(KendallCharacters.K)"
+       [innerHTML]="'kendallDescriptionListItems_K' | translate">
+        <p class="my-0 font-weight-normal text-left mt-1"></p>
+    </a>
+    <a (mouseover)="selectKendallCharacter(KendallCharacters.n)"
+       [className]="getClassesForKendallList(KendallCharacters.n)"
+       [innerHTML]="'kendallDescriptionListItems_n' | translate">
+        <p class="my-0 font-weight-normal text-left mt-1"></p>
+    </a>
+    <a (mouseover)="selectKendallCharacter(KendallCharacters.D)"
+       [className]="getClassesForKendallList(KendallCharacters.D)"
+       [innerHTML]="'kendallDescriptionListItems_D' | translate">
+        <p class="my-0 font-weight-normal text-left mt-1"></p>
+    </a>
+</div>

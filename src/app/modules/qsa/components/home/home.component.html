@@ -1,0 +1,44 @@
+<section class="clearfix" id="intro">
+    <div class="container">
+        <h1 class="my-0 font-weight-normal text-center text-white"><strong>{{ 'qsaApplication' | translate}} <br>
+            Queueing Systems Assistance</strong></h1>
+    </div>
+</section>
+<main class="container"
+      role="main">
+    <div class="row mt-5">
+        <div class="col col-12">
+            <h2 class="my-0 font-weight-normal text-left mb-2">{{ 'whatWeOffer' | translate}}</h2>
+            <p class="my-0 font-weight-normal text-left mt-1">{{ 'whatWeOfferDescription' | translate}}</p>
+        </div>
+        <div class="col col-lg-6 col-12">
+            <home-selection-component
+                    [altText]="'tableIntro'"
+                    [imageSrc]="'assets/res/table_intro.gif'"
+                    [tabType]="TabType.TABLE"
+                    [text]="'calculateSystemDetails'">
+            </home-selection-component>
+        </div>
+        <div class="col col-lg-6 col-12">
+            <home-selection-component
+                    [altText]="'chartIntro'"
+                    [imageSrc]="'assets/res/chart_intro.gif'"
+                    [tabType]="TabType.CHART"
+                    [text]="'visualizeSystemProperties'">
+            </home-selection-component>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-12">
+            <home-systems-component>
+            </home-systems-component>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col col-12">
+            <home-kendall-component>
+            </home-kendall-component>
+        </div>
+    </div>
+</main>

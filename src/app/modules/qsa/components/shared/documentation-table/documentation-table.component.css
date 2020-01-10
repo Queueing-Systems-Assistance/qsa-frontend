@@ -1,0 +1,21 @@
+.code-highlight {
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+.table-name {
+    width: 15%;
+}
+
+.table-required {
+    width: 10%;
+}
+
+.table-dataType {
+    width: 15%;
+}
+
+.table-description {
+    width: 60%;
+}

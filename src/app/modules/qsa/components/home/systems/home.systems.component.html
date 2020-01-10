@@ -1,0 +1,30 @@
+<h2 class="my-0 font-weight-normal text-left mb-2">{{ 'systemsAvailableQuestion' | translate}}</h2>
+<p class="my-0 font-weight-normal text-left mt-1 mb-2">{{ 'systemAvailableQuestionAnswer' | translate}}</p>
+<div *ngIf="isSystemsLoaded()"
+     [scrollbarOptions]="scrollbarOptions"
+     class="container-fluid mt-3 card-home-systems"
+     malihu-scrollbar>
+    <div class=" row flex-row flex-nowrap">
+        <div *ngFor="let systemView of getSystems()" class="col-3 card-system-element">
+            <div class="card shadow-sm card-system-element">
+                <div class="card-header">
+                    <div *ngIf="isSystemStatusBeta(systemView.status)" class="float-right mt-1">
+                        <span class="badge badge-warning">{{systemView.status}}</span>
+                    </div>
+                    <h6 class="mt-2">{{systemView.name}}</h6>
+                </div>
+                <div *ngIf="!systemView.description.length"
+                     class="card-body text-center">-
+                </div>
+                <ul *ngIf="systemView.description.length"
+                    class="list-group list-group-flush">
+                    <li *ngFor="let descriptionElement of systemView.description"
+                        [innerHTML]="descriptionElement"
+                        class="list-group-item"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<error-system-views-load-component *ngIf="!isSystemsLoaded()" class="mt-3">
+</error-system-views-load-component>

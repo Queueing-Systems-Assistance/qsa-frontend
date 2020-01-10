@@ -1,0 +1,13 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+# Frontend Builds
+**/node_modules/**
+**/dist/**
+# Frontend Test Results
+**/cypress/videos/**
+**/cypress/screenshots/**
+**/cypress/fixtures/**
+**/.nyc_output
+**/coverage/*
+**/instrumented/*

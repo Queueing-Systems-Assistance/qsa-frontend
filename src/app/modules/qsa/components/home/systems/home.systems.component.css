@@ -1,0 +1,6 @@
+.card-system-element {
+    max-width: 350px;
+    width: 350px;
+    display: inline-flex;
+    max-height: 400px;
+}

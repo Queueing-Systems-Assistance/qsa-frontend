@@ -1,0 +1,38 @@
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+
+os: linux
+linux:
+  - trusty
+sudo: required
+services:
+  - docker
+git:
+  depth: false
+
+jobs:
+  include:
+    - stage: "Build"
+      language: node_js
+      node_js: "10"
+      addons:
+        apt:
+          packages:
+            - libgconf-2-4
+      cache: npm
+      before_install:
+        - chmod +x ./support/pipeline/pipeline-setup.sh
+        - chmod +x ./support/pipeline/pipeline-build.sh
+        - chmod +x ./support/pipeline/pipeline-deploy.sh
+      install:
+        - ./support/pipeline/pipeline-setup.sh
+      script:
+        - ./support/pipeline/pipeline-build.sh
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: ./support/pipeline/pipeline-deploy.sh
+        on:
+          branch: develop

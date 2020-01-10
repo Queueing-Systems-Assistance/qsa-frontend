@@ -1,0 +1,33 @@
+[
+	{
+		"name": "λ",
+		"description": "Summarized arrival rate",
+		"id": "Lambda",
+		"optional": "false"
+	},
+	{
+		"name": "µ",
+		"description": "Mean service rate per server, that is, the mean rate of service completions while the server is busy",
+		"id": "Mu",
+		"optional": "false"
+	},
+	{
+		"name": "t",
+		"description": "<i>t</i> timeslot",
+		"id": "t",
+		"optional": "true"
+	},
+	{
+		"name": "r",
+		"description": "Quartile",
+		"id": "r",
+		"optional": "true"
+	},
+	{
+		"name": "n",
+		"description": "Number of customers in the system.",
+		"id": "n",
+		"optional": "true",
+		"number": "integer"
+	}
+]

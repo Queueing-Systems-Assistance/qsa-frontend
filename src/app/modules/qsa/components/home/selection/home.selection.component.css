@@ -1,0 +1,38 @@
+.home-selection-wrap {
+    opacity: 1;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.home-selection-text {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.home-selection-wrap:hover .home-selection-image {
+    opacity: 0.3;
+    background: #003166;
+    transition: .5s ease;
+}
+
+.home-selection-wrap:hover {
+    background: #003166;
+}
+
+.home-selection-wrap:hover .home-selection-text {
+    opacity: 1;
+}
+
+.home-selection-image-small {
+    width: 30px;
+    height: 30px;
+}

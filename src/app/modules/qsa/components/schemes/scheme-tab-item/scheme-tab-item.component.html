@@ -1,0 +1,48 @@
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a (click)="onSelectedTab()"
+           *ngIf="!router.url.endsWith(index.toString())"
+           [routerLink]="[index]"
+           class="nav-link cursor-pointer"
+           routerLinkActive="active">{{ tab.name | translate }}
+        </a>
+        <div (click)="onSelectedTab()"
+             *ngIf="router.url.endsWith(index.toString())"
+             [routerLink]="[index]"
+             class="btn-group ml-2 mr-2"
+             role="group"
+             routerLinkActive="active">
+            <button class="btn btn-primary"
+                    type="button">{{ tab.name | translate}}
+            </button>
+            <div class="btn-group"
+                 role="group">
+                <button aria-expanded="false"
+                        aria-haspopup="true"
+                        class="btn btn-primary dropdown-toggle"
+                        data-toggle="dropdown"
+                        id="btnGroupDropTabItem"
+                        type="button">
+                </button>
+                <div aria-labelledby="btnGroupDropTabItem"
+                     class="dropdown-menu"
+                     id="btnGroupDropDownTabItem">
+                    <a (click)="onRename()"
+                       class="dropdown-item cursor-pointer"
+                       id="tabItemRename">{{ 'rename' | translate}}
+                    </a>
+                    <a (click)="onChangeTabType()"
+                       *ngIf="tab.type !== TabType.DEFAULT"
+                       class="dropdown-item cursor-pointer"
+                       id="tabItemChangeTabType">{{ 'changeTabType' | translate}}
+                    </a>
+                    <a (click)="onCloseTab()"
+                       *ngIf="index !== 0"
+                       class="dropdown-item cursor-pointer"
+                       id="tabItemClose">{{ 'delete' | translate}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

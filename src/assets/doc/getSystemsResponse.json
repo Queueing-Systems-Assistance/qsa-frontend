@@ -1,0 +1,104 @@
+[
+	{
+		"name": "D | D | n | K | K",
+		"id": "systemDDnKK",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "GI | M | 1",
+		"id": "systemGIM1",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | G | 1",
+		"id": "systemMG1",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | G | 1 | K | K",
+		"id": "systemMG1KK",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | G | 1 | Priority",
+		"id": "systemMG1Prior",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | Hypo | 1 | K | K",
+		"id": "systemMHypo1KK",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | 1",
+		"id": "systemMM1",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | 1 | Decreasing",
+		"id": "systemMM1Dec",
+		"status": "OK",
+		"description": ""
+	},
+	{
+		"name": "M | M | 1 | K",
+		"id": "systemMM1K",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | 1 | K | K",
+		"id": "systemMM1KK",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | 2",
+		"id": "systemMM2",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | n",
+		"id": "systemMMn",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | n | K",
+		"id": "systemMMnK",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | n | K | K",
+		"id": "systemMMnKK",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | n | Priority",
+		"id": "systemMMnPrior",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | n | n",
+		"id": "systemMMnn",
+		"status": "BETA",
+		"description": ""
+	},
+	{
+		"name": "M | M | ∞",
+		"id": "systemMMInf",
+		"status": "BETA",
+		"description": ""
+	}
+]

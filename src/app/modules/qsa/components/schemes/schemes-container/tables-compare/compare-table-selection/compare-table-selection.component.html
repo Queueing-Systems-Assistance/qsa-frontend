@@ -1,0 +1,41 @@
+<div class="row mt-5 mb-5">
+    <div class="col-12">
+        <div class="card shadow-sm mt-2">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ 'tables' | translate}}</h4>
+            </div>
+            <empty-system-views-component class="card-body"
+                                          *ngIf="!isEnoughTableViewsAreAvailable()"
+                                          [imageAsset]="'assets/res/warning.svg'"
+                                          [headingText]="'notEnoughTableAreAvailable'"
+                                          [subText]="'createTablesFirst'">
+            </empty-system-views-component>
+            <div *ngIf="isEnoughTableViewsAreAvailable()" class="system-list">
+                <form [formGroup]="formGroup">
+                    <ul class="list-group list-group-flush">
+                        <li *ngFor="let tabIndexes of getTableViewTabIndexes(); let i = index"
+                            class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input (ngModelChange)="setSelectable()"
+                                       [value]="tabIndexes"
+                                       class="custom-control-input"
+                                       formControlName="{{tabIndexes}}"
+                                       id="{{tabIndexes}}"
+                                       type="checkbox">
+                                <label class="custom-control-label"
+                                       for="{{tabIndexes}}">{{getTableViewsTabName()[i] | translate }}
+                                    - {{getTableViews()[i].name}}</label>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <button [hidden]="!isEnoughTableViewsAreAvailable()"
+                    (click)="processCompareTableScheme()"
+                    [disabled]="!isTwoTablesAreSelected()"
+                    id="buttonCalculate"
+                    class="btn card-footer text-center">{{ 'generate' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
