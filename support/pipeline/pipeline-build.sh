@@ -13,7 +13,6 @@ echo "[OK]"
 
 #### Run Frontend Tests
 printf "Running Tests FE "
-cd qsa-application-frontend || exit
 npm run e2eCI || exit
 echo "[OK]"
 
