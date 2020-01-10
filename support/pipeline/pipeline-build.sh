@@ -5,7 +5,7 @@ cd "${TRAVIS_BUILD_DIR}" || exit
 
 #### Start Backend
 printf "Startup Backend "
-docker run -d --rm --name qsaBackend zoltanszilagyicse/qsa-backend:latest
+docker run -d --rm --name qsaBackend -p 8080:8080 zoltanszilagyicse/qsa-backend:latest
 while ! $(curl --output /dev/null --silent --head --fail http://localhost:8080/actuator/info); do
     sleep 5
 done
