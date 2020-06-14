@@ -4,6 +4,6 @@ export class SystemView {
 
     id: string;
     name: string;
-    description: string[];
+    description: string;
     status: Status;
 }

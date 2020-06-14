@@ -31,7 +31,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (HttpErrorInterceptor.isErrorCodeZero(error)) {
             this.handleErrorCodeZero();
         } else {
-            this.notificationService.showToastError(error.error.error);
+            this.notificationService.showToastError(error.error);
         }
     }
 

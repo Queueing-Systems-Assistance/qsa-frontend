@@ -3,8 +3,8 @@ import {SystemView} from '../system/system.view';
 
 export class ChartData {
 
-    systemView: SystemView;
+    systemElement: SystemView;
     labels: Array<number>;
-    systemFeatureValues: Array<SystemFeatureValue>;
+    systemOutputs: Array<SystemFeatureValue>;
 
 }

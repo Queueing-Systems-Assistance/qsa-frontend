@@ -18,7 +18,7 @@
                 </div>
                 <ul *ngIf="systemView.description.length"
                     class="list-group list-group-flush">
-                    <li *ngFor="let descriptionElement of systemView.description"
+                    <li *ngFor="let descriptionElement of systemView.description.split('<br>')"
                         [innerHTML]="descriptionElement"
                         class="list-group-item"></li>
                 </ul>

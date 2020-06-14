@@ -30,10 +30,10 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr *ngFor="let systemFeatureValue of systemTableView.systemFeatureValues">
-				<td><span [innerHTML]="systemFeatureValue.systemFeature.name"></span></td>
+			<tr *ngFor="let systemFeatureValue of systemTableView.systemOutputs">
+				<td><span [innerHTML]="systemFeatureValue.name"></span></td>
 				<td>{{systemFeatureValue.values[0] == 'NaN' ? ("cannotCalculate" | translate) : (+systemFeatureValue.values[0] | number) }}</td>
-				<td><span [innerHTML]="systemFeatureValue.systemFeature.description"></span></td>
+				<td><span [innerHTML]="systemFeatureValue.description"></span></td>
 			</tr>
 			</tbody>
 		</table>

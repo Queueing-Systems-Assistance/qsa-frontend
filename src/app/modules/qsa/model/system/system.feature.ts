@@ -3,7 +3,7 @@ export class SystemFeature {
     name: string;
     description: string;
     id: string;
-    optional: string;
-    number: string;
+    required: string;
+    typeFraction: string;
 
 }

@@ -28,16 +28,16 @@ export class BackendService {
         return this.http.get<Array<SystemFeature>>(environment.apiUrl + '/systems/' + systemId, {params});
     }
 
-    public getTable(values): Observable<TableView> {
+    public getTable(values, systemId): Observable<TableView> {
         let params = this.getParams();
         Logger.i(this, 'HTTP POST', 'getTable()', values);
-        return this.http.post<TableView>(this.SYSTEM_TABLE_API, values, {params});
+        return this.http.post<TableView>(this.SYSTEM_TABLE_API + '/' + systemId, values, {params});
     }
 
-    public getChart(values): Observable<ChartData> {
+    public getChart(values, systemId, xAxisFeatureId): Observable<ChartData> {
         let params = this.getParams();
         Logger.i(this, 'HTTP POST', 'getChart()', values);
-        return this.http.post<ChartData>(this.CHART_API, values, {params});
+        return this.http.post<ChartData>(this.CHART_API + '/' + systemId + '/' + xAxisFeatureId, values, {params});
     }
 
     public getBackendInfo(): Observable<Build> {
@@ -46,6 +46,6 @@ export class BackendService {
     }
 
     private getParams(): HttpParams {
-        return new HttpParams().set('language', LocaleHelper.getCorrectLocale(this.translateService));
+        return new HttpParams().set('locale', LocaleHelper.getCorrectLocale(this.translateService));
     }
 }

@@ -70,17 +70,16 @@ export class ChartDetailComponent implements OnInit {
 
     public calculateSystemFeatures(): void {
         let values = this.getSystemInputsForm().value;
-        let selectedSystemFixedValues = values[this.getSystemViewId()];
-        selectedSystemFixedValues[values.xAxis.featureId] = values.xAxis.to;
         let formData = {
-            xAxis: values.xAxis,
-            systemWeb: {
-                systemId: this.getSystemViewId(),
-                features: values[this.getSystemViewId()]
+            features: values[this.getSystemViewId()],
+            xAxis: {
+                from: values.xAxis.from,
+                to: values.xAxis.to,
+                steps: values.xAxis.steps
             }
         };
         this.requestLoading = true;
-        this.backendService.getChart(formData).subscribe(
+        this.backendService.getChart(formData, this.getSystemViewId(), values.xAxis.featureId).subscribe(
             value => this.updateChartView(value),
             null,
             () => this.requestLoading = false);
@@ -117,12 +116,12 @@ export class ChartDetailComponent implements OnInit {
 
     public getRequiredFixSystemInputs(): SystemFeature[] {
         return this.createFixSystemInputs()
-            .filter(systemViewInput => systemViewInput.optional === 'false');
+            .filter(systemViewInput => systemViewInput.required);
     }
 
     public getNonRequiredFixSystemInputs(): SystemFeature[] {
         return this.createFixSystemInputs()
-            .filter(systemViewInput => systemViewInput.optional === 'true');
+            .filter(systemViewInput => !systemViewInput.required);
     }
 
     public getSelectedSystemFeature(): SystemFeature {

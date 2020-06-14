@@ -54,11 +54,11 @@ export class ExportCsvModal {
 
     private mapToCSV(): Array<any> {
         let data = new Array<any>();
-        this.systemTableView.systemFeatureValues.forEach(value => {
+        this.systemTableView.systemOutputs.forEach(value => {
                 let row = {};
-                this.addPropertyToCSVRow(row, this.formControl.controls['id'].value ? 'id' : null, value.systemFeature.id);
-                this.addPropertyToCSVRow(row, this.formControl.controls['name'].value ? 'name' : null, value.systemFeature.name);
-                this.addPropertyToCSVRow(row, this.formControl.controls['description'].value ? 'description' : null, value.systemFeature.description);
+                this.addPropertyToCSVRow(row, this.formControl.controls['id'].value ? 'id' : null, value.id);
+                this.addPropertyToCSVRow(row, this.formControl.controls['name'].value ? 'name' : null, value.name);
+                this.addPropertyToCSVRow(row, this.formControl.controls['description'].value ? 'description' : null, value.description);
                 this.addPropertyToCSVRow(row, 'value', value.values[0]);
                 data.push(row);
             }

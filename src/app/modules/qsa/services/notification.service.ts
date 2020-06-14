@@ -7,8 +7,10 @@ export class NotificationService {
     constructor(private toastService: ToastrService) {
     }
 
-    public showToastError(errorMessage: string): void {
-        this.toastService.error(errorMessage);
+    public showToastError(error: any[]): void {
+        error.forEach(errorMessageElem => {
+            this.toastService.error(errorMessageElem.errorMessage);
+        })
     }
 
     public showToastInfo(infoMessage: string): void {

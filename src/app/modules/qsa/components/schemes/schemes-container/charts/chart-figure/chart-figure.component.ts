@@ -70,7 +70,7 @@ export class ChartFigureComponent {
                 }
             },
             title: {
-                text: value.systemView.name
+                text: value.systemElement.name
             },
             xAxis: {
                 type: 'category',
@@ -95,13 +95,13 @@ export class ChartFigureComponent {
     private createDataForChart(chartData: ChartData): Array<SeriesOptionsType> {
         let datasets = [];
         let count = 0;
-        chartData.systemFeatureValues.forEach((systemFeatureValue) => {
+        chartData.systemOutputs.forEach((systemFeatureValue) => {
             let datas = [];
             chartData.labels.forEach((label, index) => {
                 datas.push([label, systemFeatureValue.values[index]]);
             });
             datasets.push({
-                name: systemFeatureValue.systemFeature.name,
+                name: systemFeatureValue.name,
                 data: datas,
                 visible: count++ <= 3,
                 showInNavigator: true,
