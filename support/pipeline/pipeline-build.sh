@@ -18,7 +18,7 @@ echo "[OK]"
 
 #### Stop Backend
 docker printf "Shutdown Backend "
-docker stop qsaBackend
+docker container stop qsaBackend
 while $(curl --output /dev/null --silent --head --fail http://localhost:8080/actuator/info); do
     sleep 5
 done

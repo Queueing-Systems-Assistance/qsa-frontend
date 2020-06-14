@@ -44,11 +44,11 @@ export class TabDetailComponent implements OnInit {
     }
 
     public getRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.optional === 'false');
+        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.required);
     }
 
     public getNonRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.optional === 'true');
+        return this.getSystemViewInputs().filter(systemViewInput => !systemViewInput.required);
     }
 
     public getSystemInputForm(): FormGroup {
@@ -68,14 +68,11 @@ export class TabDetailComponent implements OnInit {
     }
 
     public calculateSystemFeatures(): void {
-        let formData = {
-            'systemId': this.getSystemViewId(),
-            'features': this.getSystemInputForm().value
-        };
+
         this.requestLoading = true;
-        this.backendService.getTable(formData).subscribe(
+        this.backendService.getTable(this.getSystemInputForm().value, this.getSystemViewId()).subscribe(
             value => {
-                value.name = this.getSystemView().name;
+                value.systemView = this.getSystemView();
                 return this.tablesService.addTableView(this.currentTab, value);
             },
             null,

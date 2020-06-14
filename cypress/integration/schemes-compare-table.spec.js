@@ -84,7 +84,7 @@ describe('Schemes Compare Tables', () => {
         app.addNewTab();
         app.navigateToScheme('schemesCardTable');
         systemSelectionList.selectSystem(systemId);
-        tables.createTable();
+        tables.createTable(systemId);
     }
 
 

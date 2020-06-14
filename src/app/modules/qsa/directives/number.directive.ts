@@ -12,7 +12,7 @@ export class NumberDirective {
     }
 
     @HostListener('input', ['$event']) onInputChange(event) {
-        if (this.systemFeature.number === 'integer') {
+        if (this.systemFeature.typeFraction === 'integer') {
             const initValue = this.elementRef.nativeElement.value;
             this.elementRef.nativeElement.value = initValue.replace(/[^0-9]*/g, '');
             if (initValue !== this.elementRef.nativeElement.value) {

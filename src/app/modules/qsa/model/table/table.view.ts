@@ -1,8 +1,9 @@
 import {SystemFeatureValue} from '../system/system.feature.value';
+import {SystemView} from "../system/system.view";
 
 export class TableView {
 
-    name: string;
-    systemFeatureValues: Array<SystemFeatureValue>;
+    systemView: SystemView;
+    systemOutputs: Array<SystemFeatureValue>;
 
 }

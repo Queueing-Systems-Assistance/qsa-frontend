@@ -1,8 +1,9 @@
-import {SystemFeature} from './system.feature';
 
 export class SystemFeatureValue {
 
-    systemFeature: SystemFeature;
+    name: string;
+    description: string;
+    id: string;
     values: Array<number>;
 
 }

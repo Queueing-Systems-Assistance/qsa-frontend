@@ -46,7 +46,7 @@ describe('Schemes Tables', () => {
     });
 
     it('can delete tab', () => {
-        tables.createTable();
+        tables.createTable('systemMM2');
         app.deleteCurrentTab();
         app.addNewTab();
         app.navigateToScheme('schemesCardTable');

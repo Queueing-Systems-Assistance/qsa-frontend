@@ -28,26 +28,25 @@ export class CompareTableComponent {
 
     public getSystemFeatureValueToDisplay(tableNumber: number, systemFeature: SystemFeature): number {
         let tableView = this.getTableViewBasedOnIndex(tableNumber);
-        return tableView.systemFeatureValues
-            .filter(systemFeatureValue => systemFeatureValue.systemFeature.id === systemFeature.id)
+        return tableView.systemOutputs
+            .filter(systemFeatureValue => systemFeatureValue.id === systemFeature.id)
             .map(systemFeatureValue => systemFeatureValue.values[0])
             [0];
     }
 
-    public getSystemFeatures(): SystemFeature[] {
-        let result = new Array<SystemFeature>();
-        result = result.concat(this.getSystemFeaturesDistinct(this.tableViewCompare.tableView1.systemFeatureValues, result));
-        result = result.concat(this.getSystemFeaturesDistinct(this.tableViewCompare.tableView2.systemFeatureValues, result));
+    public getSystemFeatures(): SystemFeatureValue[] {
+        let result = new Array<SystemFeatureValue>();
+        result = result.concat(this.getSystemFeaturesDistinct(this.tableViewCompare.tableView1.systemOutputs, result));
+        result = result.concat(this.getSystemFeaturesDistinct(this.tableViewCompare.tableView2.systemOutputs, result));
         return result;
     }
 
-    public getSystemFeaturesDistinct(systemFeatureValues: SystemFeatureValue[], result: SystemFeature[]): SystemFeature[] {
+    public getSystemFeaturesDistinct(systemFeatureValues: SystemFeatureValue[], result: SystemFeatureValue[]): SystemFeatureValue[] {
         return result.concat(systemFeatureValues
-            .map(systemFeatureValue => systemFeatureValue.systemFeature)
             .filter(systemFeature => !this.isSystemFeaturesAlreadyAdded(systemFeature, result)));
     }
 
-    private isSystemFeaturesAlreadyAdded(systemFeature: SystemFeature, systemFeatures: SystemFeature[]): boolean {
+    private isSystemFeaturesAlreadyAdded(systemFeature: SystemFeatureValue, systemFeatures: SystemFeatureValue[]): boolean {
         let contains = false;
         systemFeatures.forEach(systemFeatureFromArray => {
             if (systemFeatureFromArray.id === systemFeature.id) {
