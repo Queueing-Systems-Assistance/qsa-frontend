@@ -9,7 +9,7 @@
 		"buildProd": "ng build --prod",
 		"e2eOpen": "cypress open --env coverage=true",
 		"e2eRun": "cypress run --env coverage=true",
-		"e2eCI": "start-server-and-test start http-get://localhost:4200 e2eRun"
+		"e2eCI": "start-server-and-test startLab http-get://localhost:4200 e2eRun"
 	},
 	"private": true,
 	"dependencies": {
