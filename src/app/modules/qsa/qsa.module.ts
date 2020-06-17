@@ -63,6 +63,7 @@ import {HomeKendallComponent} from './components/home/kendall/home.kendall.compo
 import {HomeSystemsComponent} from './components/home/systems/home.systems.component';
 import {MalihuScrollbarModule} from 'ngx-malihu-scrollbar';
 import * as Highcharts from 'highcharts/highstock';
+import { MathjaxModule } from '../mathjax/mathjax.module';
 
 require('highcharts/modules/exporting')(Highcharts);
 
@@ -141,6 +142,7 @@ const appRoutes: Routes = [
         NgSelectModule,
         NgxJsonViewerModule,
         ClipboardModule,
+        MathjaxModule.forRoot(),
         RouterModule.forRoot(appRoutes),
         TranslateModule.forRoot({
             loader: {
