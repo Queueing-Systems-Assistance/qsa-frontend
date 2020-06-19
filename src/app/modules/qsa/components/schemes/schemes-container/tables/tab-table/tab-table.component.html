@@ -33,7 +33,9 @@
 			<tr *ngFor="let systemFeatureValue of systemTableView.systemOutputs">
 				<td><span [innerHTML]="systemFeatureValue.name"></span></td>
 				<td>{{systemFeatureValue.values[0] == 'NaN' ? ("cannotCalculate" | translate) : (+systemFeatureValue.values[0] | number) }}</td>
-				<td><span [innerHTML]="systemFeatureValue.description"></span></td>
+				<td class="desc-container">
+					<span [innerHTML]="systemFeatureValue.description"></span> 
+					<button type="button" class="btn btn-primary btn-icon btn-sm" (click)="showCalculationModal()">?</button></td>
 			</tr>
 			</tbody>
 		</table>

@@ -3,6 +3,9 @@ import {TableView} from '../../../../../model/table/table.view';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ExportCsvModal} from '../../../../modals/export-csv/export-csv.modal';
 import {SystemView} from '../../../../../model/system/system.view';
+import { CalculationModal } from '../../../../modals/calculation/calculation.modal';
+import { AboutModal } from '../../../../modals/about/about.modal';
+import { Logger } from 'src/app/modules/qsa/services/logger';
 
 @Component({
     selector: 'tab-table-component',
@@ -20,5 +23,10 @@ export class TabTableComponent {
         const modalRef = this.modalService.open(ExportCsvModal);
         modalRef.componentInstance.systemTableView = this.systemTableView;
         modalRef.componentInstance.systemView = this.systemView;
+    }
+
+    public showCalculationModal(){
+        const modalRef = this.modalService.open(CalculationModal);
+        Logger.i(this, 'Modalref: ', modalRef);
     }
 }

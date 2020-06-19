@@ -1,5 +1,6 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~ngx-toastr/toastr.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 body {
     background-color: #e9ecef;
@@ -93,6 +94,18 @@ schemes-component, documentation-component, home-component {
     justify-content: space-between;
 }
 
+
+.desc-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-icon{
+    margin-left: 1rem;
+    max-width: 2rem;
+    max-height: 2rem;
+}
+
 /* Animation */
 
 .hover-zoom:hover {
@@ -118,7 +131,6 @@ schemes-component, documentation-component, home-component {
         transform: scale(1)
     }
 }
-
 /* Mobile */
 
 @media (max-width: 767px) {

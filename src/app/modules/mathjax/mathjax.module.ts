@@ -1,5 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MathContentDirective } from './math-content.directive';
 import { MathService } from './math.service';
 

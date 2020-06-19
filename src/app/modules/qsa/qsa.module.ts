@@ -64,6 +64,7 @@ import {HomeSystemsComponent} from './components/home/systems/home.systems.compo
 import {MalihuScrollbarModule} from 'ngx-malihu-scrollbar';
 import * as Highcharts from 'highcharts/highstock';
 import { MathjaxModule } from '../mathjax/mathjax.module';
+import { CalculationModal } from './components/modals/calculation/calculation.modal';
 
 require('highcharts/modules/exporting')(Highcharts);
 
@@ -127,7 +128,8 @@ const appRoutes: Routes = [
         EmptySystemViewsComponent,
         ErrorSystemViewsLoadComponent,
         JsonCardComponent,
-        DocumentationTableComponent
+        DocumentationTableComponent,
+        CalculationModal
     ],
     imports: [
         MalihuScrollbarModule.forRoot(),
@@ -172,7 +174,8 @@ const appRoutes: Routes = [
         RenameModal,
         ExportCsvModal,
         TabDeleteModal,
-        TabChangeModal
+        TabChangeModal,
+        CalculationModal,
     ]
 })
 export class QsaModule {
