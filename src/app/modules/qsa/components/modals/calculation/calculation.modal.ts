@@ -18,5 +18,4 @@ export class CalculationModal implements OnInit {
     this.demoMath.append('\n');
     this.demoMath.append('When $a \\ne 0$, there are two solutions to $\\frac{5}{9}$');
   }
-
 }
