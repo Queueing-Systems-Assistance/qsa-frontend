@@ -6,6 +6,7 @@ import {SystemView} from '../../../../../model/system/system.view';
 import { CalculationModal } from '../../../../modals/calculation/calculation.modal';
 import { AboutModal } from '../../../../modals/about/about.modal';
 import { Logger } from 'src/app/modules/qsa/services/logger';
+import { NotificationService } from 'src/app/modules/qsa/services/notification.service';
 
 @Component({
     selector: 'tab-table-component',
@@ -16,7 +17,8 @@ export class TabTableComponent {
     @Input() systemView: SystemView;
     @Input() systemTableView: TableView;
 
-    constructor(private modalService: NgbModal) {
+    constructor(private modalService: NgbModal,
+                private notificationService: NotificationService) {
     }
 
     public exportToCSV(): void {
@@ -26,7 +28,13 @@ export class TabTableComponent {
     }
 
     public showCalculationModal(){
-        const modalRef = this.modalService.open(CalculationModal);
-        Logger.i(this, 'Modalref: ', modalRef);
+        
+        //Currently only System MM1 is supported
+        if(this.systemView.name === "M | M | 1"){
+            const modalRef = this.modalService.open(CalculationModal);
+            Logger.i(this, 'Modalref: ', modalRef);
+        }else{
+            this.notificationService.showToastInfo("This feature is currently supported in System MM1 only");
+        } 
     }
 }
