@@ -9,11 +9,14 @@ export class CalculationModal implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) { }
 
-  demoMath: string;
+  generalFormula: string;
+  
+  calculationSteps: string[];
+  currentPage: number = 1;
 
   ngOnInit() {
-    this.demoMath = "$E = mc^2$";
-    this.demoMath = this.demoMath.concat('\n');
-    this.demoMath = this.demoMath.concat('When $a \\ne 0$, there are two solutions to $\\frac{5}{9}$');
+    this.generalFormula = "$E = mc^2$";
+
+    this.calculationSteps = ['When $a \\ne 0$,', 'there are two solutions to $\\frac{5}{9}$'];
   }
 }

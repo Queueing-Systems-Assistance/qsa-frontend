@@ -8,6 +8,26 @@
     </button>
 </div>
 <div class="modal-body">
-    <div [mathContent]="demoMath"></div>
+    <div class="lg-rounded-border">
+        <h3>General formula</h3>
+        <div [mathContent]="generalFormula"
+         aria-label="General formula"></div>
+    </div>
+    
+    <div class="lg-rounded-border">
+        <h3>Step {{currentPage}}</h3>
+        <div [mathContent]="calculationSteps[currentPage-1]"
+         aria-label="Current step"></div>
+    </div>
 </div>
-<div class="modal-footer">FOOTER</div>
+<div class="modal-footer center-content">
+    <ngb-pagination
+        aria-label="Pagination for calculation steps"
+        [(page)]="currentPage"
+        [pageSize]=1
+        size="sm"
+        [collectionSize]="calculationSteps.length">
+        <ng-template ngbPaginationPrevious>Prev</ng-template>
+        <ng-template ngbPaginationNext>Next</ng-template>
+    </ngb-pagination>
+</div>

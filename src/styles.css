@@ -111,6 +111,17 @@ schemes-component, documentation-component, home-component {
     max-height: 2rem;
 }
 
+.center-content{
+    text-align: center;
+    justify-content: center;
+}
+
+.lg-rounded-border{
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    padding: 5px;
+}
+
 /* Animation */
 
 .hover-zoom:hover {

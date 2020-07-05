@@ -31,6 +31,7 @@ export class MathContentDirective implements OnInit, OnChanges, OnDestroy {
   
     ngOnChanges(changes: SimpleChanges): void {
       console.log(changes);
+      this.service.render(this._el, this.mathContent);
     }
   
     ngOnDestroy(): void {
