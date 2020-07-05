@@ -1,6 +1,5 @@
 import { Observer, ReplaySubject, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { MathContent } from "./math-content";
 import { Logger } from "../qsa/services/logger";
 
 declare global {
@@ -22,16 +21,14 @@ export class MathService {
     return this.notifier;
   }
 
-  render(element: HTMLElement, mathContent?: MathContent): void {
+  render(element: HTMLElement, mathContent?: string): void {
     if (mathContent) {
-        
-        let content: string = mathContent.getContent();
 
-        if (content) {
-            element.innerText = content;
-            Logger.i(this, 'LaTeX string to be displayed: ', content);
+        if (mathContent) {
+            element.innerText = mathContent;
+            Logger.i(this, 'LaTeX string to be displayed: ', mathContent);
         }else{
-          Logger.e(this, 'Invalid LaTeX string: ', content);
+          Logger.e(this, 'Invalid LaTeX string: ', mathContent);
         }
     }else{
       Logger.e(this, 'Math content undefined: ', mathContent);

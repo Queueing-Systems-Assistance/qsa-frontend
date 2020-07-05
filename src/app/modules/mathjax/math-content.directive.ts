@@ -1,7 +1,6 @@
 import { Directive, OnInit, OnChanges, OnDestroy, Input, ElementRef, SimpleChanges } from "@angular/core";
 import { Subject } from "rxjs";
 import { take, takeUntil } from 'rxjs/operators';
-import { MathContent } from "./math-content";
 import { MathService } from "./math.service";
 
 @Directive({
@@ -11,7 +10,7 @@ export class MathContentDirective implements OnInit, OnChanges, OnDestroy {
     private alive$ = new Subject<boolean>();
 
     @Input()
-    private mathContent: MathContent;
+    private mathContent: string;
     private readonly _el: HTMLElement;
   
     constructor(private service: MathService,

@@ -100,7 +100,12 @@ schemes-component, documentation-component, home-component {
     justify-content: space-between;
 }
 
+.desc-container:hover .btn-icon{
+    visibility: visible;
+}
+
 .btn-icon{
+    visibility: hidden;
     margin-left: 1rem;
     max-width: 2rem;
     max-height: 2rem;
