@@ -19,7 +19,8 @@
     ],
     "types": [
       "jquery",
-      "mcustomscrollbar"
+      "mcustomscrollbar",
+      "mathjax"
     ],
     "resolveJsonModule": true,
     "esModuleInterop": true

@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title">Calculated using the following formula</h5>
+    <h5 class="modal-title">{{'calculatedUsing' | translate}}</h5>
     <button (click)="activeModal.dismiss()"
             aria-label="Close"
             class="close"
@@ -8,14 +8,14 @@
     </button>
 </div>
 <div class="modal-body">
-    <div class="lg-rounded-border">
-        <h3 class="formula-header">General formula</h3>
+    <div class="lg-rounded-border mb-2">
+        <h3 class="formula-header">{{'generalFormula' | translate}}</h3>
         <div [mathContent]="generalFormula"
          aria-label="General formula"></div>
     </div>
     
-    <div class="lg-rounded-border">
-        <h3 class="formula-header">Step {{currentPage}}</h3>
+    <div class="lg-rounded-border mt-2">
+        <h3 class="formula-header">{{'step' | translate}} {{currentPage}}</h3>
         <div [mathContent]="calculationSteps[currentPage-1]"
          aria-label="Current step"></div>
     </div>
@@ -27,7 +27,7 @@
         [pageSize]=1
         size="sm"
         [collectionSize]="calculationSteps.length">
-        <ng-template ngbPaginationPrevious>Prev</ng-template>
-        <ng-template ngbPaginationNext>Next</ng-template>
+        <ng-template ngbPaginationPrevious>{{'prev' | translate}}</ng-template>
+        <ng-template ngbPaginationNext>{{'next' | translate}}</ng-template>
     </ngb-pagination>
 </div>

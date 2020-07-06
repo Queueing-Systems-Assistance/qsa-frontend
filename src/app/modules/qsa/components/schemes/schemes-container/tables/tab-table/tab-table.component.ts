@@ -27,10 +27,9 @@ export class TabTableComponent {
         modalRef.componentInstance.systemView = this.systemView;
     }
 
-    public showCalculationModal(){
-        
+    public showCalculationModal() {
         //Currently only System MM1 is supported
-        if(this.systemView.name === "M | M | 1"){
+        if(this.systemView.id === "systemMM1"){
             const modalRef = this.modalService.open(CalculationModal);
             Logger.i(this, 'Modalref: ', modalRef);
         }else{
