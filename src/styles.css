@@ -122,6 +122,11 @@ schemes-component, documentation-component, home-component {
     padding: 5px;
 }
 
+.formula-header{
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
 /* Animation */
 
 .hover-zoom:hover {

@@ -9,13 +9,13 @@
 </div>
 <div class="modal-body">
     <div class="lg-rounded-border">
-        <h3>General formula</h3>
+        <h3 class="formula-header">General formula</h3>
         <div [mathContent]="generalFormula"
          aria-label="General formula"></div>
     </div>
     
     <div class="lg-rounded-border">
-        <h3>Step {{currentPage}}</h3>
+        <h3 class="formula-header">Step {{currentPage}}</h3>
         <div [mathContent]="calculationSteps[currentPage-1]"
          aria-label="Current step"></div>
     </div>
