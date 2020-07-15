@@ -1,15 +1,14 @@
 describe('Footer', () => {
-
-    before(() =>{
+    before(() => {
         cy.visit('http://localhost:4200?language=en')
-    });
+    })
 
     it('has a date', () => {
         cy.get('footer-component')
             .should('be.visible')
             .should('contain.text', 'QSA')
-            .should('contain.text', '2018 - ');
-    });
+            .should('contain.text', '2018 - ')
+    })
 
     it('has creators', () => {
         cy.get('footer-component')
@@ -17,5 +16,4 @@ describe('Footer', () => {
             .should('contain.text', 'Szászi Szabolcs')
             .should('contain.text', 'Szilágyi Zoltán')
     })
-
-});
+})

@@ -1,137 +1,130 @@
 [
-	{
-		"nameKey": "systems",
-		"requestType": "GET",
-		"requestURL": "https://qsa.inf.unideb.hu/prod/api/systems",
-		"parameters": [
-			{
-				"name": "language",
-				"dataType": "String",
-				"descriptionKey": "languageDocumentationDescription",
-				"required": false
-			}
-		],
-		"body": null,
-		"examples": [
-			null,
-			"assets/doc/getSystemsResponse.json"
-		]
-	},
-	{
-		"nameKey": "systemInput",
-		"requestType": "GET",
-		"requestURL": "https://qsa.inf.unideb.hu/prod/api/systems/:systemId",
-		"parameters": [
-			{
-				"name": "language",
-				"dataType": "String",
-				"descriptionKey": "languageDocumentationDescription",
-				"required": false
-			}
-		],
-		"body": null,
-		"examples": [
-			null,
-			"assets/doc/systemInputResponse.json"
-		]
-	},
-	{
-		"nameKey": "table",
-		"requestType": "POST",
-		"requestURL": "https://qsa.inf.unideb.hu/prod/api/table",
-		"parameters": [
-			{
-				"name": "language",
-				"dataType": "String",
-				"descriptionKey": "languageDocumentationDescription",
-				"required": false
-			}
-		],
-		"body": [
-
-			{
-				"name": "systemId",
-				"dataType": "String",
-				"descriptionKey": "systemIdDocumentationDescription",
-				"required": true
-			},
-			{
-				"name": "features",
-				"dataType": "Object",
-				"descriptionKey": "featuresDocumentationDescription",
-				"required": false
-			}
-		],
-		"examples": [
-			"assets/doc/tableRequest.json",
-			"assets/doc/tableResponse.json"
-		]
-	},
-	{
-		"nameKey": "chart",
-		"requestType": "POST",
-		"requestURL": "https://qsa.inf.unideb.hu/prod/api/chart",
-		"parameters": [
-			{
-				"name": "language",
-				"dataType": "String",
-				"descriptionKey": "languageDocumentationDescription",
-				"required": false
-			}
-		],
-		"body": [
-			{
-				"name": "xAxis",
-				"dataType": "Object",
-				"descriptionKey": "xAxisDocumentationDescription",
-				"required": true
-			},
-			{
-				"name": "from",
-				"dataType": "String",
-				"descriptionKey": "fromDocumentationDescription",
-				"required": false
-			},
-			{
-				"name": "to",
-				"dataType": "String",
-				"descriptionKey": "toDocumentationDescription",
-				"required": false
-			},
-			{
-				"name": "steps",
-				"dataType": "String",
-				"descriptionKey": "stepsDocumentationDescription",
-				"required": false
-			},
-			{
-				"name": "featureId",
-				"dataType": "String",
-				"descriptionKey": "featureIdDocumentationDescription",
-				"required": true
-			},
-			{
-				"name": "systemWeb",
-				"dataType": "Object",
-				"descriptionKey": "systemWebDocumentationDescription",
-				"required": true
-			},
-			{
-				"name": "features",
-				"dataType": "Object",
-				"descriptionKey": "featuresDocumentationDescription",
-				"required": false
-			},
-			{
-				"name": "systemId",
-				"dataType": "String",
-				"descriptionKey": "systemIdDocumentationDescription",
-				"required": true
-			}
-		],
-		"examples": [
-			"assets/doc/chartRequest.json",
-			"assets/doc/chartResponse.json"
-		]
-	}
+    {
+        "nameKey": "systems",
+        "requestType": "GET",
+        "requestURL": "https://qsa.inf.unideb.hu/prod/api/systems",
+        "parameters": [
+            {
+                "name": "language",
+                "dataType": "String",
+                "descriptionKey": "languageDocumentationDescription",
+                "required": false
+            }
+        ],
+        "body": null,
+        "examples": [null, "assets/doc/getSystemsResponse.json"]
+    },
+    {
+        "nameKey": "systemInput",
+        "requestType": "GET",
+        "requestURL": "https://qsa.inf.unideb.hu/prod/api/systems/:systemId",
+        "parameters": [
+            {
+                "name": "language",
+                "dataType": "String",
+                "descriptionKey": "languageDocumentationDescription",
+                "required": false
+            }
+        ],
+        "body": null,
+        "examples": [null, "assets/doc/systemInputResponse.json"]
+    },
+    {
+        "nameKey": "table",
+        "requestType": "POST",
+        "requestURL": "https://qsa.inf.unideb.hu/prod/api/table",
+        "parameters": [
+            {
+                "name": "language",
+                "dataType": "String",
+                "descriptionKey": "languageDocumentationDescription",
+                "required": false
+            }
+        ],
+        "body": [
+            {
+                "name": "systemId",
+                "dataType": "String",
+                "descriptionKey": "systemIdDocumentationDescription",
+                "required": true
+            },
+            {
+                "name": "features",
+                "dataType": "Object",
+                "descriptionKey": "featuresDocumentationDescription",
+                "required": false
+            }
+        ],
+        "examples": [
+            "assets/doc/tableRequest.json",
+            "assets/doc/tableResponse.json"
+        ]
+    },
+    {
+        "nameKey": "chart",
+        "requestType": "POST",
+        "requestURL": "https://qsa.inf.unideb.hu/prod/api/chart",
+        "parameters": [
+            {
+                "name": "language",
+                "dataType": "String",
+                "descriptionKey": "languageDocumentationDescription",
+                "required": false
+            }
+        ],
+        "body": [
+            {
+                "name": "xAxis",
+                "dataType": "Object",
+                "descriptionKey": "xAxisDocumentationDescription",
+                "required": true
+            },
+            {
+                "name": "from",
+                "dataType": "String",
+                "descriptionKey": "fromDocumentationDescription",
+                "required": false
+            },
+            {
+                "name": "to",
+                "dataType": "String",
+                "descriptionKey": "toDocumentationDescription",
+                "required": false
+            },
+            {
+                "name": "steps",
+                "dataType": "String",
+                "descriptionKey": "stepsDocumentationDescription",
+                "required": false
+            },
+            {
+                "name": "featureId",
+                "dataType": "String",
+                "descriptionKey": "featureIdDocumentationDescription",
+                "required": true
+            },
+            {
+                "name": "systemWeb",
+                "dataType": "Object",
+                "descriptionKey": "systemWebDocumentationDescription",
+                "required": true
+            },
+            {
+                "name": "features",
+                "dataType": "Object",
+                "descriptionKey": "featuresDocumentationDescription",
+                "required": false
+            },
+            {
+                "name": "systemId",
+                "dataType": "String",
+                "descriptionKey": "systemIdDocumentationDescription",
+                "required": true
+            }
+        ],
+        "examples": [
+            "assets/doc/chartRequest.json",
+            "assets/doc/chartResponse.json"
+        ]
+    }
 ]

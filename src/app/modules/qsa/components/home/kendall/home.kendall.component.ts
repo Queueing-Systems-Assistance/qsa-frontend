@@ -1,35 +1,44 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
     selector: 'home-kendall-component',
-    templateUrl: './home.kendall.component.html'
+    templateUrl: './home.kendall.component.html',
 })
 export class HomeKendallComponent {
-
-    public KendallCharacters = KendallCharacters;
-    private selectedKendallCharacter: KendallCharacters;
-
+    public KendallCharacters = KendallCharacters
+    private selectedKendallCharacter: KendallCharacters
 
     public selectKendallCharacter(kendallCharacter: KendallCharacters): void {
-        this.selectedKendallCharacter = kendallCharacter;
+        this.selectedKendallCharacter = kendallCharacter
     }
 
-    public getClassesForKendallCharacters(kendallCharacter: KendallCharacters): string {
-        if (this.selectedKendallCharacter === kendallCharacter || (kendallCharacter === KendallCharacters.A && !this.selectedKendallCharacter)) {
+    public getClassesForKendallCharacters(
+        kendallCharacter: KendallCharacters
+    ): string {
+        if (
+            this.selectedKendallCharacter === kendallCharacter ||
+            (kendallCharacter === KendallCharacters.A &&
+                !this.selectedKendallCharacter)
+        ) {
             return 'btn btn-primary'
         } else {
-            return 'btn';
+            return 'btn'
         }
     }
 
-    public getClassesForKendallList(kendallCharacter: KendallCharacters): string {
-        if (this.selectedKendallCharacter === kendallCharacter || (kendallCharacter === KendallCharacters.A && !this.selectedKendallCharacter)) {
+    public getClassesForKendallList(
+        kendallCharacter: KendallCharacters
+    ): string {
+        if (
+            this.selectedKendallCharacter === kendallCharacter ||
+            (kendallCharacter === KendallCharacters.A &&
+                !this.selectedKendallCharacter)
+        ) {
             return 'list-group-item list-group-item-action text-white active'
         } else {
-            return 'list-group-item list-group-item-action';
+            return 'list-group-item list-group-item-action'
         }
     }
-
 }
 
 enum KendallCharacters {
@@ -38,5 +47,5 @@ enum KendallCharacters {
     c = 'c',
     K = 'K',
     n = 'n',
-    D = 'D'
+    D = 'D',
 }
