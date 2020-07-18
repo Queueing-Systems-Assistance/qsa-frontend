@@ -35,7 +35,7 @@
 				<td>{{systemFeatureValue.values[0] == 'NaN' ? ("cannotCalculate" | translate) : (+systemFeatureValue.values[0] | number) }}</td>
 				<td class="desc-container">
 					<span [innerHTML]="systemFeatureValue.description"></span> 
-					<button type="button" class="btn btn-outline-secondary btn-circle btn-sm" (click)="showCalculationModal()" aria-label="Show how it was calculated">?</button></td>
+					<button type="button" class="btn btn-outline-secondary btn-circle btn-sm" (click)="showCalculationModal(systemFeatureValue.id)" aria-label="Show how it was calculated">?</button></td>
 			</tr>
 			</tbody>
 		</table>

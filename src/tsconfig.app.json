@@ -1,10 +1,8 @@
 {
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../out-tsc/app",
-    "types": ["mathjax"]
-  },
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../out-tsc/app",
+        "types": ["mathjax"]
+    },
+    "exclude": ["**/*.spec.ts"]
 }

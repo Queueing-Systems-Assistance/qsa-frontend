@@ -1,21 +1,19 @@
-import {Component} from '@angular/core';
-import * as Highcharts from "highcharts/highstock";
-import {ChartData} from "../../../../../model/chart/chart.data";
-import {Logger} from "../../../../../services/logger";
-import {SeriesOptionsType} from "highcharts";
-
+import { Component } from '@angular/core'
+import * as Highcharts from 'highcharts/highstock'
+import { ChartData } from '../../../../../model/chart/chart.data'
+import { Logger } from '../../../../../services/logger'
+import { SeriesOptionsType } from 'highcharts'
 
 @Component({
     selector: 'chart-figure-component',
     templateUrl: './chart-figure.component.html'
 })
 export class ChartFigureComponent {
-
-    Highcharts = Highcharts;
-    chartOptions: Highcharts.Options;
+    Highcharts = Highcharts
+    chartOptions: Highcharts.Options
 
     public removeChart(): void {
-        this.chartOptions = undefined;
+        this.chartOptions = undefined
     }
 
     public createChart(xAxisName: string, value: ChartData): void {
@@ -39,13 +37,16 @@ export class ChartFigureComponent {
             },
             tooltip: {
                 formatter: function () {
-                    let tooltip = '';
+                    let tooltip = ''
                     this.points.forEach(function (yAxis) {
-                        tooltip += '<strong>' + yAxis.series.name
-                            + ':</strong> ' + yAxis.y.toFixed(3).replace(/\.?0*$/, '')
-                            + '<br/>';
-                    });
-                    return tooltip;
+                        tooltip +=
+                            '<strong>' +
+                            yAxis.series.name +
+                            ':</strong> ' +
+                            yAxis.y.toFixed(3).replace(/\.?0*$/, '') +
+                            '<br/>'
+                    })
+                    return tooltip
                 },
                 shared: true,
                 useHTML: true,
@@ -57,8 +58,7 @@ export class ChartFigureComponent {
                     type: 'category',
                     labels: {
                         formatter: function () {
-                            return this.value.toFixed(3).replace(/\.?0*$/, '')
-                                + '<br/>';
+                            return this.value.toFixed(3).replace(/\.?0*$/, '') + '<br/>'
                         }
                     }
                 }
@@ -83,32 +83,31 @@ export class ChartFigureComponent {
                 },
                 labels: {
                     formatter: function () {
-                        return this.value.toFixed(3).replace(/\.?0*$/, '')
-                            + '<br/>';
+                        return this.value.toFixed(3).replace(/\.?0*$/, '') + '<br/>'
                     }
                 }
             },
             series: this.createDataForChart(value)
-        };
-    };
+        }
+    }
 
     private createDataForChart(chartData: ChartData): Array<SeriesOptionsType> {
-        let datasets = [];
-        let count = 0;
+        const datasets = []
+        let count = 0
         chartData.systemOutputs.forEach((systemFeatureValue) => {
-            let datas = [];
+            const datas = []
             chartData.labels.forEach((label, index) => {
-                datas.push([label, systemFeatureValue.values[index]]);
-            });
+                datas.push([label, systemFeatureValue.values[index]])
+            })
             datasets.push({
                 name: systemFeatureValue.name,
                 data: datas,
                 visible: count++ <= 3,
                 showInNavigator: true,
                 showInLegend: true
-            });
-        });
-        Logger.i(this, 'Loaded chart data', chartData);
-        return datasets;
+            })
+        })
+        Logger.i(this, 'Loaded chart data', chartData)
+        return datasets
     }
 }

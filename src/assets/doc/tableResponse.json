@@ -1,240 +1,194 @@
 {
-	"systemView": {
-		"name": "M | M | 1",
-		"id": "systemMM1",
-		"status": "BETA",
-		"description": ""
-	},
-	"systemFeatureValues": [
-		{
-			"values": [
-				3
-			],
-			"systemFeature": {
-				"name": "<span class=\"overline\">N</span>",
-				"description": "Average number of customers in the steady state system",
-				"id": "NAvg"
-			}
-		},
-		{
-			"values": [
-				2.25
-			],
-			"systemFeature": {
-				"name": "<span class=\"overline\">Q</span>",
-				"description": "Average number of customers in the queue (not including thosein service)",
-				"id": "QAvg"
-			}
-		},
-		{
-			"values": [
-				1
-			],
-			"systemFeature": {
-				"name": "<span class=\"overline\">T</span>",
-				"description": "The mean total time (both service and queing time) a customer spends in the system",
-				"id": "TAvg"
-			}
-		},
-		{
-			"values": [
-				0.75
-			],
-			"systemFeature": {
-				"name": "<span class=\"overline\">W</span>",
-				"description": "Average time in the queue",
-				"id": "WAvg"
-			}
-		},
-		{
-			"values": [
-				12
-			],
-			"systemFeature": {
-				"name": "D<sup>2</sup>(N)",
-				"description": "Variance of <i>N</i>",
-				"id": "D2N"
-			}
-		},
-		{
-			"values": [
-				10.6875
-			],
-			"systemFeature": {
-				"name": "D<sup>2</sup>(Q)",
-				"description": "Variance of <i>Q</i>",
-				"id": "D2Q"
-			}
-		},
-		{
-			"values": [
-				1
-			],
-			"systemFeature": {
-				"name": "D<sup>2</sup>(T)",
-				"description": "Variance of <i>T</i>",
-				"id": "D2T"
-			}
-		},
-		{
-			"values": [
-				0.9375
-			],
-			"systemFeature": {
-				"name": "D<sup>2</sup>(W)",
-				"description": "Variance of <i>W</i>",
-				"id": "D2W"
-			}
-		},
-		{
-			"values": [
-				12
-			],
-			"systemFeature": {
-				"name": "D<sup>2</sup>[Q|Q>0]",
-				"description": "Variance of queue length of nonempty queues in steady state",
-				"id": "D2QQ0"
-			}
-		},
-		{
-			"values": [
-				4
-			],
-			"systemFeature": {
-				"name": "E[Q|Q>0]",
-				"description": "Average queue length of nonempty queues when the system is in steady state",
-				"id": "EQQ0"
-			}
-		},
-		{
-			"values": [
-				0.8646647167633873
-			],
-			"systemFeature": {
-				"name": "F<sub>T</sub>(t)",
-				"description": "Distribution function for mean total time a customer spends in the system",
-				"id": "FTt"
-			}
-		},
-		{
-			"values": [
-				0.8984985375725405
-			],
-			"systemFeature": {
-				"name": "F<sub>W</sub>(t)",
-				"description": "Distribution function for time in the queue",
-				"id": "FWt"
-			}
-		},
-		{
-			"values": [
-				0.059326171875
-			],
-			"systemFeature": {
-				"name": "P<sub>n</sub>",
-				"description": "Steady state probability that there are <i>n</i> customers in the system",
-				"id": "Pn"
-			}
-		},
-		{
-			"values": [
-				0.2373046875
-			],
-			"systemFeature": {
-				"name": "P[N>=n]",
-				"description": "P[N>=n]",
-				"id": "PNn"
-			}
-		},
-		{
-			"values": [
-				0.1353352832366127
-			],
-			"systemFeature": {
-				"name": "P[T>t]",
-				"description": "The probability that the mean total time a customer spends in the system is greater then <i>t</i>",
-				"id": "PTt"
-			}
-		},
-		{
-			"values": [
-				0.10150146242745953
-			],
-			"systemFeature": {
-				"name": "P[W>t]",
-				"description": "The probability that the time in the queue is greater then <i>t</i>",
-				"id": "PWt"
-			}
-		},
-		{
-			"values": [
-				2.302585092994046
-			],
-			"systemFeature": {
-				"name": "π<sub>T[90]</sub>",
-				"description": "Symbol for 90-th percentile waiting time in the system",
-				"id": "PiT90"
-			}
-		},
-		{
-			"values": [
-				2.995732273553991
-			],
-			"systemFeature": {
-				"name": "π<sub>T[95]</sub>",
-				"description": "Symbol for 95-th percentile waiting time in the system",
-				"id": "PiT95"
-			}
-		},
-		{
-			"values": [
-				0.02020270731751947
-			],
-			"systemFeature": {
-				"name": "π<sub>T[r]</sub>",
-				"description": "Symbol for r-th percentile waiting time in the system",
-				"id": "PiTr"
-			}
-		},
-		{
-			"values": [
-				2.0149030205422647
-			],
-			"systemFeature": {
-				"name": "π<sub>W[90]</sub>",
-				"description": "Symbol for 90-th percentile queuing time",
-				"id": "PiW90"
-			}
-		},
-		{
-			"values": [
-				2.70805020110221
-			],
-			"systemFeature": {
-				"name": "π<sub>W[95]</sub>",
-				"description": "Symbol for 95-th percentile queuing time",
-				"id": "PiW95"
-			}
-		},
-		{
-			"values": [
-				0
-			],
-			"systemFeature": {
-				"name": "π<sub>W[r]</sub>",
-				"description": "Symbol for r-th percentile queuing time",
-				"id": "PiWr"
-			}
-		},
-		{
-			"values": [
-				0.75
-			],
-			"systemFeature": {
-				"name": "ρ",
-				"description": "Traffic intensity, unit of measure is the erlang",
-				"id": "Ro"
-			}
-		}
-	]
+    "systemView": {
+        "name": "M | M | 1",
+        "id": "systemMM1",
+        "status": "BETA",
+        "description": ""
+    },
+    "systemFeatureValues": [
+        {
+            "values": [3],
+            "systemFeature": {
+                "name": "<span class=\"overline\">N</span>",
+                "description": "Average number of customers in the steady state system",
+                "id": "NAvg"
+            }
+        },
+        {
+            "values": [2.25],
+            "systemFeature": {
+                "name": "<span class=\"overline\">Q</span>",
+                "description": "Average number of customers in the queue (not including thosein service)",
+                "id": "QAvg"
+            }
+        },
+        {
+            "values": [1],
+            "systemFeature": {
+                "name": "<span class=\"overline\">T</span>",
+                "description": "The mean total time (both service and queing time) a customer spends in the system",
+                "id": "TAvg"
+            }
+        },
+        {
+            "values": [0.75],
+            "systemFeature": {
+                "name": "<span class=\"overline\">W</span>",
+                "description": "Average time in the queue",
+                "id": "WAvg"
+            }
+        },
+        {
+            "values": [12],
+            "systemFeature": {
+                "name": "D<sup>2</sup>(N)",
+                "description": "Variance of <i>N</i>",
+                "id": "D2N"
+            }
+        },
+        {
+            "values": [10.6875],
+            "systemFeature": {
+                "name": "D<sup>2</sup>(Q)",
+                "description": "Variance of <i>Q</i>",
+                "id": "D2Q"
+            }
+        },
+        {
+            "values": [1],
+            "systemFeature": {
+                "name": "D<sup>2</sup>(T)",
+                "description": "Variance of <i>T</i>",
+                "id": "D2T"
+            }
+        },
+        {
+            "values": [0.9375],
+            "systemFeature": {
+                "name": "D<sup>2</sup>(W)",
+                "description": "Variance of <i>W</i>",
+                "id": "D2W"
+            }
+        },
+        {
+            "values": [12],
+            "systemFeature": {
+                "name": "D<sup>2</sup>[Q|Q>0]",
+                "description": "Variance of queue length of nonempty queues in steady state",
+                "id": "D2QQ0"
+            }
+        },
+        {
+            "values": [4],
+            "systemFeature": {
+                "name": "E[Q|Q>0]",
+                "description": "Average queue length of nonempty queues when the system is in steady state",
+                "id": "EQQ0"
+            }
+        },
+        {
+            "values": [0.8646647167633873],
+            "systemFeature": {
+                "name": "F<sub>T</sub>(t)",
+                "description": "Distribution function for mean total time a customer spends in the system",
+                "id": "FTt"
+            }
+        },
+        {
+            "values": [0.8984985375725405],
+            "systemFeature": {
+                "name": "F<sub>W</sub>(t)",
+                "description": "Distribution function for time in the queue",
+                "id": "FWt"
+            }
+        },
+        {
+            "values": [0.059326171875],
+            "systemFeature": {
+                "name": "P<sub>n</sub>",
+                "description": "Steady state probability that there are <i>n</i> customers in the system",
+                "id": "Pn"
+            }
+        },
+        {
+            "values": [0.2373046875],
+            "systemFeature": {
+                "name": "P[N>=n]",
+                "description": "P[N>=n]",
+                "id": "PNn"
+            }
+        },
+        {
+            "values": [0.1353352832366127],
+            "systemFeature": {
+                "name": "P[T>t]",
+                "description": "The probability that the mean total time a customer spends in the system is greater then <i>t</i>",
+                "id": "PTt"
+            }
+        },
+        {
+            "values": [0.10150146242745953],
+            "systemFeature": {
+                "name": "P[W>t]",
+                "description": "The probability that the time in the queue is greater then <i>t</i>",
+                "id": "PWt"
+            }
+        },
+        {
+            "values": [2.302585092994046],
+            "systemFeature": {
+                "name": "π<sub>T[90]</sub>",
+                "description": "Symbol for 90-th percentile waiting time in the system",
+                "id": "PiT90"
+            }
+        },
+        {
+            "values": [2.995732273553991],
+            "systemFeature": {
+                "name": "π<sub>T[95]</sub>",
+                "description": "Symbol for 95-th percentile waiting time in the system",
+                "id": "PiT95"
+            }
+        },
+        {
+            "values": [0.02020270731751947],
+            "systemFeature": {
+                "name": "π<sub>T[r]</sub>",
+                "description": "Symbol for r-th percentile waiting time in the system",
+                "id": "PiTr"
+            }
+        },
+        {
+            "values": [2.0149030205422647],
+            "systemFeature": {
+                "name": "π<sub>W[90]</sub>",
+                "description": "Symbol for 90-th percentile queuing time",
+                "id": "PiW90"
+            }
+        },
+        {
+            "values": [2.70805020110221],
+            "systemFeature": {
+                "name": "π<sub>W[95]</sub>",
+                "description": "Symbol for 95-th percentile queuing time",
+                "id": "PiW95"
+            }
+        },
+        {
+            "values": [0],
+            "systemFeature": {
+                "name": "π<sub>W[r]</sub>",
+                "description": "Symbol for r-th percentile queuing time",
+                "id": "PiWr"
+            }
+        },
+        {
+            "values": [0.75],
+            "systemFeature": {
+                "name": "ρ",
+                "description": "Traffic intensity, unit of measure is the erlang",
+                "id": "Ro"
+            }
+        }
+    ]
 }

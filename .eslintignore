@@ -1,0 +1,6 @@
+.eslintignore 
+package.json
+package-lock.json
+dist
+e2e
+cypress

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {TabType} from '../../model/tab/tab';
+import { Component } from '@angular/core'
+import { TabType } from '../../model/tab/tab'
 
 @Component({
     selector: 'home-component',
@@ -7,7 +7,5 @@ import {TabType} from '../../model/tab/tab';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-    public TabType = TabType;
-
+    public TabType = TabType
 }

@@ -1,10 +1,10 @@
 {
-	"systemId": "systemMM1",
-	"features": {
-		"Mu": "4",
-		"Lambda": "3",
-		"n": "5",
-		"r": "2",
-		"t": "2"
-	}
+    "systemId": "systemMM1",
+    "features": {
+        "Mu": "4",
+        "Lambda": "3",
+        "n": "5",
+        "r": "2",
+        "t": "2"
+    }
 }
