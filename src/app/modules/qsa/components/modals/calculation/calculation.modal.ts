@@ -25,6 +25,6 @@ export class CalculationModal implements OnInit {
             this.generalFormula = res.data.formulaDefault.value
         })
 
-        this.calculationSteps = ['When $a \\ne 0$,', 'there are two solutions to $\\frac{5}{9}$']
+        this.calculationSteps = ['Coming soon...']
     }
 }
