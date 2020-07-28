@@ -45,9 +45,9 @@ export class BackendService {
     }
 
     public getDefaultFormula(name: string, system: string): Observable<any> {
-        Logger.i(this, 'HTTP POST', 'getDefaultFormula()')
-        const queryString = `${this.FORMULA_API}?query={formulaDefault(name:"${name}",system:"${system}"){value}}`
-        console.log(queryString)
+        const locale: string = LocaleHelper.getCorrectLocale(this.translateService)
+        Logger.i(this, 'HTTP GET', 'getDefaultFormula()')
+        const queryString = `${this.FORMULA_API}?query={formulaDefault(name:"${name}",system:"${system}",locale:"${locale}"){value}}`
         return this.http.get(queryString)
     }
 
