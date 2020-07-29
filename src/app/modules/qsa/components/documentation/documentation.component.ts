@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {DocumentationData} from '../../model/documentation/documentation.data';
-import {Logger} from '../../services/logger';
+import { Component } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { DocumentationData } from '../../model/documentation/documentation.data'
+import { Logger } from '../../services/logger'
 
 @Component({
     selector: 'documentation-component',
@@ -9,34 +9,32 @@ import {Logger} from '../../services/logger';
     styleUrls: ['./documentation.component.css']
 })
 export class DocumentationComponent {
-
-    public dataDocumentation = Array<DocumentationData>();
-    public loadedExamples = new Map<string, string>();
+    public dataDocumentation = Array<DocumentationData>()
+    public loadedExamples = new Map<string, string>()
 
     constructor(private http: HttpClient) {
-        this.loadConfig();
+        this.loadConfig()
     }
 
     public readExamples(): void {
-        this.dataDocumentation.forEach(data => {
-            data.examples.forEach(fileName => {
+        this.dataDocumentation.forEach((data) => {
+            data.examples.forEach((fileName) => {
                 if (fileName) {
-                    Logger.i(this, 'Loading file', fileName);
-                    this.http.get<string>(fileName).subscribe(fileData => {
-                        this.loadedExamples.set(fileName, fileData);
-                    });
+                    Logger.i(this, 'Loading file', fileName)
+                    this.http.get<string>(fileName).subscribe((fileData) => {
+                        this.loadedExamples.set(fileName, fileData)
+                    })
                 }
-            });
-        });
+            })
+        })
     }
 
     private loadConfig(): void {
-        let documentationResourceConfigFile = 'assets/doc/documentation.json';
-        Logger.i(this, 'Loading file', documentationResourceConfigFile);
-        this.http.get<any[]>(documentationResourceConfigFile).subscribe(fileData => {
-            this.dataDocumentation = fileData;
-            this.readExamples();
-        });
+        const documentationResourceConfigFile = 'assets/doc/documentation.json'
+        Logger.i(this, 'Loading file', documentationResourceConfigFile)
+        this.http.get<any[]>(documentationResourceConfigFile).subscribe((fileData) => {
+            this.dataDocumentation = fileData
+            this.readExamples()
+        })
     }
-
 }

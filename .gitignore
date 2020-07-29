@@ -1,6 +1,8 @@
 # IntelliJ IDEA
 .idea/
 *.iml
+#VSCode
+.vscode/
 # Frontend Builds
 **/node_modules/**
 **/dist/**

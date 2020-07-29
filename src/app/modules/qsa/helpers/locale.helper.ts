@@ -1,31 +1,30 @@
-import {TranslateService} from '@ngx-translate/core';
-import {Logger} from '../services/logger';
+import { TranslateService } from '@ngx-translate/core'
+import { Logger } from '../services/logger'
 
 export class LocaleHelper {
+    private static LANGUAGES = ['en', 'hu']
 
-    private static LANGUAGES = ['en', 'hu'];
-
-    private static DEFAULT_LANGUAGE = 'en';
+    private static DEFAULT_LANGUAGE = 'en'
 
     public static getCorrectLocale(translateService: TranslateService): string {
-        let presetLocale = this.getPresetLocale();
-        let userLocale = translateService.currentLang;
-        let compatibleLanguage = this.DEFAULT_LANGUAGE;
+        const presetLocale = this.getPresetLocale()
+        const userLocale = translateService.currentLang
+        let compatibleLanguage = this.DEFAULT_LANGUAGE
         if (this.isLanguageAvailable(presetLocale)) {
-            compatibleLanguage = presetLocale;
+            compatibleLanguage = presetLocale
         } else if (this.isLanguageAvailable(userLocale)) {
-            compatibleLanguage = userLocale;
+            compatibleLanguage = userLocale
         }
-        Logger.i(this, 'Preset | User | Compatible', presetLocale, userLocale, compatibleLanguage);
-        return compatibleLanguage;
+        Logger.i(this, 'Preset | User | Compatible', presetLocale, userLocale, compatibleLanguage)
+        return compatibleLanguage
     }
 
     private static getPresetLocale() {
-        let url = new URL(window.location.href);
-        return url.searchParams.get('language');
+        const url = new URL(window.location.href)
+        return url.searchParams.get('language')
     }
 
     private static isLanguageAvailable(presetLanguage: string): boolean {
-        return this.LANGUAGES.includes(presetLanguage);
+        return this.LANGUAGES.includes(presetLanguage)
     }
 }

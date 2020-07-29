@@ -1,9 +1,9 @@
 {
-  "build": {
-    "artifact": "qsa",
-    "name": "QSA Application",
-    "time": "2019-08-15T13:26:08.201Z",
-    "version": "1.0.443",
-    "group": "com.unideb.qsa"
-  }
+    "build": {
+        "artifact": "qsa",
+        "name": "QSA Application",
+        "time": "2019-08-15T13:26:08.201Z",
+        "version": "1.0.443",
+        "group": "com.unideb.qsa"
+    }
 }
