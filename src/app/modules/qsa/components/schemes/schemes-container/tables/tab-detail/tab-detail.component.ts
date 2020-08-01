@@ -35,7 +35,7 @@ export class TabDetailComponent implements OnInit {
         return this.systemViewService.getSystemViews()
     }
 
-    public isSystemViewsLoaded() {
+    public isSystemViewsLoaded(): boolean {
         return this.systemViewService.isSystemViewsLoaded()
     }
 

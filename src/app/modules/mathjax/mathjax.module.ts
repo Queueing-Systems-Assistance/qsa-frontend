@@ -20,15 +20,15 @@ export class MathjaxModule {
         config.type = 'text/x-mathjax-config'
         // register notifier to StartupHook and trigger .next() for all subscribers
         config.text = `
-    MathJax.Hub.Config({
-        skipStartupTypeset: true,
-        tex2jax: { inlineMath: [["$", "$"]],displayMath:[["$$", "$$"]] }
-      });
-      MathJax.Hub.Register.StartupHook('End', () => {
-        window.hubReady.next();
-        window.hubReady.complete();
-      });
-    `
+            MathJax.Hub.Config({
+                skipStartupTypeset: true,
+                tex2jax: { inlineMath: [["$", "$"]],displayMath:[["$$", "$$"]] }
+            });
+            MathJax.Hub.Register.StartupHook('End', () => {
+                window.hubReady.next();
+                window.hubReady.complete();
+            });
+        `
 
         document.getElementsByTagName('head')[0].appendChild(config)
     }

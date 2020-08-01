@@ -15,7 +15,6 @@ export class BackendService {
     private SYSTEM_TABLE_API = environment.apiUrl + '/table'
     private CHART_API = environment.apiUrl + '/chart'
     private INFO_API = environment.apiUrl + '/actuator/info'
-    private FORMULA_API = environment.formulaApiUrl + '/graphql'
 
     constructor(private translateService: TranslateService, private http: HttpClient) {
         Logger.i(this, 'API URL [' + environment.apiUrl + ']')
@@ -42,13 +41,6 @@ export class BackendService {
     public getBackendInfo(): Observable<Build> {
         Logger.i(this, 'HTTP GET', 'getBackendInfo()')
         return this.http.get<Build>(this.INFO_API)
-    }
-
-    public getDefaultFormula(name: string, system: string): Observable<any> {
-        const locale: string = LocaleHelper.getCorrectLocale(this.translateService)
-        Logger.i(this, 'HTTP GET', 'getDefaultFormula()')
-        const queryString = `${this.FORMULA_API}?query={formulaDefault(name:"${name}",system:"${system}",locale:"${locale}"){value}}`
-        return this.http.get(queryString)
     }
 
     private getParams(): HttpParams {

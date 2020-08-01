@@ -1,0 +1,23 @@
+.steps-container {
+    height: 20vh;
+    overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar-track {
+    background: #aeb6b1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #007bff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #007bff;
+    border: 1px solid white;
+}

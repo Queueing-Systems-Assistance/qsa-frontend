@@ -16,7 +16,7 @@
     
     <div class="lg-rounded-border mt-2">
         <h3 class="formula-header">{{'step' | translate}} {{currentPage}}</h3>
-        <div [mathContent]="calculationSteps[currentPage-1]"
+        <div class="steps-container" [mathContent]="calculationSteps[currentPage-1]"
          aria-label="Current step"></div>
     </div>
 </div>
