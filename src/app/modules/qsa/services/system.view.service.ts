@@ -18,13 +18,13 @@ export class SystemViewService {
     public loadSystemViews(force: boolean) {
         if (!this.isSystemViewsLoaded() || force) {
             Logger.i(this, 'Loading system list')
-            this.getSystemsViewsAsync().subscribe((value) => (this.systemViews = value))
+            this.getSystemsViewsAsync().subscribe(value => (this.systemViews = value))
         }
     }
 
     public getSystemViewById(id: string): SystemView {
         let result = null
-        this.getSystemViews().forEach((systemView) => {
+        this.getSystemViews().forEach(systemView => {
             if (systemView.id == id) {
                 result = systemView
             }

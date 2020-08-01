@@ -1,12 +1,16 @@
-<div (click)="navigateToSchemes(tabType)"
-     class="card rounded border-0 shadow-sm mt-3 home-selection-wrap cursor-pointer">
-    <img [src]="imageSrc"
-         alt="{{ altText | translate}}"
-         class="home-selection-image">
+<div
+    (click)="navigateToSchemes(tabType)"
+    class="card rounded border-0 shadow-sm mt-3 home-selection-wrap cursor-pointer"
+>
+    <img [src]="imageSrc" alt="{{ altText | translate }}" class="home-selection-image" />
     <div class="text-center home-selection-text text-white">
-        <h5><strong>{{ text | translate}}</strong></h5>
-        <img [src]="'/assets/res/arrow-point-to-right.svg'"
-             alt="{{ altText | translate}}"
-             class="home-selection-image-small rounded-circle bg-primary p-2 mt-2">
+        <h5>
+            <strong>{{ text | translate }}</strong>
+        </h5>
+        <img
+            [src]="'/assets/res/arrow-point-to-right.svg'"
+            alt="{{ altText | translate }}"
+            class="home-selection-image-small rounded-circle bg-primary p-2 mt-2"
+        />
     </div>
 </div>

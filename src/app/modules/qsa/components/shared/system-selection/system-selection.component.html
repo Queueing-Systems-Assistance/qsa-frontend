@@ -1,19 +1,20 @@
 <div class="card-body">
     <form [formGroup]="systemViewsInputForm">
         <ul class="list-group list-group-flush">
-            <li *ngFor="let systemView of systemViews"
-                class="list-group-item">
+            <li *ngFor="let systemView of systemViews" class="list-group-item">
                 <div class="custom-control custom-radio">
-                    <input (change)="change(systemView.id)"
-                           [value]="systemView.id"
-                           class="custom-control-input"
-                           formControlName="systemViewSelected"
-                           id="{{systemView.id}}"
-                           type="radio">
-                    <label class="custom-control-label"
-                           for="{{systemView.id}}">{{systemView.name}}</label>
-                    <span *ngIf="isSystemBeta(systemView)"
-                          class="badge badge-warning badge-system-selection">{{systemView.status}}</span>
+                    <input
+                        (change)="change(systemView.id)"
+                        [value]="systemView.id"
+                        class="custom-control-input"
+                        formControlName="systemViewSelected"
+                        id="{{ systemView.id }}"
+                        type="radio"
+                    />
+                    <label class="custom-control-label" for="{{ systemView.id }}">{{ systemView.name }}</label>
+                    <span *ngIf="isSystemBeta(systemView)" class="badge badge-warning badge-system-selection">{{
+                        systemView.status
+                    }}</span>
                 </div>
             </li>
         </ul>

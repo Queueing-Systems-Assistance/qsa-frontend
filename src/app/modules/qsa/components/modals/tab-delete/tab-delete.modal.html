@@ -1,23 +1,18 @@
 <div class="modal-header">
-	<h4 class="modal-title">{{ 'tabDelete' | translate}}</h4>
-	<button (click)="activeModal.dismiss()"
-	        aria-label="Close"
-	        class="close"
-	        type="button">
-		<span aria-hidden="true">&times;</span>
-	</button>
+    <h4 class="modal-title">{{ 'tabDelete' | translate}}</h4>
+    <button (click)="activeModal.dismiss()" aria-label="Close" class="close" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 <div class="modal-body">
-	<h5 class="card-title">{{ 'warning' | translate}}</h5>
-	<p class="card-text">{{ 'tabDeleteWarning' | translate}}</p>
+    <h5 class="card-title">{{ 'warning' | translate}}</h5>
+    <p class="card-text">{{ 'tabDeleteWarning' | translate}}</p>
 </div>
 <div class="modal-footer">
-	<button (click)="activeModal.close(false)"
-	        class="btn btn-outline-primary"
-	        type="button">{{ 'cancel' | translate | uppercase}}
-	</button>
-	<button (click)="activeModal.close(true)"
-	        class="btn btn-outline-primary"
-	        type="button">{{ 'ok' | translate | uppercase}}
-	</button>
+    <button (click)="activeModal.close(false)" class="btn btn-outline-primary" type="button">
+        {{ 'cancel' | translate | uppercase}}
+    </button>
+    <button (click)="activeModal.close(true)" class="btn btn-outline-primary" type="button">
+        {{ 'ok' | translate | uppercase}}
+    </button>
 </div>

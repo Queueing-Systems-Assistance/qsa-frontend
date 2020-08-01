@@ -42,7 +42,7 @@ export class SchemeTabItem {
 
     public onCloseTab(): void {
         this.modalService.open(TabDeleteModal).result.then(
-            (result) => {
+            result => {
                 Logger.i(this, 'Modal [DELETE] result', result)
                 if (result) {
                     this.schemesService.deleteTab(this.index)
@@ -51,32 +51,32 @@ export class SchemeTabItem {
                     this.updateCachedData()
                 }
             },
-            (reason) => SchemeTabItem.handleModalDismissWithLog(reason)
+            reason => SchemeTabItem.handleModalDismissWithLog(reason)
         )
     }
 
     public onRename(): void {
         this.modalService.open(RenameModal).result.then(
-            (result) => {
+            result => {
                 Logger.i(this, 'Modal [RENAME] result', result)
                 if (result) {
                     this.schemesService.getTabs()[this.index].name = result
                 }
             },
-            (reason) => SchemeTabItem.handleModalDismissWithLog(reason)
+            reason => SchemeTabItem.handleModalDismissWithLog(reason)
         )
     }
 
     public onChangeTabType(): void {
         this.modalService.open(TabChangeModal).result.then(
-            (result) => {
+            result => {
                 Logger.i(this, 'Modal [CHANGE] result', result)
                 if (result) {
                     this.schemesService.getTabs()[this.index].type = TabType.DEFAULT
                     this.updateCachedData()
                 }
             },
-            (reason) => SchemeTabItem.handleModalDismissWithLog(reason)
+            reason => SchemeTabItem.handleModalDismissWithLog(reason)
         )
     }
 
@@ -97,19 +97,19 @@ export class SchemeTabItem {
         this.tablesService.deleteTableView(this.index)
         this.tablesService.deleteSystemView(this.index)
         // Need to shift all the elements by one
-        this.shiftValues(this.tablesService.getSystemViewsForms(), (currentIndex) =>
+        this.shiftValues(this.tablesService.getSystemViewsForms(), currentIndex =>
             this.tablesService.getSystemViewsForm(currentIndex)
         )
-        this.shiftValues(this.tablesService.getSystemViewInputsAll(), (currentIndex) =>
+        this.shiftValues(this.tablesService.getSystemViewInputsAll(), currentIndex =>
             this.tablesService.getSystemViewInputs(currentIndex)
         )
-        this.shiftValues(this.tablesService.getSystemViewInputsAll(), (currentIndex) =>
+        this.shiftValues(this.tablesService.getSystemViewInputsAll(), currentIndex =>
             this.tablesService.getSystemViewInputs(currentIndex)
         )
-        this.shiftValues(this.tablesService.getTableViews(), (currentIndex) =>
+        this.shiftValues(this.tablesService.getTableViews(), currentIndex =>
             this.tablesService.getTableView(currentIndex)
         )
-        this.shiftValues(this.tablesService.getSystemViews(), (currentIndex) =>
+        this.shiftValues(this.tablesService.getSystemViews(), currentIndex =>
             this.tablesService.getSystemView(currentIndex)
         )
     }
@@ -120,33 +120,33 @@ export class SchemeTabItem {
         this.chartsService.deleteSystemViewInputs(this.index)
         this.chartsService.deleteSystemView(this.index)
         this.chartsService.deleteChartData(this.index)
-        this.shiftValues(this.chartsService.getSystemViewsForms(), (currentIndex) =>
+        this.shiftValues(this.chartsService.getSystemViewsForms(), currentIndex =>
             this.chartsService.getSystemViewsForm(currentIndex)
         )
-        this.shiftValues(this.chartsService.getSystemViewInputsAll(), (currentIndex) =>
+        this.shiftValues(this.chartsService.getSystemViewInputsAll(), currentIndex =>
             this.chartsService.getSystemViewInputs(currentIndex)
         )
-        this.shiftValues(this.chartsService.getSystemViewInputsAll(), (currentIndex) =>
+        this.shiftValues(this.chartsService.getSystemViewInputsAll(), currentIndex =>
             this.chartsService.getSystemViewInputs(currentIndex)
         )
-        this.shiftValues(this.chartsService.getSystemViews(), (currentIndex) =>
+        this.shiftValues(this.chartsService.getSystemViews(), currentIndex =>
             this.chartsService.getSystemView(currentIndex)
         )
-        this.shiftValues(this.chartsService.getChartDatas(), (currentIndex) =>
+        this.shiftValues(this.chartsService.getChartDatas(), currentIndex =>
             this.chartsService.getChartData(currentIndex)
         )
     }
 
     private updateCompareTable(): void {
         this.compareTableService.removeTableViewCompare(this.index)
-        this.shiftValues(this.compareTableService.getTableViewCompares(), (currentIndex) =>
+        this.shiftValues(this.compareTableService.getTableViewCompares(), currentIndex =>
             this.compareTableService.getTableViewCompare(currentIndex)
         )
     }
 
     private shiftValues(map: Map<number, any>, func: (currentIndex: number) => any): void {
         Array.from(map.keys())
-            .filter((currentIndex) => currentIndex >= this.index)
-            .forEach((currentIndex) => SchemeTabItem.updateMap(currentIndex - 1, func(currentIndex), map))
+            .filter(currentIndex => currentIndex >= this.index)
+            .forEach(currentIndex => SchemeTabItem.updateMap(currentIndex - 1, func(currentIndex), map))
     }
 }

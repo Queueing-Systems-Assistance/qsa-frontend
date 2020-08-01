@@ -20,7 +20,7 @@ export class DocumentationUrlComponent {
 
     public copyToClipboardText(text: string): void {
         Logger.i(this, 'Copy text to clipboard', text)
-        this.translateService.get('copiedToClipboard').subscribe((value) => {
+        this.translateService.get('copiedToClipboard').subscribe(value => {
             this.notificationService.showToastInfo(value)
             this.clipboardService.copyFromContent(text)
         })

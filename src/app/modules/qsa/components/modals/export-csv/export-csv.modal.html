@@ -1,27 +1,27 @@
 <div class="modal-header">
-	<h4 class="modal-title">{{ 'exportToCSV' | translate}}</h4>
-	<button (click)="activeModal.dismiss()"
-	        aria-label="Close"
-	        class="close"
-	        type="button">
-		<span aria-hidden="true">&times;</span>
-	</button>
+    <h4 class="modal-title">{{ 'exportToCSV' | translate}}</h4>
+    <button (click)="activeModal.dismiss()" aria-label="Close" class="close" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 <div class="modal-body">
-	<p>{{ 'exportToCSVDescription' | translate}}</p>
-	<form [formGroup]="formControl">
-		<ul class="list-group list-group-flush">
-			<li *ngFor="let property of properties" class="list-group-item">
-				<div class="custom-control custom-checkbox">
-					<input class="custom-control-input" formControlName="{{property.id}}" id="{{property.id}}" type="checkbox">
-					<label class="custom-control-label" for="{{property.id}}">{{property.valueKey | translate}}</label>
-				</div>
-			</li>
-		</ul>
-	</form>
+    <p>{{ 'exportToCSVDescription' | translate}}</p>
+    <form [formGroup]="formControl">
+        <ul class="list-group list-group-flush">
+            <li *ngFor="let property of properties" class="list-group-item">
+                <div class="custom-control custom-checkbox">
+                    <input
+                        class="custom-control-input"
+                        formControlName="{{property.id}}"
+                        id="{{property.id}}"
+                        type="checkbox"
+                    />
+                    <label class="custom-control-label" for="{{property.id}}">{{property.valueKey | translate}}</label>
+                </div>
+            </li>
+        </ul>
+    </form>
 </div>
 <div class="modal-footer">
-	<button (click)="exportToCSV()"
-	        class="btn btn-outline-primary"
-	        type="button">{{ 'export' | translate}}</button>
+    <button (click)="exportToCSV()" class="btn btn-outline-primary" type="button">{{ 'export' | translate}}</button>
 </div>

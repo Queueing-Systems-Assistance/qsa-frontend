@@ -36,8 +36,8 @@ export class HomeSelectionComponent {
         this.schemesService.selectedTab(tabsSize - 1)
         this.router
             .navigate(['/schemes/' + (tabsSize - 1)], { replaceUrl: true, relativeTo: this.route })
-            .then((value) => Logger.i(this, 'New tab created from the [HomeComponent], result is [' + value + ']'))
-            .catch((reason) =>
+            .then(value => Logger.i(this, 'New tab created from the [HomeComponent], result is [' + value + ']'))
+            .catch(reason =>
                 Logger.e(this, 'Error occurred while navigating to the new tab on [HomeComponent], reason:', reason)
             )
     }

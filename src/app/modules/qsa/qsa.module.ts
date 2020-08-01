@@ -66,6 +66,7 @@ import * as Highcharts from 'highcharts/highstock'
 import { MathjaxModule } from '../mathjax/mathjax.module'
 import { CalculationModal } from './components/modals/calculation/calculation.modal'
 import { FormulaBackendService } from './services/formula-backend.service'
+import { GraphQLModule } from '../graphql/graphql.module'
 
 require('highcharts/modules/exporting')(Highcharts)
 
@@ -135,6 +136,7 @@ const appRoutes: Routes = [
         CalculationModal
     ],
     imports: [
+        GraphQLModule,
         MalihuScrollbarModule.forRoot(),
         HighchartsChartModule,
         BrowserModule,

@@ -28,8 +28,8 @@ export class CompareTableComponent {
     public getSystemFeatureValueToDisplay(tableNumber: number, systemFeature: SystemFeature): number {
         const tableView = this.getTableViewBasedOnIndex(tableNumber)
         return tableView.systemOutputs
-            .filter((systemFeatureValue) => systemFeatureValue.id === systemFeature.id)
-            .map((systemFeatureValue) => systemFeatureValue.values[0])[0]
+            .filter(systemFeatureValue => systemFeatureValue.id === systemFeature.id)
+            .map(systemFeatureValue => systemFeatureValue.values[0])[0]
     }
 
     public getSystemFeatures(): SystemFeatureValue[] {
@@ -44,7 +44,7 @@ export class CompareTableComponent {
         result: SystemFeatureValue[]
     ): SystemFeatureValue[] {
         return result.concat(
-            systemFeatureValues.filter((systemFeature) => !this.isSystemFeaturesAlreadyAdded(systemFeature, result))
+            systemFeatureValues.filter(systemFeature => !this.isSystemFeaturesAlreadyAdded(systemFeature, result))
         )
     }
 
@@ -53,7 +53,7 @@ export class CompareTableComponent {
         systemFeatures: SystemFeatureValue[]
     ): boolean {
         let contains = false
-        systemFeatures.forEach((systemFeatureFromArray) => {
+        systemFeatures.forEach(systemFeatureFromArray => {
             if (systemFeatureFromArray.id === systemFeature.id) {
                 contains = true
             }

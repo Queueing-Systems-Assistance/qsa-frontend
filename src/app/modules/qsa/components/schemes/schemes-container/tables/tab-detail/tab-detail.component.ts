@@ -44,11 +44,11 @@ export class TabDetailComponent implements OnInit {
     }
 
     public getRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter((systemViewInput) => systemViewInput.required)
+        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.required)
     }
 
     public getNonRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter((systemViewInput) => !systemViewInput.required)
+        return this.getSystemViewInputs().filter(systemViewInput => !systemViewInput.required)
     }
 
     public getSystemInputForm(): FormGroup {
@@ -70,7 +70,7 @@ export class TabDetailComponent implements OnInit {
     public calculateSystemFeatures(): void {
         this.requestLoading = true
         this.backendService.getTable(this.getSystemInputForm().value, this.getSystemViewId()).subscribe(
-            (value) => {
+            value => {
                 value.systemView = this.getSystemView()
                 return this.tablesService.addTableView(this.currentTab, value)
             },
@@ -84,7 +84,7 @@ export class TabDetailComponent implements OnInit {
         this.tablesService.deleteTableView(this.currentTab)
         this.requestLoading = true
         this.backendService.getInput(id).subscribe(
-            (result) => this.updateSystemInputForms(result),
+            result => this.updateSystemInputForms(result),
             null,
             () => (this.requestLoading = false)
         )
@@ -114,7 +114,7 @@ export class TabDetailComponent implements OnInit {
     private updateSystemInputForms(systemViewInputs: Array<SystemFeature>): void {
         if ((!this.getSystemInputForm() && systemViewInputs) || systemViewInputs) {
             const newInputFormGroup = new FormGroup({})
-            systemViewInputs.forEach((systemInput) => {
+            systemViewInputs.forEach(systemInput => {
                 newInputFormGroup.addControl(systemInput.id, new FormControl(0))
             })
             this.tablesService.addSystemInputsForm(this.currentTab, newInputFormGroup)

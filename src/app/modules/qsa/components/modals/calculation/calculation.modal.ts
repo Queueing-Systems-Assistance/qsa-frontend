@@ -28,15 +28,14 @@ export class CalculationModal implements OnInit {
 
     ngOnInit(): void {
         Logger.i(this, `systemFeatureId: ${this.systemFeatureId}, systemId: ${this.systemId}`)
-        this.formulaBackendService.getDefaultFormula(this.systemFeatureId, this.systemId).subscribe((res) => {
-            this.generalFormula = res.data.formulaDefault.value
+        this.formulaBackendService.getDefaultFormula(this.systemFeatureId, this.systemId).subscribe(({ data }) => {
+            this.generalFormula = data.formulaDefault.value
         })
-        /*
+
         const currentTab = this.schemesService.getSelectedTabIndex()
         const inputValues = this.tablesService.getSystemInputsForm(currentTab).value
-        this.formulaBackendService.getStepsFormula(this.systemFeatureId, this.systemId).subscribe((res) => {
-            this.calculationSteps = res.data.formulaSteps.value
+        this.formulaBackendService.getStepsFormula(this.systemFeatureId, this.systemId).subscribe(({ data }) => {
+            this.calculationSteps = data.formulaSteps.value
         })
-        */
     }
 }

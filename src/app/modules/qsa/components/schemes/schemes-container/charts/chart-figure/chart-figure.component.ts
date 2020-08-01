@@ -94,7 +94,7 @@ export class ChartFigureComponent {
     private createDataForChart(chartData: ChartData): Array<SeriesOptionsType> {
         const datasets = []
         let count = 0
-        chartData.systemOutputs.forEach((systemFeatureValue) => {
+        chartData.systemOutputs.forEach(systemFeatureValue => {
             const datas = []
             chartData.labels.forEach((label, index) => {
                 datas.push([label, systemFeatureValue.values[index]])

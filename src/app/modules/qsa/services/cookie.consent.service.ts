@@ -16,7 +16,7 @@ export class CookieConsentService {
         const isCookieConsentOld = this.cookieService.check('cookieConsent')
         Logger.i(this, 'Cookie consent status', true)
         if (!isCookieConsentOld) {
-            this.translateService.get('cookieConsentText').subscribe((text) => this.showNotification(text))
+            this.translateService.get('cookieConsentText').subscribe(text => this.showNotification(text))
         }
     }
 

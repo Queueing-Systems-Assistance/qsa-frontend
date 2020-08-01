@@ -3,35 +3,49 @@
         <div class="card card-system shadow-sm mt-2">
             <div class="table-responsive">
                 <div class="card-header">
-                    <h6 class="mt-2" id="compareTableTitle">{{ 'compareTable' | translate}}</h6>
+                    <h6 class="mt-2" id="compareTableTitle">{{ 'compareTable' | translate }}</h6>
                 </div>
             </div>
             <table class="table table-md table-bordered table-system-properties" aria-describedby="compareTableTitle">
                 <thead>
-                <tr>
-                    <th class="card-header font-weight-bold"
-                        scope="col">{{ 'parameter' | translate}}</th>
-                    <th class="card-header font-weight-bold"
-                        scope="col">
-                        {{tableViewCompare.tabName1 | translate}} - {{tableViewCompare.tableView1.systemView.name}}
-                    </th>
-                    <th class="card-header font-weight-bold"
-                        scope="col">
-                        {{tableViewCompare.tabName2 | translate}} - {{tableViewCompare.tableView2.systemView.name}}
-                    </th>
-                </tr>
+                    <tr>
+                        <th class="card-header font-weight-bold" scope="col">{{ 'parameter' | translate }}</th>
+                        <th class="card-header font-weight-bold" scope="col">
+                            {{ tableViewCompare.tabName1 | translate }} -
+                            {{ tableViewCompare.tableView1.systemView.name }}
+                        </th>
+                        <th class="card-header font-weight-bold" scope="col">
+                            {{ tableViewCompare.tabName2 | translate }} -
+                            {{ tableViewCompare.tableView2.systemView.name }}
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let systemFeature of getSystemFeatures()">
-                    <td>
-                        <ng-template #nonRequiredSystemViewInputTooltip><span
-                                [innerHTML]="systemFeature.description"></span></ng-template>
-                        <span [innerHTML]="systemFeature.name"
-                              [ngbTooltip]="nonRequiredSystemViewInputTooltip"></span>
-                    </td>
-                    <td>{{getReadableValue(FIRST_TABLE, systemFeature).length > 0 ? (getReadableValue(FIRST_TABLE, systemFeature) | translate) : (getSystemFeatureValueToDisplay(FIRST_TABLE, systemFeature) |  number)}}</td>
-                    <td>{{getReadableValue(SECOND_TABLE, systemFeature).length > 0 ? (getReadableValue(SECOND_TABLE, systemFeature) | translate) : (getSystemFeatureValueToDisplay(SECOND_TABLE, systemFeature) |  number)}}</td>
-                </tr>
+                    <tr *ngFor="let systemFeature of getSystemFeatures()">
+                        <td>
+                            <ng-template #nonRequiredSystemViewInputTooltip
+                                ><span [innerHTML]="systemFeature.description"></span
+                            ></ng-template>
+                            <span
+                                [innerHTML]="systemFeature.name"
+                                [ngbTooltip]="nonRequiredSystemViewInputTooltip"
+                            ></span>
+                        </td>
+                        <td>
+                            {{
+                                getReadableValue(FIRST_TABLE, systemFeature).length > 0
+                                    ? (getReadableValue(FIRST_TABLE, systemFeature) | translate)
+                                    : (getSystemFeatureValueToDisplay(FIRST_TABLE, systemFeature) | number)
+                            }}
+                        </td>
+                        <td>
+                            {{
+                                getReadableValue(SECOND_TABLE, systemFeature).length > 0
+                                    ? (getReadableValue(SECOND_TABLE, systemFeature) | translate)
+                                    : (getSystemFeatureValueToDisplay(SECOND_TABLE, systemFeature) | number)
+                            }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

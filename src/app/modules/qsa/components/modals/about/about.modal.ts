@@ -12,7 +12,7 @@ export class AboutModal {
     public build: Build
 
     constructor(public activeModal: NgbActiveModal, public backendService: BackendService) {
-        this.backendService.getBackendInfo().subscribe((response) => {
+        this.backendService.getBackendInfo().subscribe(response => {
             Logger.i(this, 'Backend info for application version', response)
             if (response) {
                 this.build = response['build']

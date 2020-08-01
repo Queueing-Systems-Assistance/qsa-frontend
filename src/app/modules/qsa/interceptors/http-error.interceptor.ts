@@ -40,6 +40,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     private handleErrorCodeZero(): void {
         this.translateService
             .get('errorOccurred')
-            .subscribe((translations) => this.notificationService.showToastError(translations))
+            .subscribe(translations => this.notificationService.showToastError(translations))
     }
 }

@@ -17,11 +17,11 @@ export class DocumentationComponent {
     }
 
     public readExamples(): void {
-        this.dataDocumentation.forEach((data) => {
-            data.examples.forEach((fileName) => {
+        this.dataDocumentation.forEach(data => {
+            data.examples.forEach(fileName => {
                 if (fileName) {
                     Logger.i(this, 'Loading file', fileName)
-                    this.http.get<string>(fileName).subscribe((fileData) => {
+                    this.http.get<string>(fileName).subscribe(fileData => {
                         this.loadedExamples.set(fileName, fileData)
                     })
                 }
@@ -32,7 +32,7 @@ export class DocumentationComponent {
     private loadConfig(): void {
         const documentationResourceConfigFile = 'assets/doc/documentation.json'
         Logger.i(this, 'Loading file', documentationResourceConfigFile)
-        this.http.get<any[]>(documentationResourceConfigFile).subscribe((fileData) => {
+        this.http.get<any[]>(documentationResourceConfigFile).subscribe(fileData => {
             this.dataDocumentation = fileData
             this.readExamples()
         })

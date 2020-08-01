@@ -32,7 +32,7 @@ export class JsonCardComponent {
     public copyToClipboard(fileName: string): void {
         const data = JSON.stringify(this.readExampleData(fileName), null, 2)
         Logger.i(this, 'Copy text to clipboard', data)
-        this.translateService.get('copiedToClipboard').subscribe((value) => {
+        this.translateService.get('copiedToClipboard').subscribe(value => {
             this.notificationService.showToastInfo(value)
             this.clipboardService.copyFromContent(data)
         })
