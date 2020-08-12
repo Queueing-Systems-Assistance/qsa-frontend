@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { environment } from '../../../../environments/environment'
 import { ConfigConditionInput } from '../model/formula/config-condition-input'
 import { Logger } from './logger'
 import { LocaleHelper } from '../helpers/locale.helper'
@@ -8,6 +7,8 @@ import { HttpClient } from '@angular/common/http'
 import { Apollo } from 'apollo-angular'
 import gql from 'graphql-tag'
 import { Observable } from 'rxjs'
+import { SystemFeatureInput } from '../model/formula/system-feature-input'
+import { ApolloQueryResult } from 'apollo-client'
 
 const formulaDefaultQuery = gql`
     query formulaDefault($name: String!, $conditions: [ConfigConditionInput!]!) {
@@ -25,12 +26,18 @@ const formulaStepsQuery = gql`
     }
 `
 
+const finalResultQuery = gql`
+    query finalResult($name: String!, $inputs: [SystemFeatureInput!]!, $conditions: [ConfigConditionInput!]!) {
+        finalResult(name: $name, inputs: $inputs, conditions: $conditions) {
+            defaultFormula
+            substitutedFormula
+        }
+    }
+`
+
 @Injectable()
 export class FormulaBackendService {
     constructor(private translateService: TranslateService, private http: HttpClient, private apollo: Apollo) {}
-
-    private FORMULA_API = environment.formulaApiUrl + '/graphql'
-
     private assembleConfigConditions(system: string, locale: string): ConfigConditionInput[] {
         const conditions: ConfigConditionInput[] = []
         conditions.push({ name: 'system', value: system })
@@ -38,19 +45,7 @@ export class FormulaBackendService {
         return conditions
     }
 
-    private buildFormulaQuery(name: string, conditions: ConfigConditionInput[]): string {
-        const queryBuilder: string[] = [`name:"${name}",[`]
-        conditions.forEach((condition, index) => {
-            queryBuilder.push(`{name:"${condition.name}",value:"${condition.value}"}`)
-            if (index < conditions.length - 1) {
-                queryBuilder.push(',')
-            }
-        })
-        queryBuilder.push(']')
-        return queryBuilder.join('')
-    }
-
-    public getDefaultFormula(name: string, system: string): Observable<any> {
+    public getDefaultFormula(name: string, system: string): Observable<ApolloQueryResult<any>> {
         Logger.i(this, 'GraphQL', 'formulaDefault')
         const locale = this.getCurrentLocale()
         const conditions: ConfigConditionInput[] = this.assembleConfigConditions(system, locale)
@@ -63,7 +58,7 @@ export class FormulaBackendService {
         })
     }
 
-    public getStepsFormula(name: string, system: string): Observable<any> {
+    public getStepsFormula(name: string, system: string): Observable<ApolloQueryResult<any>> {
         Logger.i(this, 'GraphQL', 'formulaSteps')
         const locale = this.getCurrentLocale()
         const conditions: ConfigConditionInput[] = this.assembleConfigConditions(system, locale)
@@ -71,6 +66,24 @@ export class FormulaBackendService {
             query: formulaStepsQuery,
             variables: {
                 name: name,
+                conditions: conditions
+            }
+        })
+    }
+
+    public getFinalResult(
+        name: string,
+        system: string,
+        inputs: SystemFeatureInput[]
+    ): Observable<ApolloQueryResult<any>> {
+        Logger.i(this, 'GraphQL', 'formulaSteps')
+        const locale = this.getCurrentLocale()
+        const conditions: ConfigConditionInput[] = this.assembleConfigConditions(system, locale)
+        return this.apollo.query({
+            query: finalResultQuery,
+            variables: {
+                name: name,
+                inputs: inputs,
                 conditions: conditions
             }
         })

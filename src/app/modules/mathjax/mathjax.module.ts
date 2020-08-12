@@ -8,7 +8,6 @@ import { MathService } from './math.service'
 })
 export class MathjaxModule {
     constructor(mathService: MathService) {
-        // see https://docs.mathjax.org/en/latest/advanced/dynamic.html
         const script = document.createElement('script') as HTMLScriptElement
         script.type = 'text/javascript'
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'
@@ -18,7 +17,6 @@ export class MathjaxModule {
 
         const config = document.createElement('script') as HTMLScriptElement
         config.type = 'text/x-mathjax-config'
-        // register notifier to StartupHook and trigger .next() for all subscribers
         config.text = `
             MathJax.Hub.Config({
                 skipStartupTypeset: true,

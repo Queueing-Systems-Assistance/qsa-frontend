@@ -1,6 +1,9 @@
 .steps-container {
+    width: inherit;
     height: 20vh;
-    overflow-x: auto;
+    line-height: 300%;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 ::-webkit-scrollbar {

@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule, Routes } from '@angular/router'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgSelectModule } from '@ng-select/ng-select'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { HighchartsChartModule } from 'highcharts-angular'
 import { ToastrModule, ToastrService } from 'ngx-toastr'
@@ -65,8 +65,8 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar'
 import * as Highcharts from 'highcharts/highstock'
 import { MathjaxModule } from '../mathjax/mathjax.module'
 import { CalculationModal } from './components/modals/calculation/calculation.modal'
-import { FormulaBackendService } from './services/formula-backend.service'
 import { GraphQLModule } from '../graphql/graphql.module'
+import { FormulaBackendService } from './services/formula-backend.service'
 
 require('highcharts/modules/exporting')(Highcharts)
 
@@ -163,7 +163,6 @@ const appRoutes: Routes = [
         // Services
         SchemesService,
         BackendService,
-        FormulaBackendService,
         TablesService,
         ChartsService,
         TablesCompareService,
@@ -171,6 +170,7 @@ const appRoutes: Routes = [
         NotificationService,
         CookieService,
         CookieConsentService,
+        FormulaBackendService,
         // Interceptors
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
     ],

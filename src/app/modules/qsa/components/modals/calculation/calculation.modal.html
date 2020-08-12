@@ -12,7 +12,11 @@
 
     <div class="lg-rounded-border mt-2">
         <h3 class="formula-header">{{'step' | translate}} {{currentPage}}</h3>
-        <div class="steps-container" [mathContent]="calculationSteps[currentPage-1]" aria-label="Current step"></div>
+        <div
+            class="steps-container"
+            [mathContent]="calculationSteps.concat(finalStep)[currentPage-1]"
+            aria-label="Current step"
+        ></div>
     </div>
 </div>
 <div class="modal-footer center-content">
@@ -21,7 +25,7 @@
         [(page)]="currentPage"
         [pageSize]="1"
         size="sm"
-        [collectionSize]="calculationSteps.length"
+        [collectionSize]="calculationSteps.length+1"
     >
         <ng-template ngbPaginationPrevious>{{'prev' | translate}}</ng-template>
         <ng-template ngbPaginationNext>{{'next' | translate}}</ng-template>

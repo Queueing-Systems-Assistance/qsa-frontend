@@ -120,5 +120,7 @@
     "generalFormula": "General formula",
     "step": "Step",
     "prev": "Prev",
-    "next": "Next"
+    "next": "Next",
+    "finalResult": "So the final result is",
+    "cannotCalculateFinalResult": "Couldn't calculate final result so nothing to display"
 }

@@ -22,12 +22,13 @@ export class TabTableComponent {
         modalRef.componentInstance.systemView = this.systemView
     }
 
-    public showCalculationModal(systemFeatureId: string): void {
+    public showCalculationModal(systemFeatureId: string, systemFeatureValue: number): void {
         //Currently only System MM1 is supported
         if (this.systemView.id === 'systemMM1') {
             const modalRef = this.modalService.open(CalculationModal)
             modalRef.componentInstance.systemFeatureId = systemFeatureId
             modalRef.componentInstance.systemId = this.systemView.id
+            modalRef.componentInstance.result = systemFeatureValue
         } else {
             this.notificationService.showToastInfo('This feature is currently supported in System MM1 only')
         }
