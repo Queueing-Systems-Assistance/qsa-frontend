@@ -28,12 +28,15 @@
             <tbody>
                 <tr *ngFor="let systemFeatureValue of systemTableView.systemOutputs">
                     <td><span [innerHTML]="systemFeatureValue.name"></span></td>
-                    <td>
+                    <!--<td>
                         {{
-                            systemFeatureValue.values[0] == 'NaN'
+                             systemFeatureValue.values[0] == 'NaN'
                                 ? ('cannotCalculate' | translate)
-                                : (+systemFeatureValue.values[0] | number)
+                                : (+systemFeatureValue.values[0] | number) 
                         }}
+                    </td>-->
+                    <td>
+                        {{systemFeatureValue.values[0]}}
                     </td>
                     <td class="desc-container">
                         <span [innerHTML]="systemFeatureValue.description"></span>
