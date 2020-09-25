@@ -4,7 +4,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { environment } from '../../../environments/environment'
 
-const uri = environment.formulaApiUrl
+const uri = `${environment.formulaApiUrl}/graphql`
 export function createApollo(httpLink: HttpLink) {
     return {
         link: httpLink.create({ uri }),
