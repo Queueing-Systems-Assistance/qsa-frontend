@@ -28,24 +28,24 @@
             <tbody>
                 <tr *ngFor="let systemFeatureValue of systemTableView.systemOutputs">
                     <td><span [innerHTML]="systemFeatureValue.name"></span></td>
-                    <!--<td>
-                        {{
-                             systemFeatureValue.values[0] == 'NaN'
-                                ? ('cannotCalculate' | translate)
-                                : (+systemFeatureValue.values[0] | number) 
-                        }}
-                    </td>-->
                     <td>
-                        {{systemFeatureValue.values[0]}}
+                        <button 
+                            type="button"
+                            *ngIf="isErrorMessage(systemFeatureValue.values[0])"
+                            class="btn btn-outline-danger btn-circle btn-sm"
+                            (click)="showErrorMessage(systemFeatureValue.values[0])"
+                            aria-label="Show why it wasn't calculated">
+                            ?
+                        </button>
+                        <div *ngIf="!isErrorMessage(systemFeatureValue.values[0])">{{roundValue(systemFeatureValue.values[0])}}</div>
                     </td>
                     <td class="desc-container">
                         <span [innerHTML]="systemFeatureValue.description"></span>
                         <button
                             type="button"
-                            class="btn btn-outline-secondary btn-circle btn-sm"
+                            class="btn btn-outline-secondary btn-circle btn-sm hidden"
                             (click)="showCalculationModal(systemFeatureValue.id, systemFeatureValue.values[0])"
-                            aria-label="Show how it was calculated"
-                        >
+                            aria-label="Show how it was calculated">
                             ?
                         </button>
                     </td>
