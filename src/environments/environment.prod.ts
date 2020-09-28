@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
     apiUrl: 'https://qsa.inf.unideb.hu/prod/api/calculator',
-    formulaApiUrl: 'http://localhost:4000'
+    formulaApiUrl: 'https://qsa.inf.unideb.hu/prod/api/formula-handler'
 }

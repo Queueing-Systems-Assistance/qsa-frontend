@@ -52,7 +52,6 @@ import { SchemeTabItem } from './components/schemes/scheme-tab-item/scheme-tab-i
 import { SchemesContainerComponent } from './components/schemes/schemes-container/schemes.container.component'
 import { TabChangeModal } from './components/modals/tab-change/tab-change.modal'
 import { TabDeleteModal } from './components/modals/tab-delete/tab-delete.modal'
-import { DocumentationInfoComponent } from './components/documentation/documentation-info/documentation-info.component'
 import { CompareTableDetailComponent } from './components/schemes/schemes-container/tables-compare/compare-detail/compare-table-detail.component'
 import { TablesCompareService } from './services/tables-compare.service'
 import { CompareTableSelectionComponent } from './components/schemes/schemes-container/tables-compare/compare-table-selection/compare-table-selection.component'
@@ -115,7 +114,6 @@ const appRoutes: Routes = [
         // Documentation section
         DocumentationComponent,
         DocumentationUrlComponent,
-        DocumentationInfoComponent,
         DocumentationExampleComponent,
         // Modals
         AboutModal,
