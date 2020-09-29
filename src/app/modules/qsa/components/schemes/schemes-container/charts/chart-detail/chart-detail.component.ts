@@ -47,7 +47,7 @@ export class ChartDetailComponent implements OnInit {
         this.chartsService.deleteChartData(this.currentTab)
         this.requestLoading = true
         this.backendService.getInput(systemViewId).subscribe(
-            (result) => {
+            result => {
                 // Save selected system inputs
                 this.chartsService.addSystemViewInputs(this.currentTab, result)
                 this.updateSystemInputsForms(true)
@@ -81,7 +81,7 @@ export class ChartDetailComponent implements OnInit {
         }
         this.requestLoading = true
         this.backendService.getChart(formData, this.getSystemViewId(), values.xAxis.featureId).subscribe(
-            (value) => this.updateChartView(value),
+            value => this.updateChartView(value),
             null,
             () => (this.requestLoading = false)
         )
@@ -117,16 +117,16 @@ export class ChartDetailComponent implements OnInit {
     }
 
     public getRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter((systemViewInput) => systemViewInput.required)
+        return this.createFixSystemInputs().filter(systemViewInput => systemViewInput.required)
     }
 
     public getNonRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter((systemViewInput) => !systemViewInput.required)
+        return this.createFixSystemInputs().filter(systemViewInput => !systemViewInput.required)
     }
 
     public getSelectedSystemFeature(): SystemFeature {
         return this.getSystemViewInputs()
-            .filter((systemInput) => this.getFeatureId() === systemInput.id)
+            .filter(systemInput => this.getFeatureId() === systemInput.id)
             .pop()
     }
 
@@ -134,8 +134,8 @@ export class ChartDetailComponent implements OnInit {
         let xAxisName = ''
         if (this.getSystemViewInputs()) {
             xAxisName = this.getSystemViewInputs()
-                .filter((systemViewInput) => this.getFeatureId() === systemViewInput.id)
-                .map((systemViewInput) => systemViewInput.name)
+                .filter(systemViewInput => this.getFeatureId() === systemViewInput.id)
+                .map(systemViewInput => systemViewInput.name)
                 .pop()
         }
         return xAxisName
@@ -227,16 +227,16 @@ export class ChartDetailComponent implements OnInit {
             this.getSystemInputsForm().removeControl(this.getSystemViewId())
             this.getSystemInputsForm().addControl(this.getSystemViewId(), dynamicInputForms)
         }
-        this.getSystemViewInputs().forEach((systemInput) => (this.getSystemInputsForm()[systemInput.id] = 0))
+        this.getSystemViewInputs().forEach(systemInput => (this.getSystemInputsForm()[systemInput.id] = 0))
     }
 
     private createFixSystemInputs(): Array<SystemFeature> {
-        return this.getSystemViewInputs().filter((systemInput) => this.getFeatureId() !== systemInput.id)
+        return this.getSystemViewInputs().filter(systemInput => this.getFeatureId() !== systemInput.id)
     }
 
     private createDynamicInputForms(): FormGroup {
         const dynamicForms = new FormGroup({})
-        this.getSystemViewInputs().forEach((systemInput) => dynamicForms.addControl(systemInput.id, new FormControl(0)))
+        this.getSystemViewInputs().forEach(systemInput => dynamicForms.addControl(systemInput.id, new FormControl(0)))
         return dynamicForms
     }
 

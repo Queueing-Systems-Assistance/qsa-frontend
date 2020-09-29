@@ -1,19 +1,18 @@
-<main class="container flex-fill"
-      role="main">
+<main class="container flex-fill" role="main">
     <div class="row mt-5 mb-5">
         <div class="col col-lg-4 col-12">
             <div class="card card-system shadow-sm mt-2">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ 'systems' | translate}}</h4>
+                    <h4 class="my-0 font-weight-normal">{{ 'systems' | translate }}</h4>
                 </div>
-                <error-system-views-load-component
-                        *ngIf="!isSystemViewsLoaded()">
-                </error-system-views-load-component>
-                <system-selection-component (onChange)="selectSystem($event)"
-                                            *ngIf="isSystemViewsLoaded()"
-                                            [systemViewsInputForm]="getSystemViewsForm()"
-                                            [systemViews]="getSystemViews()"
-                                            class="system-list">
+                <error-system-views-load-component *ngIf="!isSystemViewsLoaded()"> </error-system-views-load-component>
+                <system-selection-component
+                    (onChange)="selectSystem($event)"
+                    *ngIf="isSystemViewsLoaded()"
+                    [systemViewsInputForm]="getSystemViewsForm()"
+                    [systemViews]="getSystemViews()"
+                    class="system-list"
+                >
                 </system-selection-component>
             </div>
         </div>
@@ -21,121 +20,133 @@
             <div class="card card-system shadow-sm mt-2">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">
-                        {{isSystemViewInputsLoaded() ? getSystemViewName() : ("systemValues" | translate)}}
+                        {{ isSystemViewInputsLoaded() ? getSystemViewName() : ('systemValues' | translate) }}
                     </h4>
                 </div>
                 <div class="card-body">
                     <empty-system-views-component
-                            *ngIf="!isSystemViewInputsLoaded()"
-                            [headingText]="'selectASystem'"
-                            [imageAsset]="'assets/res/filter.svg'"
-                            [subText]="'selectSystemEnterValues'">
+                        *ngIf="!isSystemViewInputsLoaded()"
+                        [headingText]="'selectASystem'"
+                        [imageAsset]="'assets/res/filter.svg'"
+                        [subText]="'selectSystemEnterValues'"
+                    >
                     </empty-system-views-component>
-                    <form *ngIf="isSystemViewInputsLoaded()"
-                          [formGroup]="getSystemInputsForm()">
+                    <form *ngIf="isSystemViewInputsLoaded()" [formGroup]="getSystemInputsForm()">
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <system-input-drop-down-component
-                                        (onChange)="selectXAxisSystemInput()"
-                                        [formGroup]="getSystemInputsForm()"
-                                        [systemFeatures]="getSystemViewInputs()"
-                                        [tooltip]="isXAxisSelected() ? getSelectedSystemFeature().description : 'noXAxisValueSelected' | translate">
+                                    (onChange)="selectXAxisSystemInput()"
+                                    [formGroup]="getSystemInputsForm()"
+                                    [systemFeatures]="getSystemViewInputs()"
+                                    [tooltip]="
+                                        isXAxisSelected()
+                                            ? getSelectedSystemFeature().description
+                                            : ('noXAxisValueSelected' | translate)
+                                    "
+                                >
                                 </system-input-drop-down-component>
                             </div>
                         </div>
-                        <div class="row"
-                             formGroupName="xAxis">
+                        <div class="row" formGroupName="xAxis">
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
-                                    <ng-template #fromXAxisInput>{{'fromXAxisDescription' | translate}}</ng-template>
-                                    <div [ngbTooltip]="fromXAxisInput"
-                                         class="input-group-prepend">
-                                        <span class="input-group-text">{{ 'from' | translate}}</span>
+                                    <ng-template #fromXAxisInput>{{ 'fromXAxisDescription' | translate }}</ng-template>
+                                    <div [ngbTooltip]="fromXAxisInput" class="input-group-prepend">
+                                        <span class="input-group-text">{{ 'from' | translate }}</span>
                                     </div>
-                                    <input (click)="$event.target.select()"
-                                           [systemFeature]="getSelectedSystemFeature()"
-                                           class="form-control"
-                                           formControlName="from"
-                                           id="from"
-                                           min="0"
-                                           name="from"
-                                           numbersOnly
-                                           placeholder="{{ 'value' | translate}}"
-                                           type="number">
+                                    <input
+                                        (click)="$event.target.select()"
+                                        [systemFeature]="getSelectedSystemFeature()"
+                                        class="form-control"
+                                        formControlName="from"
+                                        id="from"
+                                        min="0"
+                                        name="from"
+                                        numbersOnly
+                                        placeholder="{{ 'value' | translate }}"
+                                        type="number"
+                                    />
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
-                                    <ng-template #toAxisInput>{{'toXAxisDescription' | translate}}</ng-template>
-                                    <div [ngbTooltip]="toAxisInput"
-                                         class="input-group-prepend">
-                                        <span class="input-group-text">{{ 'to' | translate}}</span>
+                                    <ng-template #toAxisInput>{{ 'toXAxisDescription' | translate }}</ng-template>
+                                    <div [ngbTooltip]="toAxisInput" class="input-group-prepend">
+                                        <span class="input-group-text">{{ 'to' | translate }}</span>
                                     </div>
-                                    <input (click)="$event.target.select()"
-                                           [systemFeature]="getSelectedSystemFeature()"
-                                           class="form-control"
-                                           formControlName="to"
-                                           id="to"
-                                           min="0"
-                                           name="to"
-                                           numbersOnly
-                                           placeholder="{{ 'value' | translate}}"
-                                           type="number">
+                                    <input
+                                        (click)="$event.target.select()"
+                                        [systemFeature]="getSelectedSystemFeature()"
+                                        class="form-control"
+                                        formControlName="to"
+                                        id="to"
+                                        min="0"
+                                        name="to"
+                                        numbersOnly
+                                        placeholder="{{ 'value' | translate }}"
+                                        type="number"
+                                    />
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
-                                    <ng-template #stepsXAxisInput>{{'stepsXAxisDescription' | translate}}</ng-template>
-                                    <div [ngbTooltip]="stepsXAxisInput"
-                                         class="input-group-prepend">
-                                        <span class="input-group-text">{{ 'steps' | translate}}</span>
+                                    <ng-template #stepsXAxisInput>{{
+                                        'stepsXAxisDescription' | translate
+                                    }}</ng-template>
+                                    <div [ngbTooltip]="stepsXAxisInput" class="input-group-prepend">
+                                        <span class="input-group-text">{{ 'steps' | translate }}</span>
                                     </div>
-                                    <input (click)="$event.target.select()"
-                                           [systemFeature]="getSelectedSystemFeature()"
-                                           class="form-control"
-                                           formControlName="steps"
-                                           id="steps"
-                                           min="0"
-                                           name="steps"
-                                           numbersOnly
-                                           placeholder="{{ 'value' | translate}}"
-                                           type="number">
+                                    <input
+                                        (click)="$event.target.select()"
+                                        [systemFeature]="getSelectedSystemFeature()"
+                                        class="form-control"
+                                        formControlName="steps"
+                                        id="steps"
+                                        min="0"
+                                        name="steps"
+                                        numbersOnly
+                                        placeholder="{{ 'value' | translate }}"
+                                        type="number"
+                                    />
                                 </div>
                             </div>
                         </div>
-                        <hr *ngIf="isXAxisSelected()"
-                            class="mb-4">
-                        <div *ngIf="isXAxisSelected()" class="row" formGroupName="{{getSystemViewId()}}">
+                        <hr *ngIf="isXAxisSelected()" class="mb-4" />
+                        <div *ngIf="isXAxisSelected()" class="row" formGroupName="{{ getSystemViewId() }}">
                             <div *ngIf="getRequiredFixSystemInputs().length" class="col-md-6">
                                 <system-input-component
-                                        [systemFeatures]="getRequiredFixSystemInputs()"
-                                        [systemInputFormName]="getSystemViewId()"
-                                        [systemInputForm]="getSystemInputsForm()"
-                                        [systemInputsTitle]="'requiredParameters' | translate">
+                                    [systemFeatures]="getRequiredFixSystemInputs()"
+                                    [systemInputFormName]="getSystemViewId()"
+                                    [systemInputForm]="getSystemInputsForm()"
+                                    [systemInputsTitle]="'requiredParameters' | translate"
+                                >
                                 </system-input-component>
                             </div>
                             <div *ngIf="getNonRequiredFixSystemInputs().length" class="col-md-6">
                                 <system-input-component
-                                        [systemFeatures]="getNonRequiredFixSystemInputs()"
-                                        [systemInputFormName]="getSystemViewId()"
-                                        [systemInputForm]="getSystemInputsForm()"
-                                        [systemInputsTitle]="'nonRequiredParameters' | translate">
+                                    [systemFeatures]="getNonRequiredFixSystemInputs()"
+                                    [systemInputFormName]="getSystemViewId()"
+                                    [systemInputForm]="getSystemInputsForm()"
+                                    [systemInputsTitle]="'nonRequiredParameters' | translate"
+                                >
                                 </system-input-component>
                             </div>
                         </div>
                     </form>
                 </div>
-                <button (click)="calculateSystemFeatures()"
-                        *ngIf="isSystemViewInputsLoaded() && isXAxisSelected()"
-                        [disabled]="isRequestLoading()"
-                        class="btn card-footer text-center"
-                        id="buttonCalculate">{{ 'calculate' | translate }}
+                <button
+                    (click)="calculateSystemFeatures()"
+                    *ngIf="isSystemViewInputsLoaded() && isXAxisSelected()"
+                    [disabled]="isRequestLoading()"
+                    class="btn card-footer text-center"
+                    id="buttonCalculate"
+                >
+                    {{ 'calculate' | translate }}
                 </button>
             </div>
         </div>
     </div>
     <div class="row mt-3 mb-5">
-        <chart-figure-component class="col col-12">
-        </chart-figure-component>
+        <chart-figure-component class="col col-12"> </chart-figure-component>
     </div>
 </main>

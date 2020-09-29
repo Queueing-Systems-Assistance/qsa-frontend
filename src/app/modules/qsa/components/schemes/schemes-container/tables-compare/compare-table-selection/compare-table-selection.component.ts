@@ -31,16 +31,16 @@ export class CompareTableSelectionComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.getTableViewTabIndexes().forEach((value) => this.formGroup.addControl('' + value, new FormControl(false)))
+        this.getTableViewTabIndexes().forEach(value => this.formGroup.addControl('' + value, new FormControl(false)))
     }
 
     public isTwoTablesAreSelected(): boolean {
-        return this.getTableViewTabIndexes().filter((tabIndex) => this.formGroup.value['' + tabIndex]).length >= 2
+        return this.getTableViewTabIndexes().filter(tabIndex => this.formGroup.value['' + tabIndex]).length >= 2
     }
 
     public setSelectable(): void {
         const isTwoTablesAreSelected = this.isTwoTablesAreSelected()
-        this.getTableViewTabIndexes().forEach((tabIndex) => {
+        this.getTableViewTabIndexes().forEach(tabIndex => {
             const currentSystemSelected = this.formGroup.value['' + tabIndex]
             if (!isTwoTablesAreSelected || currentSystemSelected) {
                 this.formGroup.controls['' + tabIndex].enable()
@@ -59,13 +59,13 @@ export class CompareTableSelectionComponent implements OnInit {
     }
 
     public getTableViewsTabName(): string[] {
-        return this.getTableViewTabIndexes().map((tabIndex) => this.schemesService.getTabs()[tabIndex].name)
+        return this.getTableViewTabIndexes().map(tabIndex => this.schemesService.getTabs()[tabIndex].name)
     }
 
     public getTableViewSelectedTabNames(): string[] {
         return this.getTableViewTabIndexes()
-            .filter((tabIndex) => this.formGroup.value['' + tabIndex])
-            .map((tabIndex) => this.schemesService.getTabs()[tabIndex].name)
+            .filter(tabIndex => this.formGroup.value['' + tabIndex])
+            .map(tabIndex => this.schemesService.getTabs()[tabIndex].name)
     }
 
     public isEnoughTableViewsAreAvailable(): boolean {
@@ -91,7 +91,7 @@ export class CompareTableSelectionComponent implements OnInit {
 
     private getSelectedTableView(): TableView[] {
         return this.getTableViewTabIndexes()
-            .filter((tabIndex) => this.formGroup.value['' + tabIndex])
-            .map((tabIndex) => this.tablesService.getTableView(tabIndex))
+            .filter(tabIndex => this.formGroup.value['' + tabIndex])
+            .map(tabIndex => this.tablesService.getTableView(tabIndex))
     }
 }

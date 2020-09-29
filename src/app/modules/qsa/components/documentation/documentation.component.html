@@ -1,35 +1,36 @@
-<main class="container"
-      role="main">
+<main class="container" role="main">
     <div class="row mt-5 mb-5">
         <div class="col">
             <div aria-multiselectable="true" class="card shadow-sm" id="accordionDocumentation">
-                <div *ngFor="let data of dataDocumentation" class="card card-collapse-parent" >
-                    <div [attr.data-target]="'#' + data.nameKey" class="card-header cursor-pointer collapsed"
-                         data-toggle="collapse">
-                        <h4 class="my-0 font-weight-normal">{{data.nameKey | translate}}</h4>
+                <div *ngFor="let data of dataDocumentation" class="card card-collapse-parent">
+                    <div
+                        [attr.data-target]="'#' + data.nameKey"
+                        class="card-header cursor-pointer collapsed"
+                        data-toggle="collapse"
+                    >
+                        <h4 class="my-0 font-weight-normal">{{ data.nameKey | translate }}</h4>
                     </div>
                     <div [attr.id]="data.nameKey" class="collapse" data-parent="#accordionDocumentation">
                         <div class="card-body">
-                            <h5 class="text-left my-0 font-weight-normal mb-2">{{ 'request' | translate}}</h5>
-                            <documentation-url-component [requestType]="data.requestType"
-                                                         [requestURL]="data.requestURL"
-                                                         class="row">
+                            <h5 class="text-left my-0 font-weight-normal mb-2">{{ 'request' | translate }}</h5>
+                            <documentation-url-component
+                                [requestType]="data.requestType"
+                                [requestURL]="data.requestURL"
+                                class="row"
+                            >
                             </documentation-url-component>
-                            <h5 *ngIf="data.parameters"
-                                class="text-left my-0 font-weight-normal mt-4 mb-2">{{ 'parameters' | translate}}</h5>
-                            <documentation-table-component
-                                    [body]="data.parameters">
-                            </documentation-table-component>
-                            <h5 *ngIf="data.body"
-                                class="text-left my-0 font-weight-normal mt-4 mb-2">{{ 'body' | translate}}</h5>
-                            <documentation-table-component
-                                    [body]="data.body">
-                            </documentation-table-component>
-                            <h5 *ngIf="data.examples"
-                                class="text-left my-0 font-weight-normal mt-4 mb-2">{{ 'examples' | translate}}</h5>
-                            <documentation-example-component
-                                    [data]="data"
-                                    [loadedExamples]="loadedExamples">
+                            <h5 *ngIf="data.parameters" class="text-left my-0 font-weight-normal mt-4 mb-2">
+                                {{ 'parameters' | translate }}
+                            </h5>
+                            <documentation-table-component [body]="data.parameters"> </documentation-table-component>
+                            <h5 *ngIf="data.body" class="text-left my-0 font-weight-normal mt-4 mb-2">
+                                {{ 'body' | translate }}
+                            </h5>
+                            <documentation-table-component [body]="data.body"> </documentation-table-component>
+                            <h5 *ngIf="data.examples" class="text-left my-0 font-weight-normal mt-4 mb-2">
+                                {{ 'examples' | translate }}
+                            </h5>
+                            <documentation-example-component [data]="data" [loadedExamples]="loadedExamples">
                             </documentation-example-component>
                         </div>
                     </div>

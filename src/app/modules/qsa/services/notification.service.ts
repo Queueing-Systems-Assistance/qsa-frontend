@@ -6,7 +6,7 @@ export class NotificationService {
     constructor(private toastService: ToastrService) {}
 
     public showToastError(error: any[]): void {
-        error.forEach((errorMessageElem) => {
+        error.forEach(errorMessageElem => {
             this.toastService.error(errorMessageElem.errorMessage)
         })
     }

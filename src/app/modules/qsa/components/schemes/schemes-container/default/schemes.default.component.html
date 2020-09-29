@@ -1,41 +1,54 @@
-<main class="container"
-      role="main">
-	<div class="row mt-5 mb-5">
-		<div class="card-deck">
-			<div (click)="schemeSelect(TabType.TABLE)"
-				 id="schemesCardTable"
-			     class="card hover-zoom shadow-sm mt-2 cursor-pointer">
-				<img [src]="'assets/res/edit-table.svg'"
-				     alt="{{ 'chartIntro' | translate}}"
-				     class="card-img card-img-top-thumb mt-5 mb-5 cursor-pointer">
-				<div class="card-body">
-					<h5 class="card-title">{{ 'table' | translate}}</h5>
-					<p class="card-text">{{ 'tableDescription' | translate}}</p>
-				</div>
-			</div>
-			<div (click)="schemeSelect(TabType.CHART)"
-				 id="schemesCardChart"
-			     class="card hover-zoom shadow-sm mt-2 cursor-pointer">
-				<img [src]="'assets/res/line-graphic.svg'"
-				     alt="{{ 'chartIntro' | translate}}"
-				     class="card-img card-img-top-thumb mt-5 mb-5 cursor-pointer">
-				<div class="card-body">
-					<h5 class="card-title">{{ 'chart' | translate}}</h5>
-					<p class="card-text">{{ 'chartDescription' | translate}}</p>
-				</div>
-			</div>
-			<div (click)="schemeSelect(TabType.COMPARE_TABLE)"
-				 id="schemesCardCompareTable"
-			     class="card hover-zoom shadow-sm mt-2 cursor-pointer">
-				<img [src]="'assets/res/advantages.svg'"
-				     alt="{{ 'chartIntro' | translate}}"
-				     class="card-img card-img-top-thumb mt-5 mb-5 cursor-pointer">
-				<div class="card-body">
-					<h5 class="card-title">{{ 'compare' | translate}} - {{ 'table' | translate}}</h5>
-					<p class="card-text">{{ 'compareTableDescription' | translate}}</p>
-					<p class="card-text"><span class="badge badge-info">{{ 'new' | translate | uppercase}}</span></p>
-				</div>
-			</div>
-		</div>
-	</div>
+<main class="container" role="main">
+    <div class="row mt-5 mb-5">
+        <div class="card-deck">
+            <div
+                (click)="schemeSelect(TabType.TABLE)"
+                id="schemesCardTable"
+                class="card hover-zoom shadow-sm mt-2 cursor-pointer"
+            >
+                <img
+                    [src]="'assets/res/edit-table.svg'"
+                    alt="{{ 'chartIntro' | translate }}"
+                    class="card-img card-img-top-thumb mt-5 mb-5 cursor-pointer"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">{{ 'table' | translate }}</h5>
+                    <p class="card-text">{{ 'tableDescription' | translate }}</p>
+                </div>
+            </div>
+            <div
+                (click)="schemeSelect(TabType.CHART)"
+                id="schemesCardChart"
+                class="card hover-zoom shadow-sm mt-2 cursor-pointer"
+            >
+                <img
+                    [src]="'assets/res/line-graphic.svg'"
+                    alt="{{ 'chartIntro' | translate }}"
+                    class="card-img card-img-top-thumb mt-5 mb-5 cursor-pointer"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">{{ 'chart' | translate }}</h5>
+                    <p class="card-text">{{ 'chartDescription' | translate }}</p>
+                </div>
+            </div>
+            <div
+                (click)="schemeSelect(TabType.COMPARE_TABLE)"
+                id="schemesCardCompareTable"
+                class="card hover-zoom shadow-sm mt-2 cursor-pointer"
+            >
+                <img
+                    [src]="'assets/res/advantages.svg'"
+                    alt="{{ 'chartIntro' | translate }}"
+                    class="card-img card-img-top-thumb mt-5 mb-5 cursor-pointer"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">{{ 'compare' | translate }} - {{ 'table' | translate }}</h5>
+                    <p class="card-text">{{ 'compareTableDescription' | translate }}</p>
+                    <p class="card-text">
+                        <span class="badge badge-info">{{ 'new' | translate | uppercase }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>

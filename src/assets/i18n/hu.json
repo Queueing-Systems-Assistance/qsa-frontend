@@ -119,5 +119,7 @@
     "generalFormula": "Általános képlet",
     "step": "Lépés sorszáma:",
     "prev": "Előző",
-    "next": "Következő"
+    "next": "Következő",
+    "finalResult": "Tehát a végeredmény:",
+    "cannotCalculateFinalResult": "A végeredményt nem sikerült kiszámítani, így nem jeleníthető meg."
 }

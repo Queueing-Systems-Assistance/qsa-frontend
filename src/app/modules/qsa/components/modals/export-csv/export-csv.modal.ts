@@ -51,7 +51,7 @@ export class ExportCsvModal {
 
     private mapToCSV(): Array<any> {
         const data = new Array<any>()
-        this.systemTableView.systemOutputs.forEach((value) => {
+        this.systemTableView.systemOutputs.forEach(value => {
             const row = {}
             this.addPropertyToCSVRow(row, this.formControl.controls['id'].value ? 'id' : null, value.id)
             this.addPropertyToCSVRow(row, this.formControl.controls['name'].value ? 'name' : null, value.name)

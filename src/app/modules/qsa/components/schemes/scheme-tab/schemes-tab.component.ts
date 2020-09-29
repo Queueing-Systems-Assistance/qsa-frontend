@@ -36,10 +36,8 @@ export class SchemesTabComponent implements OnInit, OnDestroy {
         this.schemesService.getOnChangedListener().next(this.tabs.length - 1)
         this.router
             .navigate([this.tabs.length - 1], { relativeTo: this.route })
-            .then((value) =>
-                Logger.i(this, 'New tab created from the [SchemesTabComponent], result is [' + value + ']')
-            )
-            .catch((reason) =>
+            .then(value => Logger.i(this, 'New tab created from the [SchemesTabComponent], result is [' + value + ']'))
+            .catch(reason =>
                 Logger.e(
                     this,
                     'Error occurred while navigating to the new tab on [SchemesTabComponent], reason:',

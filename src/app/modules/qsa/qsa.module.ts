@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule, Routes } from '@angular/router'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgSelectModule } from '@ng-select/ng-select'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { HighchartsChartModule } from 'highcharts-angular'
 import { ToastrModule, ToastrService } from 'ngx-toastr'
@@ -52,7 +52,6 @@ import { SchemeTabItem } from './components/schemes/scheme-tab-item/scheme-tab-i
 import { SchemesContainerComponent } from './components/schemes/schemes-container/schemes.container.component'
 import { TabChangeModal } from './components/modals/tab-change/tab-change.modal'
 import { TabDeleteModal } from './components/modals/tab-delete/tab-delete.modal'
-import { DocumentationInfoComponent } from './components/documentation/documentation-info/documentation-info.component'
 import { CompareTableDetailComponent } from './components/schemes/schemes-container/tables-compare/compare-detail/compare-table-detail.component'
 import { TablesCompareService } from './services/tables-compare.service'
 import { CompareTableSelectionComponent } from './components/schemes/schemes-container/tables-compare/compare-table-selection/compare-table-selection.component'
@@ -65,6 +64,8 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar'
 import * as Highcharts from 'highcharts/highstock'
 import { MathjaxModule } from '../mathjax/mathjax.module'
 import { CalculationModal } from './components/modals/calculation/calculation.modal'
+import { GraphQLModule } from '../graphql/graphql.module'
+import { FormulaBackendService } from './services/formula-backend.service'
 
 require('highcharts/modules/exporting')(Highcharts)
 
@@ -113,7 +114,6 @@ const appRoutes: Routes = [
         // Documentation section
         DocumentationComponent,
         DocumentationUrlComponent,
-        DocumentationInfoComponent,
         DocumentationExampleComponent,
         // Modals
         AboutModal,
@@ -134,6 +134,7 @@ const appRoutes: Routes = [
         CalculationModal
     ],
     imports: [
+        GraphQLModule,
         MalihuScrollbarModule.forRoot(),
         HighchartsChartModule,
         BrowserModule,
@@ -167,6 +168,7 @@ const appRoutes: Routes = [
         NotificationService,
         CookieService,
         CookieConsentService,
+        FormulaBackendService,
         // Interceptors
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
     ],

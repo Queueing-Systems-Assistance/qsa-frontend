@@ -1,9 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title">{{ 'about' | translate}}</h4>
-    <button (click)="activeModal.dismiss()"
-            aria-label="Close"
-            class="close"
-            type="button">
+    <button (click)="activeModal.dismiss()" aria-label="Close" class="close" type="button">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -12,8 +9,9 @@
 </div>
 <div class="modal-footer">
     <div *ngIf="build" class="float-left">
-        <small class="text-sm-right">{{ 'version' | translate}}: {{build.version}}<br/>{{ 'lastBuild' | translate}}
-            : {{build.time | date:'yyyy.MM.dd HH:mm'}}
+        <small class="text-sm-right"
+            >{{ 'version' | translate}}: {{build.version}}<br />{{ 'lastBuild' | translate}} : {{build.time |
+            date:'yyyy.MM.dd HH:mm'}}
         </small>
     </div>
 </div>

@@ -1,4 +1,4 @@
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@ng-select/ng-select/themes/default.theme.css';
 @import '~ngx-toastr/toastr.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
@@ -66,12 +66,14 @@ body {
     margin-bottom: 0;
 }
 
-
-body, .sticky-footer-wrapper {
+body,
+.sticky-footer-wrapper {
     min-height: 100vh;
 }
 
-schemes-component, documentation-component, home-component {
+schemes-component,
+documentation-component,
+home-component {
     -ms-flex: 1 1 auto !important;
     flex: 1 1 auto !important;
 }
@@ -94,23 +96,26 @@ schemes-component, documentation-component, home-component {
     justify-content: space-between;
 }
 
-
-.desc-container{
+.desc-container {
     display: flex;
     justify-content: space-between;
 }
 
-.desc-container:hover .btn-circle{
+.desc-container:hover .btn-circle {
     visibility: visible;
 }
 
 .btn-circle {
+    padding: 0;
     border-radius: 12px;
-    height: 24px;
-    width: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    line-height: 1rem;
+    align-content: middle;
+    text-align: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.hidden {
     visibility: hidden;
 }
 
@@ -130,7 +135,8 @@ schemes-component, documentation-component, home-component {
     margin-bottom: 1rem;
 }
 
-.mjx-chtml[tabindex]:focus, body :focus .mjx-chtml[tabindex] {
+.mjx-chtml[tabindex]:focus,
+body :focus .mjx-chtml[tabindex] {
     display: inline-table;
     outline: 1px solid #aeb6b1;
 }
@@ -139,7 +145,7 @@ schemes-component, documentation-component, home-component {
 
 .hover-zoom:hover {
     visibility: visible;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     transform: scale(1.05);
     z-index: 100;
     position: relative;
@@ -154,10 +160,10 @@ schemes-component, documentation-component, home-component {
 
 @keyframes modal-in-animation {
     0% {
-        transform: scale(0.25)
+        transform: scale(0.25);
     }
     100% {
-        transform: scale(1)
+        transform: scale(1);
     }
 }
 /* Mobile */

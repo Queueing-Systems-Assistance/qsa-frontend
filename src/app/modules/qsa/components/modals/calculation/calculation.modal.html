@@ -1,32 +1,32 @@
 <div class="modal-header">
     <h5 class="modal-title">{{'calculatedUsing' | translate}}</h5>
-    <button (click)="activeModal.dismiss()"
-            aria-label="Close"
-            class="close"
-            type="button">
+    <button (click)="activeModal.dismiss()" aria-label="Close" class="close" type="button">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
     <div class="lg-rounded-border mb-2">
         <h3 class="formula-header">{{'generalFormula' | translate}}</h3>
-        <div [mathContent]="generalFormula"
-         aria-label="General formula"></div>
+        <div [mathContent]="generalFormula" aria-label="General formula"></div>
     </div>
-    
+
     <div class="lg-rounded-border mt-2">
         <h3 class="formula-header">{{'step' | translate}} {{currentPage}}</h3>
-        <div [mathContent]="calculationSteps[currentPage-1]"
-         aria-label="Current step"></div>
+        <div
+            class="steps-container"
+            [mathContent]="calculationSteps.concat(finalStep)[currentPage-1]"
+            aria-label="Current step"
+        ></div>
     </div>
 </div>
 <div class="modal-footer center-content">
     <ngb-pagination
         aria-label="Pagination for calculation steps"
         [(page)]="currentPage"
-        [pageSize]=1
+        [pageSize]="1"
         size="sm"
-        [collectionSize]="calculationSteps.length">
+        [collectionSize]="calculationSteps.length+1"
+    >
         <ng-template ngbPaginationPrevious>{{'prev' | translate}}</ng-template>
         <ng-template ngbPaginationNext>{{'next' | translate}}</ng-template>
     </ngb-pagination>

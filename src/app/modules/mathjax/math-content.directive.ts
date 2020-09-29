@@ -1,4 +1,4 @@
-import { Directive, OnInit, OnChanges, OnDestroy, Input, ElementRef, SimpleChanges } from '@angular/core'
+import { Directive, OnInit, OnChanges, OnDestroy, Input, ElementRef } from '@angular/core'
 import { Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 import { MathService } from './math.service'
