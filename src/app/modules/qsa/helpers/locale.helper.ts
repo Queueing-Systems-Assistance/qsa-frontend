@@ -21,7 +21,7 @@ export class LocaleHelper {
 
     private static getPresetLocale() {
         const url = new URL(window.location.href)
-        return url.searchParams.get('language')
+        return url.searchParams.get('locale')
     }
 
     private static isLanguageAvailable(presetLanguage: string): boolean {

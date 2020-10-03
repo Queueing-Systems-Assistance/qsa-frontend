@@ -6,7 +6,7 @@ import * as systemSelectionList from "../support/systemSelectionList";
 describe('Schemes Compare Tables', () => {
 
     before(() => {
-        cy.visit('http://localhost:4200/schemes?language=en');
+        cy.visit('http://localhost:4200/schemes?locale=en');
         app.navigateToScheme('schemesCardCompareTable')
     });
 

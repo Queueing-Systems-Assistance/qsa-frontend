@@ -1,7 +1,7 @@
 describe('Footer', () => {
 
     before(() =>{
-        cy.visit('http://localhost:4200?language=en')
+        cy.visit('http://localhost:4200?locale=en')
     });
 
     it('has a date', () => {

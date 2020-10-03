@@ -4,6 +4,12 @@ import { ChartData } from '../../../../../model/chart/chart.data'
 import { Logger } from '../../../../../services/logger'
 import { SeriesOptionsType } from 'highcharts'
 
+const STRING_START = '^'
+const SIGN = '[-+]?'
+const INTEGRAL_PART_WITH_DOT = '(?:[0-9]{0,30}\\.)?'
+const FRACTIONAL_PART = '[0-9]{1,30}'
+const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
+const STRING_END = '$'
 @Component({
     selector: 'chart-figure-component',
     templateUrl: './chart-figure.component.html'
@@ -91,13 +97,20 @@ export class ChartFigureComponent {
         }
     }
 
+    public getNumValue(value: string): number {
+        return new RegExp(
+            STRING_START + SIGN + INTEGRAL_PART_WITH_DOT + FRACTIONAL_PART + SCIENTIFIC_FORM + STRING_END
+        ).test(value) ? Number.parseFloat(value) : Number.NaN
+    }
+
     private createDataForChart(chartData: ChartData): Array<SeriesOptionsType> {
         const datasets = []
         let count = 0
         chartData.systemOutputs.forEach(systemFeatureValue => {
             const datas = []
             chartData.labels.forEach((label, index) => {
-                datas.push([label, systemFeatureValue.values[index]])
+                console.log(systemFeatureValue.values[index])
+                datas.push([label, this.getNumValue(systemFeatureValue.values[index])])
             })
             datasets.push({
                 name: systemFeatureValue.name,

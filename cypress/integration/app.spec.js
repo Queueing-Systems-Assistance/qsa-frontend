@@ -13,17 +13,17 @@ describe('App', () => {
     });
 
     it('has i18n support [en]', () => {
-        cy.visit('http://localhost:4200?language=en')
+        cy.visit('http://localhost:4200?locale=en')
             .contains('QSA Application')
     });
 
     it('has i18n support [hu]', () => {
-        cy.visit('http://localhost:4200?language=hu')
+        cy.visit('http://localhost:4200?locale=hu')
             .contains('QSA Alkalmazás')
     });
 
     it('has a cookie notification', () => {
-        cy.visit('http://localhost:4200/home?language=en');
+        cy.visit('http://localhost:4200/home?locale=en');
         cy.clearCookies();
         cy.wait(2000)
             .get('#toast-container')

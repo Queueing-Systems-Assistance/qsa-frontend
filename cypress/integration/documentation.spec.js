@@ -1,7 +1,7 @@
 describe('Documentation', () => {
 
     before(() => {
-        cy.visit('http://localhost:4200/documentation?language=en');
+        cy.visit('http://localhost:4200/documentation?locale=en');
     });
 
     it('has multiple documentation', () => {
