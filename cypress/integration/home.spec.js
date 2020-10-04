@@ -4,7 +4,7 @@ import * as systemInputs from "../support/systemInputs";
 describe('Home', () => {
 
     before(() => {
-        cy.visit('http://localhost:4200/home?language=en');
+        cy.visit('http://localhost:4200/home?locale=en');
     });
 
     it('has a title', () => {

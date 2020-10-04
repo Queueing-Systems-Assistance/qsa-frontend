@@ -10,7 +10,7 @@ export class NumberDirective {
     constructor(private elementRef: ElementRef) {}
 
     @HostListener('input', ['$event']) onInputChange(event) {
-        if (this.systemFeature.typeFraction === 'integer') {
+        if (!this.systemFeature.typeFraction) {
             const initValue = this.elementRef.nativeElement.value
             this.elementRef.nativeElement.value = initValue.replace(/[^0-9]*/g, '')
             if (initValue !== this.elementRef.nativeElement.value) {

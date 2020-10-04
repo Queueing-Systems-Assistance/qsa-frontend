@@ -43,7 +43,7 @@ export class TabTableComponent {
         this.notificationService.showToastError([{ errorMessage: errorMsg }])
     }
 
-    public showCalculationModal(systemFeatureId: string, systemFeatureValue: number): void {
+    public showCalculationModal(systemFeatureId: string, systemFeatureValue: string): void {
         //Currently only System MM1 is supported
         if (this.systemView.id === 'systemMM1') {
             const modalRef = this.modalService.open(CalculationModal)
