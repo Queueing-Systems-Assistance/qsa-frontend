@@ -5,7 +5,7 @@ import * as systemInputs from "../support/systemInputs";
 describe('Schemes Default', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:4200/schemes?language=en');
+        cy.visit('http://localhost:4200/schemes?locale=en');
     });
 
     it('can select table section', () => {

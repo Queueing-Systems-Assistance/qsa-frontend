@@ -19,13 +19,11 @@ export class CompareTableComponent {
         let result = ''
         if (value === undefined) {
             result = '-'
-        } else if (isNaN(value)) {
-            result = 'cannotCalculate'
         }
         return result
     }
 
-    public getSystemFeatureValueToDisplay(tableNumber: number, systemFeature: SystemFeature): number {
+    public getSystemFeatureValueToDisplay(tableNumber: number, systemFeature: SystemFeature): string {
         const tableView = this.getTableViewBasedOnIndex(tableNumber)
         return tableView.systemOutputs
             .filter(systemFeatureValue => systemFeatureValue.id === systemFeature.id)

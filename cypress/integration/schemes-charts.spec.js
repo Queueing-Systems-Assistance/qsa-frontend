@@ -6,7 +6,7 @@ import * as toast from "../support/toast";
 describe('Schemes Charts', () => {
 
     before(() => {
-        cy.visit('http://localhost:4200/schemes?language=en');
+        cy.visit('http://localhost:4200/schemes?locale=en');
         app.addNewTab();
         app.navigateToScheme('schemesCardChart');
     });

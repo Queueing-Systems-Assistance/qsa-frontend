@@ -42,16 +42,18 @@
                             {{ roundValue(systemFeatureValue.values[0]) }}
                         </div>
                     </td>
-                    <td class="desc-container">
-                        <span [innerHTML]="systemFeatureValue.description"></span>
-                        <button
-                            type="button"
-                            class="btn btn-outline-secondary btn-circle btn-sm hidden"
-                            (click)="showCalculationModal(systemFeatureValue.id, systemFeatureValue.values[0])"
-                            aria-label="Show how it was calculated"
-                        >
-                            ?
-                        </button>
+                    <td>
+                        <div class="desc-container">
+                            <span [innerHTML]="systemFeatureValue.description"></span>
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary btn-circle btn-sm hidden"
+                                (click)="showCalculationModal(systemFeatureValue.id, systemFeatureValue.values[0])"
+                                aria-label="Show how it was calculated"
+                            >
+                                ?
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

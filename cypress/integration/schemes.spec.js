@@ -1,7 +1,7 @@
 describe('Schemes', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:4200/schemes?language=en')
+        cy.visit('http://localhost:4200/schemes?locale=en')
     });
 
     it('has a tab with dropdown', () => {

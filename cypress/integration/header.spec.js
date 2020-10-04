@@ -1,7 +1,7 @@
 describe('Header', () => {
 
     it('has i18n support', () => {
-        cy.visit('http://localhost:4200?language=en')
+        cy.visit('http://localhost:4200?locale=en')
             .contains('QSA Application')
             .get('#languageItemHu')
             .click({force: true});
