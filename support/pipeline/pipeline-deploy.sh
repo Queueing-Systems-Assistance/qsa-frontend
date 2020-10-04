@@ -12,7 +12,7 @@ dockerLogin() {
 dockerBuildPushQSAFrontend() {
   sudo docker build \
   -f ./support/docker/Dockerfile \
-  -t zoltanszilagyicse/qsa-frontend:latest \
+  -t zoltanszilagyicse/qsa-frontend:latest . || exit
   sudo docker push zoltanszilagyicse/qsa-frontend:latest || exit
 }
 
