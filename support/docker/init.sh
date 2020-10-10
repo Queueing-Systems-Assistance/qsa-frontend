@@ -4,13 +4,18 @@ IS_CONTAINER_FIRST_RUN="IS_CONTAINER_FIRST_RUN"
 if [ ! -e $IS_CONTAINER_FIRST_RUN ]; then
     touch $IS_CONTAINER_FIRST_RUN
     # Update base href
-    echo "Updating base href [${BASE_HREF}]"
+    indexHtmlFileName="/usr/share/nginx/html/index.html"
+    echo "Updating base href [${BASE_HREF}] at [${indexHtmlFileName}]"
     updatedBaseUrl=$(echo "${BASE_HREF}" | sed --expression='s/\//\\\//g')
-    contentOfIndexHtml=$(cat /usr/share/nginx/html/index.html)
-    updateContentOfIndex=$(echo "${contentOfIndexHtml}" | sed --expression="s/<base href=\"\/\">/<base href=\"${updatedBaseUrl}\">/g")
-    rm /usr/share/nginx/html/index.html
-    echo "${updateContentOfIndex}" > "/usr/share/nginx/html/index.html"
-    chmod 755 /usr/share/nginx/html/index.html
+    contentOfIndexHtml=$(cat ${indexHtmlFileName})
+    updateContentOfIndex=$(echo "${contentOfIndexHtml}" | sed --expression="s/<base href=\"\/\" \/>/<base href=\"${updatedBaseUrl}\" \/>/g")
+    echo "Updated [${indexHtmlFileName}] content"
+    echo updateContentOfIndex
+    rm ${indexHtmlFileName}
+    echo "${updateContentOfIndex}" > "${indexHtmlFileName}"
+    chmod 755 ${indexHtmlFileName}
+    echo "Updated [${indexHtmlFileName}] file"
+    cat ${indexHtmlFileName}
     # Update calculator and formula handler URL
     jsFileName=$(find /usr/share/nginx/html/ -name 'main.*.js' -exec basename {} \;)
     echo "Updating [/usr/share/nginx/html/${jsFileName}]"
