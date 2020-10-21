@@ -74,7 +74,7 @@ export class TabDetailComponent implements OnInit {
                 value.systemView = this.getSystemView()
                 return this.tablesService.addTableView(this.currentTab, value)
             },
-            null,
+            () => (this.requestLoading = false),
             () => (this.requestLoading = false)
         )
     }

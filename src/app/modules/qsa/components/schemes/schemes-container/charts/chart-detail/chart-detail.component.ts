@@ -82,7 +82,7 @@ export class ChartDetailComponent implements OnInit {
         this.requestLoading = true
         this.backendService.getChart(formData, this.getSystemViewId(), values.xAxis.featureId).subscribe(
             value => this.updateChartView(value),
-            null,
+            () => (this.requestLoading = false),
             () => (this.requestLoading = false)
         )
     }
