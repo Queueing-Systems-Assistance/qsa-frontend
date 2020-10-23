@@ -13,9 +13,13 @@ const FRACTIONAL_PART = '[0-9]{1,30}'
 const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
 const STRING_END = '$'
 
-const TRAILING_0: RegExp = /0+$/
-const TRAILING_DOT: RegExp = /\.+$/
+const TRAILING_0 = /0+$/
+const TRAILING_DOT = /\.+$/
 const EMPTY_STRING = ''
+const ZERO = '0'
+const PRECISION = 3
+
+const SCIENTIFIC_FORM_DECIMAL_PLACES = /(?:[eE]([+-]?\d+))?$/
 
 @Component({
     selector: 'tab-table-component',
@@ -39,11 +43,22 @@ export class TabTableComponent {
         ).test(value)
     }
 
+    public isScientificZero(value: string) {
+        const decimalPlaces = value.match(SCIENTIFIC_FORM_DECIMAL_PLACES)
+        return decimalPlaces[1] && Number.parseInt(decimalPlaces[1]) < -PRECISION
+    }
+
     public roundValue(value: string): string {
-        return parseFloat(value)
-            .toPrecision(3)
-            .replace(TRAILING_0, EMPTY_STRING)
-            .replace(TRAILING_DOT, EMPTY_STRING)
+        let result: string
+        if (this.isScientificZero(value)) {
+            result = ZERO
+        } else {
+            result = parseFloat(value)
+                .toPrecision(PRECISION)
+                .replace(TRAILING_0, EMPTY_STRING)
+                .replace(TRAILING_DOT, EMPTY_STRING)
+        }
+        return result
     }
 
     public showErrorMessage(errorMsg: string): void {
