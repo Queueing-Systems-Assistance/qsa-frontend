@@ -13,6 +13,10 @@ const FRACTIONAL_PART = '[0-9]{1,30}'
 const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
 const STRING_END = '$'
 
+const TRAILING_0: RegExp = /0+$/
+const TRAILING_DOT: RegExp = /\.+$/
+const EMPTY_STRING = ''
+
 @Component({
     selector: 'tab-table-component',
     templateUrl: './tab-table.component.html'
@@ -36,7 +40,10 @@ export class TabTableComponent {
     }
 
     public roundValue(value: string): string {
-        return parseFloat(value).toPrecision(2)
+        return parseFloat(value)
+            .toPrecision(3)
+            .replace(TRAILING_0, EMPTY_STRING)
+            .replace(TRAILING_DOT, EMPTY_STRING)
     }
 
     public showErrorMessage(errorMsg: string): void {
