@@ -13,13 +13,13 @@ const FRACTIONAL_PART = '[0-9]{1,30}'
 const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
 const STRING_END = '$'
 
-const TRAILING_0: RegExp = /0+$/
-const TRAILING_DOT: RegExp = /\.+$/
+const TRAILING_0 = /0+$/
+const TRAILING_DOT = /\.+$/
 const EMPTY_STRING = ''
 const ZERO = '0'
 const PRECISION = 3
 
-const SCIENTIFIC_FORM_DECIMAL_PLACES: RegExp = /(?:[eE]([+-]?\d+))?$/
+const SCIENTIFIC_FORM_DECIMAL_PLACES = /(?:[eE]([+-]?\d+))?$/
 
 @Component({
     selector: 'tab-table-component',

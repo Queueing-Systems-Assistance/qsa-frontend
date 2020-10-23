@@ -100,7 +100,9 @@ export class ChartFigureComponent {
     public getNumValue(value: string): number {
         return new RegExp(
             STRING_START + SIGN + INTEGRAL_PART_WITH_DOT + FRACTIONAL_PART + SCIENTIFIC_FORM + STRING_END
-        ).test(value) ? Number.parseFloat(value) : Number.NaN
+        ).test(value)
+            ? Number.parseFloat(value)
+            : Number.NaN
     }
 
     private createDataForChart(chartData: ChartData): Array<SeriesOptionsType> {

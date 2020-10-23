@@ -27,7 +27,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 if (error.error instanceof Array) {
                     this.notificationService.showToastError(error.error)
                 } else if (error.error.error) {
-                    this.showToast(error);
+                    this.showToast(error)
                 }
                 return of(error)
             }) as any
