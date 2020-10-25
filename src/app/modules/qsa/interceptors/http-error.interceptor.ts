@@ -23,7 +23,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             catchError((error, caught) => {
                 Logger.e(this, 'HTTP error occurred', error, caught)
-                console.log(error.error)
                 if (error.error instanceof Array) {
                     this.notificationService.showToastError(error.error)
                 } else if (error.error.error) {
