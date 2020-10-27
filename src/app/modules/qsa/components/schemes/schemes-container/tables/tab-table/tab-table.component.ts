@@ -5,21 +5,7 @@ import { ExportCsvModal } from '../../../../modals/export-csv/export-csv.modal'
 import { SystemView } from '../../../../../model/system/system.view'
 import { CalculationModal } from '../../../../modals/calculation/calculation.modal'
 import { NotificationService } from 'src/app/modules/qsa/services/notification.service'
-
-const STRING_START = '^'
-const SIGN = '[-+]?'
-const INTEGRAL_PART_WITH_DOT = '(?:[0-9]{0,30}\\.)?'
-const FRACTIONAL_PART = '[0-9]{1,30}'
-const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
-const STRING_END = '$'
-
-const TRAILING_0 = /0+$/
-const TRAILING_DOT = /\.+$/
-const EMPTY_STRING = ''
-const ZERO = '0'
-const PRECISION = 3
-
-const SCIENTIFIC_FORM_DECIMAL_PLACES = /(?:[eE]([+-]?\d+))?$/
+import { NumberService } from 'src/app/modules/qsa/services/number.service'
 
 @Component({
     selector: 'tab-table-component',
@@ -29,7 +15,7 @@ export class TabTableComponent {
     @Input() systemView: SystemView
     @Input() systemTableView: TableView
 
-    constructor(private modalService: NgbModal, private notificationService: NotificationService) {}
+    constructor(private modalService: NgbModal, private notificationService: NotificationService, private numberService: NumberService) {}
 
     public exportToCSV(): void {
         const modalRef = this.modalService.open(ExportCsvModal)
@@ -38,27 +24,11 @@ export class TabTableComponent {
     }
 
     public isErrorMessage(value: string): boolean {
-        return !new RegExp(
-            STRING_START + SIGN + INTEGRAL_PART_WITH_DOT + FRACTIONAL_PART + SCIENTIFIC_FORM + STRING_END
-        ).test(value)
-    }
-
-    public isScientificZero(value: string) {
-        const decimalPlaces = value.match(SCIENTIFIC_FORM_DECIMAL_PLACES)
-        return decimalPlaces[1] && Number.parseInt(decimalPlaces[1]) < -PRECISION
+        return !this.numberService.isNumber(value)
     }
 
     public roundValue(value: string): string {
-        let result: string
-        if (this.isScientificZero(value)) {
-            result = ZERO
-        } else {
-            result = parseFloat(value)
-                .toPrecision(PRECISION)
-                .replace(TRAILING_0, EMPTY_STRING)
-                .replace(TRAILING_DOT, EMPTY_STRING)
-        }
-        return result
+        return this.numberService.getSimplestForm(value)
     }
 
     public showErrorMessage(errorMsg: string): void {
