@@ -122,5 +122,6 @@
     "prev": "Prev",
     "next": "Next",
     "finalResult": "So the final result is",
-    "cannotCalculateFinalResult": "Couldn't calculate final result so nothing to display"
+    "cannotCalculateFinalResult": "Couldn't calculate final result so nothing to display",
+    "errorOccured": "The following error occured:"
 }
