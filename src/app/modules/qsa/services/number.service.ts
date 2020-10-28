@@ -23,9 +23,9 @@ export class NumberService {
         ).test(value)
     }
 
-    public isScientificZero(value: string, precision?: number): boolean {
+    public isScientificZero(num: string, precision?: number): boolean {
         const currentPrecision = precision ? precision : DEFAULT_PRECISION
-        const decimalPlaces = value.match(SCIENTIFIC_FORM_DECIMAL_PLACES)
+        const decimalPlaces = num.match(SCIENTIFIC_FORM_DECIMAL_PLACES)
         return decimalPlaces[1] && Number.parseInt(decimalPlaces[1]) < -currentPrecision
     }
 
@@ -40,8 +40,8 @@ export class NumberService {
         return result
     }
 
-    public roundValue(value: string, precision: number): string {
-        return parseFloat(value)
+    public roundValue(num: string, precision: number): string {
+        return parseFloat(num)
                 .toPrecision(precision)
                 .replace(TRAILING_0, EMPTY_STRING)
                 .replace(TRAILING_DOT, EMPTY_STRING)

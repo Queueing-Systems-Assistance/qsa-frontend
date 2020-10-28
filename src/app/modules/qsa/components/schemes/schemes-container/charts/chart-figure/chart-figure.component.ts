@@ -3,18 +3,15 @@ import * as Highcharts from 'highcharts/highstock'
 import { ChartData } from '../../../../../model/chart/chart.data'
 import { Logger } from '../../../../../services/logger'
 import { SeriesOptionsType } from 'highcharts'
+import { NumberService } from 'src/app/modules/qsa/services/number.service'
 
-const STRING_START = '^'
-const SIGN = '[-+]?'
-const INTEGRAL_PART_WITH_DOT = '(?:[0-9]{0,30}\\.)?'
-const FRACTIONAL_PART = '[0-9]{1,30}'
-const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
-const STRING_END = '$'
 @Component({
     selector: 'chart-figure-component',
     templateUrl: './chart-figure.component.html'
 })
 export class ChartFigureComponent {
+    constructor(private numberService: NumberService) {}
+
     Highcharts = Highcharts
     chartOptions: Highcharts.Options
 
@@ -98,9 +95,7 @@ export class ChartFigureComponent {
     }
 
     public getNumValue(value: string): number {
-        return new RegExp(
-            STRING_START + SIGN + INTEGRAL_PART_WITH_DOT + FRACTIONAL_PART + SCIENTIFIC_FORM + STRING_END
-        ).test(value)
+        return this.numberService.isNumber(value)
             ? Number.parseFloat(value)
             : Number.NaN
     }
