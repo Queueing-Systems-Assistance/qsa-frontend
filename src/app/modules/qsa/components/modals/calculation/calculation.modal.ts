@@ -29,7 +29,7 @@ export class CalculationModal implements OnInit {
 
     @Input() public systemFeatureId: string
     @Input() public systemId: string
-    @Input() public result: number
+    @Input() public result: string
 
     generalFormula = ''
     calculationSteps: string[] = []
@@ -68,7 +68,7 @@ export class CalculationModal implements OnInit {
             EQUALS +
             finalResult.substitutedFormula +
             EQUALS +
-            this.numberService.getSimplestForm(this.result.toString())
+            this.numberService.getSimplestForm(this.result)
         } catch (Exception) {
             return this.translateService.instant('cannotCalculateFinalResult')
         }
@@ -77,12 +77,10 @@ export class CalculationModal implements OnInit {
     private createFinalError(): string {
         return this.translateService.instant('cannotCalculateFinalResult') +
             LINEBREAK +
-            this.translateService.instant('errorOccured') +
-            LINEBREAK +
-            this.result
+            this.translateService.instant('errorOccured')
     }
 
     private isResultValid(): boolean {
-        return this.numberService.isNumber(this.result.toString())
+        return this.numberService.isNumber(this.result)
     }
 }
