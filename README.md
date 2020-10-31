@@ -1,4 +1,5 @@
-# QSA Application - Frontend [![Build Status](https://travis-ci.com/Queueing-Systems-Assistance/qsa-application-frontend.svg?branch=master)](https://travis-ci.com/Queueing-Systems-Assistance/qsa-application-frontend)
+# QSA Application - Frontend 
+[![Build Status](https://travis-ci.com/Queueing-Systems-Assistance/qsa-application-frontend.svg?branch=master)](https://travis-ci.com/Queueing-Systems-Assistance/qsa-application-frontend)
 
 ### Project description
 
