@@ -4,7 +4,7 @@ const STRING_START = '^'
 const SIGN = '[-+]?'
 const INTEGRAL_PART_WITH_DOT = '(?:[0-9]{0,30}\\.)?'
 const FRACTIONAL_PART = '[0-9]{1,30}'
-const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
+const SCIENTIFIC_FORM = '(?:[eE][-+]?\\d+)?'
 const STRING_END = '$'
 
 const TRAILING_0 = /0+$/
@@ -26,6 +26,7 @@ export class NumberService {
     public isScientificZero(num: string, precision?: number): boolean {
         const currentPrecision = precision ? precision : DEFAULT_PRECISION
         const decimalPlaces = num.match(SCIENTIFIC_FORM_DECIMAL_PLACES)
+        console.log(`num: ${num}, decimalPlaces: ${decimalPlaces[1]}`)
         return decimalPlaces[1] && Number.parseInt(decimalPlaces[1]) < -currentPrecision
     }
 
