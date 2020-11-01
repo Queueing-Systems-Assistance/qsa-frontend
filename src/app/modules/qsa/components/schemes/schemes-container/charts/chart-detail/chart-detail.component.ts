@@ -44,13 +44,11 @@ export class ChartDetailComponent implements OnInit {
         this.chartsService.addSystemView(this.currentTab, this.systemViewService.getSystemViewById(systemViewId))
         this.chartFigure.removeChart()
         this.chartsService.deleteChartData(this.currentTab)
-        this.backendService.getInput(systemViewId).subscribe(
-            result => {
-                // Save selected system inputs
-                this.chartsService.addSystemViewInputs(this.currentTab, result)
-                this.updateSystemInputsForms(true)
-            }
-        )
+        this.backendService.getInput(systemViewId).subscribe(result => {
+            // Save selected system inputs
+            this.chartsService.addSystemViewInputs(this.currentTab, result)
+            this.updateSystemInputsForms(true)
+        })
     }
 
     public selectXAxisSystemInput(): void {
@@ -69,9 +67,9 @@ export class ChartDetailComponent implements OnInit {
                 steps: values.xAxis.steps
             }
         }
-        this.backendService.getChart(formData, this.getSystemViewId(), values.xAxis.featureId).subscribe(
-            value => this.updateChartView(value),
-        )
+        this.backendService
+            .getChart(formData, this.getSystemViewId(), values.xAxis.featureId)
+            .subscribe(value => this.updateChartView(value))
     }
 
     public getSystemViews(): Array<SystemView> {
