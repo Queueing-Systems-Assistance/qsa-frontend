@@ -18,7 +18,6 @@ export class ChartDetailComponent implements OnInit {
     @ViewChild(ChartFigureComponent) chartFigure: ChartFigureComponent
 
     currentTab: number
-    requestLoading: boolean
 
     constructor(
         private route: ActivatedRoute,
@@ -45,16 +44,11 @@ export class ChartDetailComponent implements OnInit {
         this.chartsService.addSystemView(this.currentTab, this.systemViewService.getSystemViewById(systemViewId))
         this.chartFigure.removeChart()
         this.chartsService.deleteChartData(this.currentTab)
-        this.requestLoading = true
         this.backendService.getInput(systemViewId).subscribe(
             result => {
                 // Save selected system inputs
                 this.chartsService.addSystemViewInputs(this.currentTab, result)
                 this.updateSystemInputsForms(true)
-            },
-            null,
-            () => {
-                this.requestLoading = false
             }
         )
     }
@@ -63,10 +57,6 @@ export class ChartDetailComponent implements OnInit {
         this.removeChart()
         this.addDynamicInputForms(this.createDynamicInputForms())
         this.updateXAxisForms()
-    }
-
-    public isRequestLoading(): boolean {
-        return this.requestLoading
     }
 
     public calculateSystemFeatures(): void {
@@ -79,11 +69,8 @@ export class ChartDetailComponent implements OnInit {
                 steps: values.xAxis.steps
             }
         }
-        this.requestLoading = true
         this.backendService.getChart(formData, this.getSystemViewId(), values.xAxis.featureId).subscribe(
             value => this.updateChartView(value),
-            () => (this.requestLoading = false),
-            () => (this.requestLoading = false)
         )
     }
 
