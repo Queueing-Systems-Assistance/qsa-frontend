@@ -7,6 +7,10 @@ import { FormulaBackendService } from '../../../services/formula-backend.service
 import { SystemFeatureInput } from '../../../model/formula/system-feature-input'
 import { FinalResult } from '../../../model/formula/final-result'
 import { TranslateService } from '@ngx-translate/core'
+import { NumberService } from '../../../services/number.service'
+
+const LINEBREAK = '\n'
+const EQUALS = ' = '
 
 @Component({
     selector: 'app-calculation',
@@ -19,12 +23,13 @@ export class CalculationModal implements OnInit {
         private formulaBackendService: FormulaBackendService,
         private schemesService: SchemesService,
         private tablesService: TablesService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private numberService: NumberService
     ) {}
 
     @Input() public systemFeatureId: string
     @Input() public systemId: string
-    @Input() public result: number
+    @Input() public result: string
 
     generalFormula = ''
     calculationSteps: string[] = []
@@ -40,24 +45,47 @@ export class CalculationModal implements OnInit {
         const currentTab = this.schemesService.getSelectedTabIndex()
         this.formulaBackendService.getStepsFormula(this.systemFeatureId, this.systemId).subscribe(({ data }) => {
             this.calculationSteps = data.formulaSteps.value || []
-            console.log(this.calculationSteps)
         })
 
-        const inputValues = this.tablesService.getSystemInputsForm(currentTab).value
-        const inputs: SystemFeatureInput[] = SystemFeatureInput.convertToArray(inputValues)
-        this.formulaBackendService.getFinalResult(this.systemFeatureId, this.systemId, inputs).subscribe(({ data }) => {
-            const finalResult: FinalResult = data.finalResult as FinalResult
-            this.finalStep = this.createFinalStep(finalResult)
-        })
+        if (this.isResultValid()) {
+            const inputValues = this.tablesService.getSystemInputsForm(currentTab).value
+            const inputs: SystemFeatureInput[] = SystemFeatureInput.convertToArray(inputValues)
+            this.formulaBackendService
+                .getFinalResult(this.systemFeatureId, this.systemId, inputs)
+                .subscribe(({ data }) => {
+                    const finalResult: FinalResult = data.finalResult as FinalResult
+                    this.finalStep = this.createFinalStep(finalResult)
+                })
+        } else {
+            this.finalStep = this.createFinalError()
+        }
     }
 
     private createFinalStep(finalResult: FinalResult): string {
         try {
-            return `${this.translateService.instant('finalResult')}\n${finalResult.defaultFormula} = ${
-                finalResult.substitutedFormula
-            } = ${this.result}`
+            return (
+                this.translateService.instant('finalResult') +
+                LINEBREAK +
+                finalResult.defaultFormula +
+                EQUALS +
+                finalResult.substitutedFormula +
+                EQUALS +
+                this.numberService.getSimplestForm(this.result)
+            )
         } catch (Exception) {
             return this.translateService.instant('cannotCalculateFinalResult')
         }
+    }
+
+    private createFinalError(): string {
+        return (
+            this.translateService.instant('cannotCalculateFinalResult') +
+            LINEBREAK +
+            this.translateService.instant('errorOccured')
+        )
+    }
+
+    private isResultValid(): boolean {
+        return this.numberService.isNumber(this.result)
     }
 }

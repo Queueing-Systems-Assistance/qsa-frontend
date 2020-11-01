@@ -121,5 +121,7 @@
     "prev": "Előző",
     "next": "Következő",
     "finalResult": "Tehát a végeredmény:",
-    "cannotCalculateFinalResult": "A végeredményt nem sikerült kiszámítani, így nem jeleníthető meg."
+    "cannotCalculateFinalResult": "A végeredményt nem sikerült kiszámítani, így nem jeleníthető meg",
+    "errorOccured": "A pontos hiba a táblázatban szereplő piros gombra kattintva jeleníthető meg",
+    "noCalculationAvailable": "Ehhez a rendszerjellemzőhöz egyelőre nem elérhetők képletek"
 }

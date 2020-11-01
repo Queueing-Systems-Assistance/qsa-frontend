@@ -66,6 +66,7 @@ import { MathjaxModule } from '../mathjax/mathjax.module'
 import { CalculationModal } from './components/modals/calculation/calculation.modal'
 import { GraphQLModule } from '../graphql/graphql.module'
 import { FormulaBackendService } from './services/formula-backend.service'
+import { NumberService } from './services/number.service'
 
 require('highcharts/modules/exporting')(Highcharts)
 
@@ -169,6 +170,7 @@ const appRoutes: Routes = [
         CookieService,
         CookieConsentService,
         FormulaBackendService,
+        NumberService,
         // Interceptors
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
     ],

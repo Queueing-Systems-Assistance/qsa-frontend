@@ -5,13 +5,9 @@ import { ExportCsvModal } from '../../../../modals/export-csv/export-csv.modal'
 import { SystemView } from '../../../../../model/system/system.view'
 import { CalculationModal } from '../../../../modals/calculation/calculation.modal'
 import { NotificationService } from 'src/app/modules/qsa/services/notification.service'
-
-const STRING_START = '^'
-const SIGN = '[-+]?'
-const INTEGRAL_PART_WITH_DOT = '(?:[0-9]{0,30}\\.)?'
-const FRACTIONAL_PART = '[0-9]{1,30}'
-const SCIENTIFIC_FORM = '(?:[Ee][-+]?[1-2]?[0-9])?'
-const STRING_END = '$'
+import { NumberService } from 'src/app/modules/qsa/services/number.service'
+import { FormulaBackendService } from 'src/app/modules/qsa/services/formula-backend.service'
+import { TranslateService } from '@ngx-translate/core'
 
 @Component({
     selector: 'tab-table-component',
@@ -21,7 +17,13 @@ export class TabTableComponent {
     @Input() systemView: SystemView
     @Input() systemTableView: TableView
 
-    constructor(private modalService: NgbModal, private notificationService: NotificationService) {}
+    constructor(
+        private modalService: NgbModal,
+        private notificationService: NotificationService,
+        private numberService: NumberService,
+        private formulaBackendService: FormulaBackendService,
+        private translateService: TranslateService
+    ) {}
 
     public exportToCSV(): void {
         const modalRef = this.modalService.open(ExportCsvModal)
@@ -30,13 +32,11 @@ export class TabTableComponent {
     }
 
     public isErrorMessage(value: string): boolean {
-        return !new RegExp(
-            STRING_START + SIGN + INTEGRAL_PART_WITH_DOT + FRACTIONAL_PART + SCIENTIFIC_FORM + STRING_END
-        ).test(value)
+        return !this.numberService.isNumber(value)
     }
 
     public roundValue(value: string): string {
-        return parseFloat(value).toPrecision(2)
+        return this.numberService.getSimplestForm(value)
     }
 
     public showErrorMessage(errorMsg: string): void {
@@ -44,14 +44,15 @@ export class TabTableComponent {
     }
 
     public showCalculationModal(systemFeatureId: string, systemFeatureValue: string): void {
-        //Currently only System MM1 is supported
-        if (this.systemView.id === 'systemMM1') {
-            const modalRef = this.modalService.open(CalculationModal)
-            modalRef.componentInstance.systemFeatureId = systemFeatureId
-            modalRef.componentInstance.systemId = this.systemView.id
-            modalRef.componentInstance.result = systemFeatureValue
-        } else {
-            this.notificationService.showToastInfo('This feature is currently supported in System MM1 only')
-        }
+        const systemId = this.systemView.id
+        this.formulaBackendService.getDefaultFormula(systemFeatureId, systemId).subscribe(
+            () => {
+                const modalRef = this.modalService.open(CalculationModal)
+                modalRef.componentInstance.systemFeatureId = systemFeatureId
+                modalRef.componentInstance.systemId = systemId
+                modalRef.componentInstance.result = systemFeatureValue
+            },
+            () => this.showErrorMessage(this.translateService.instant('noCalculationAvailable'))
+        )
     }
 }
