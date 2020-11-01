@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { Injectable } from '@angular/core'
 
 const STRING_START = '^'
 const SIGN = '[-+]?'
@@ -26,7 +26,6 @@ export class NumberService {
     public isScientificZero(num: string, precision?: number): boolean {
         const currentPrecision = precision ? precision : DEFAULT_PRECISION
         const decimalPlaces = num.match(SCIENTIFIC_FORM_DECIMAL_PLACES)
-        console.log(`num: ${num}, decimalPlaces: ${decimalPlaces[1]}`)
         return decimalPlaces[1] && Number.parseInt(decimalPlaces[1]) < -currentPrecision
     }
 
@@ -43,8 +42,8 @@ export class NumberService {
 
     public roundValue(num: string, precision: number): string {
         return parseFloat(num)
-                .toPrecision(precision)
-                .replace(TRAILING_0, EMPTY_STRING)
-                .replace(TRAILING_DOT, EMPTY_STRING)
+            .toPrecision(precision)
+            .replace(TRAILING_0, EMPTY_STRING)
+            .replace(TRAILING_DOT, EMPTY_STRING)
     }
 }
