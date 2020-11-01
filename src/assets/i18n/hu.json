@@ -121,6 +121,6 @@
     "prev": "Előző",
     "next": "Következő",
     "finalResult": "Tehát a végeredmény:",
-    "cannotCalculateFinalResult": "A végeredményt nem sikerült kiszámítani, így nem jeleníthető meg.",
-    "errorOccured": "A következő hiba történt:"
+    "cannotCalculateFinalResult": "A végeredményt nem sikerült kiszámítani, így nem jeleníthető meg",
+    "errorOccured": "A pontos hiba a táblázatban szereplő piros gombra kattintva jeleníthető meg"
 }
