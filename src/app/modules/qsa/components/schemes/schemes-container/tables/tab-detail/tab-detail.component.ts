@@ -14,7 +14,6 @@ import { TableView } from '../../../../../model/table/table.view'
 })
 export class TabDetailComponent implements OnInit {
     private currentTab: number
-    private requestLoading: boolean
 
     constructor(
         private route: ActivatedRoute,
@@ -25,10 +24,6 @@ export class TabDetailComponent implements OnInit {
 
     public ngOnInit(): void {
         this.subscribeRouteChanging()
-    }
-
-    public isRequestLoading(): boolean {
-        return this.requestLoading
     }
 
     public getSystemViews(): SystemView[] {
@@ -68,26 +63,16 @@ export class TabDetailComponent implements OnInit {
     }
 
     public calculateSystemFeatures(): void {
-        this.requestLoading = true
-        this.backendService.getTable(this.getSystemInputForm().value, this.getSystemViewId()).subscribe(
-            value => {
-                value.systemView = this.getSystemView()
-                return this.tablesService.addTableView(this.currentTab, value)
-            },
-            () => (this.requestLoading = false),
-            () => (this.requestLoading = false)
-        )
+        this.backendService.getTable(this.getSystemInputForm().value, this.getSystemViewId()).subscribe(value => {
+            value.systemView = this.getSystemView()
+            return this.tablesService.addTableView(this.currentTab, value)
+        })
     }
 
     public getSystemInputLayouts(id: string): void {
         this.tablesService.addSystemView(this.currentTab, this.systemViewService.getSystemViewById(id))
         this.tablesService.deleteTableView(this.currentTab)
-        this.requestLoading = true
-        this.backendService.getInput(id).subscribe(
-            result => this.updateSystemInputForms(result),
-            null,
-            () => (this.requestLoading = false)
-        )
+        this.backendService.getInput(id).subscribe(result => this.updateSystemInputForms(result))
     }
 
     public getSystemView(): SystemView {
