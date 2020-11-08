@@ -53,8 +53,7 @@ export class TabTableComponent {
                 modalRef.componentInstance.systemId = systemId
                 modalRef.componentInstance.result = systemFeatureValue
                 modalRef.componentInstance.calculatedFeatures = this.systemTableView.systemOutputs
-                    .map(element => ({ name: element.id, value: this.numberService.roundValue(element.values[0], 3) }))
-                    .map(feature => ({ name: feature.name, value: Number.parseFloat(feature.value) }))
+                    .map(element => ({ name: element.id, value: Number.parseFloat(this.numberService.roundValue(element.values[0], 3)) }))
             },
             () => this.showErrorMessage(this.translateService.instant('noCalculationAvailable'))
         )
