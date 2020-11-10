@@ -137,7 +137,6 @@
                 <button
                     (click)="calculateSystemFeatures()"
                     *ngIf="isSystemViewInputsLoaded() && isXAxisSelected()"
-                    [disabled]="isRequestLoading()"
                     class="btn card-footer text-center"
                     id="buttonCalculate"
                 >

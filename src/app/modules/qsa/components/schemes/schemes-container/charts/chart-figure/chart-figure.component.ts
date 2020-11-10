@@ -95,9 +95,7 @@ export class ChartFigureComponent {
     }
 
     public getNumValue(value: string): number {
-        return this.numberService.isNumber(value)
-            ? Number.parseFloat(value)
-            : Number.NaN
+        return this.numberService.isNumber(value) ? Number.parseFloat(value) : Number.NaN
     }
 
     private createDataForChart(chartData: ChartData): Array<SeriesOptionsType> {

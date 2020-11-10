@@ -45,16 +45,17 @@ export class CalculationModal implements OnInit {
         const currentTab = this.schemesService.getSelectedTabIndex()
         this.formulaBackendService.getStepsFormula(this.systemFeatureId, this.systemId).subscribe(({ data }) => {
             this.calculationSteps = data.formulaSteps.value || []
-            console.log(this.calculationSteps)
         })
 
         if (this.isResultValid()) {
             const inputValues = this.tablesService.getSystemInputsForm(currentTab).value
             const inputs: SystemFeatureInput[] = SystemFeatureInput.convertToArray(inputValues)
-            this.formulaBackendService.getFinalResult(this.systemFeatureId, this.systemId, inputs).subscribe(({ data }) => {
-                const finalResult: FinalResult = data.finalResult as FinalResult
-                this.finalStep = this.createFinalStep(finalResult)
-            })
+            this.formulaBackendService
+                .getFinalResult(this.systemFeatureId, this.systemId, inputs)
+                .subscribe(({ data }) => {
+                    const finalResult: FinalResult = data.finalResult as FinalResult
+                    this.finalStep = this.createFinalStep(finalResult)
+                })
         } else {
             this.finalStep = this.createFinalError()
         }
@@ -62,22 +63,26 @@ export class CalculationModal implements OnInit {
 
     private createFinalStep(finalResult: FinalResult): string {
         try {
-            return this.translateService.instant('finalResult') +
-            LINEBREAK +
-            finalResult.defaultFormula +
-            EQUALS +
-            finalResult.substitutedFormula +
-            EQUALS +
-            this.numberService.getSimplestForm(this.result)
+            return (
+                this.translateService.instant('finalResult') +
+                LINEBREAK +
+                finalResult.defaultFormula +
+                EQUALS +
+                finalResult.substitutedFormula +
+                EQUALS +
+                this.numberService.getSimplestForm(this.result)
+            )
         } catch (Exception) {
             return this.translateService.instant('cannotCalculateFinalResult')
         }
     }
 
     private createFinalError(): string {
-        return this.translateService.instant('cannotCalculateFinalResult') +
+        return (
+            this.translateService.instant('cannotCalculateFinalResult') +
             LINEBREAK +
             this.translateService.instant('errorOccured')
+        )
     }
 
     private isResultValid(): boolean {
