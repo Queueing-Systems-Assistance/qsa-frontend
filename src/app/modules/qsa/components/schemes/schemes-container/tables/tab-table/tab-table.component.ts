@@ -44,6 +44,7 @@ export class TabTableComponent {
     }
 
     public showCalculationModal(systemFeatureId: string, systemFeatureValue: string): void {
+        console.log(this.systemTableView.systemOutputs)
         const systemId = this.systemView.id
         this.formulaBackendService.getDefaultFormula(systemFeatureId, systemId).subscribe(
             () => {
@@ -51,6 +52,8 @@ export class TabTableComponent {
                 modalRef.componentInstance.systemFeatureId = systemFeatureId
                 modalRef.componentInstance.systemId = systemId
                 modalRef.componentInstance.result = systemFeatureValue
+                modalRef.componentInstance.calculatedFeatures = this.systemTableView.systemOutputs
+                    .map(element => ({ name: element.id, value: Number.parseFloat(this.numberService.roundValue(element.values[0], 3)) }))
             },
             () => this.showErrorMessage(this.translateService.instant('noCalculationAvailable'))
         )
