@@ -124,5 +124,6 @@
     "finalResult": "So the final result is",
     "cannotCalculateFinalResult": "Couldn't calculate final result so nothing to display",
     "errorOccured": "You can get more information by clicking on the red button in the table",
-    "noCalculationAvailable": "Currently there are no calculations available for this system feature"
+    "noCalculationAvailable": "Currently there are no calculations available for this system feature",
+    "hunFlag": "Hungarian flag"
 }

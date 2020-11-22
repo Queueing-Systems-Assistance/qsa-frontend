@@ -1,4 +1,5 @@
 <section class="clearfix" id="intro">
+    <logo [vertical]="true"></logo>
     <div class="container">
         <h1 class="my-0 font-weight-normal text-center text-white">
             <strong
@@ -9,6 +10,11 @@
     </div>
 </section>
 <main class="container" role="main">
+    <div class="row mt-5">
+        <div class="col col-12">
+            <logo [vertical]="false"></logo>
+        </div>
+    </div>
     <div class="row mt-5">
         <div class="col col-12">
             <h2 class="my-0 font-weight-normal text-left mb-2">{{ 'whatWeOffer' | translate }}</h2>

@@ -1,0 +1,17 @@
+<div *ngIf="!vertical" class="card rounded border-0 shadow-sm mt-3 p-1 d-flex flex-row">
+    <img src="../../../../../../assets/res/hun_flag.svg" alt="{{ 'hunFlag' | translate }}" />
+    <div class="flex-column justify-content-between row">
+        <div class="mt-1 text-danger">University of Debrecen</div>
+        <div class="mt-4 text-success">Hungary</div>
+    </div>
+</div>
+<div *ngIf="vertical" class="p-1 rounded flag-floating mobile-hide">
+    <img
+        class="ml-3"
+        src="../../../../../../assets/res/hun_flag.svg"
+        width="150rem"
+        alt="{{ 'hunFlag' | translate }}"
+    />
+    <div class="text-danger">University of Debrecen</div>
+    <div class="text-success">Hungary</div>
+</div>

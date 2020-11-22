@@ -141,6 +141,15 @@ body :focus .mjx-chtml[tabindex] {
     outline: 1px solid #aeb6b1;
 }
 
+.flag-floating {
+    position: fixed;
+    top: 4.2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    font-size: 70%;
+}
+
 /* Animation */
 
 .hover-zoom:hover {
