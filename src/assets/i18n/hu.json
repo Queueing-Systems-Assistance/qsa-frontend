@@ -41,7 +41,7 @@
     "source": "Forráskód",
     "select": "Választ",
     "cookieConsentText": "Az oldal sütiket használ, hogy jobb élményt tudjon nyújtani.",
-    "aboutContent": "<p>Az alkalmazás a Hálózatok hatékonyságanalízise tárgy tanulásának könnyebbítése miatt jött létre. Az egyes számítások <strong><a href=\"http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main.pdf\">Dr. Sztrik János - A sorbanállási elmélet alapjai</a></strong> könyvében található függvények implementációján történnek.</p><p>A fejlesztésben résztvett Szilágyi Zoltán és Szászi Szabolcs. Forráskód megtalálható a GitHub-on</p>",
+    "aboutContent": "<p>Az alkalmazás a Hálózatok hatékonyságanalízise tárgy tanulásának könnyebbítése miatt jött létre. Az egyes számítások <strong><a href=\"http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main.pdf\">Dr. Sztrik János - A sorbanállási elmélet alapjai</a></strong> könyvében található függvények implementációján történnek.</p><p>A fejlesztésben résztvett Szilágyi Zoltán, Szászi Szabolcs és Kölcsei Csanád. Forráskód megtalálható a GitHub-on</p>",
     "selectAValue": "Válassz egy értéket",
     "documentation": "Dokumentáció",
     "copy": "Másolás",

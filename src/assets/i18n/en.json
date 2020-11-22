@@ -41,7 +41,7 @@
     "source": "Source",
     "select": "Select",
     "cookieConsentText": "This website uses cookies to ensure you get the best experience on our website.",
-    "aboutContent": "<p>This application was created to make easier learning network analysis. Each calculation was implemented from <strong><a href=\"http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main_Angol.pdf\">Dr. Sztrik János - Basic Queueing Theory</a></strong>.</p><p>Involved in development Zoltán Szilágyi and Szabolcs Szászi. You can find the source code on GitHub.</p>",
+    "aboutContent": "<p>This application was created to make easier learning network analysis. Each calculation was implemented from <strong><a href=\"http://irh.inf.unideb.hu/user/jsztrik/education/16/SOR_Main_Angol.pdf\">Dr. Sztrik János - Basic Queueing Theory</a></strong>.</p><p>Involved in development Zoltán Szilágyi, Szabolcs Szászi and Csanád Kölcsei. You can find the source code on GitHub.</p>",
     "selectAValue": "Select a value",
     "documentation": "Documentation",
     "copy": "Copy",
