@@ -41,9 +41,11 @@ export class NumberService {
     }
 
     public roundValue(num: string, precision: number): string {
-        return parseFloat(num)
-            .toPrecision(precision)
-            .replace(TRAILING_0, EMPTY_STRING)
-            .replace(TRAILING_DOT, EMPTY_STRING)
+        const number: number = parseFloat(num)
+        return this.roundNumber(number, precision)
+    }
+
+    public roundNumber(num: number, precision: number): string {
+        return num.toPrecision(precision).replace(TRAILING_0, EMPTY_STRING).replace(TRAILING_DOT, EMPTY_STRING)
     }
 }

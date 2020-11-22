@@ -3,7 +3,6 @@ import { ConfigConditionInput } from '../model/formula/config-condition-input'
 import { Logger } from './logger'
 import { LocaleHelper } from '../helpers/locale.helper'
 import { TranslateService } from '@ngx-translate/core'
-import { HttpClient } from '@angular/common/http'
 import { Apollo } from 'apollo-angular'
 import gql from 'graphql-tag'
 import { Observable } from 'rxjs'
@@ -37,7 +36,8 @@ const finalResultQuery = gql`
 
 @Injectable()
 export class FormulaBackendService {
-    constructor(private translateService: TranslateService, private http: HttpClient, private apollo: Apollo) {}
+    constructor(private translateService: TranslateService, private apollo: Apollo) {}
+
     private assembleConfigConditions(system: string, locale: string): ConfigConditionInput[] {
         const conditions: ConfigConditionInput[] = []
         conditions.push({ name: 'system', value: system })
