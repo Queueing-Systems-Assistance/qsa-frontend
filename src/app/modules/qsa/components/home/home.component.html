@@ -12,11 +12,6 @@
 <main class="container" role="main">
     <div class="row mt-5">
         <div class="col col-12">
-            <logo [sticky]="false"></logo>
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col col-12">
             <h2 class="my-0 font-weight-normal text-left mb-2">{{ 'whatWeOffer' | translate }}</h2>
             <p class="my-0 font-weight-normal text-left mt-1">{{ 'whatWeOfferDescription' | translate }}</p>
         </div>
@@ -44,10 +39,14 @@
             <home-systems-component> </home-systems-component>
         </div>
     </div>
-
     <div class="row mt-5">
         <div class="col col-12">
             <home-kendall-component> </home-kendall-component>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col col-12">
+            <logo [sticky]="false"></logo>
         </div>
     </div>
 </main>
