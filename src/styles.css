@@ -187,3 +187,9 @@ body :focus .mjx-chtml[tabindex] {
         display: none;
     }
 }
+
+@media (min-width: 767px) {
+    .desktop-hide {
+        display: none;
+    }
+}
