@@ -50,10 +50,7 @@ export class ChartFigureComponent {
                             '<br/>'
                     })
                     tooltip +=
-                        '<br><strong>' + 
-                        xAxisName + 
-                        ':</strong> ' + 
-                        this.points[0].x.toFixed(3).replace(/\.?0*$/, '')
+                        '<br><strong>' + xAxisName + ':</strong> ' + this.points[0].x.toFixed(3).replace(/\.?0*$/, '')
                     return tooltip
                 },
                 shared: true,

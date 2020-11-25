@@ -67,6 +67,7 @@ import { CalculationModal } from './components/modals/calculation/calculation.mo
 import { GraphQLModule } from '../graphql/graphql.module'
 import { FormulaBackendService } from './services/formula-backend.service'
 import { NumberService } from './services/number.service'
+import { LogoComponent } from './components/home/logo/logo.component'
 
 require('highcharts/modules/exporting')(Highcharts)
 
@@ -132,7 +133,8 @@ const appRoutes: Routes = [
         ErrorSystemViewsLoadComponent,
         JsonCardComponent,
         DocumentationTableComponent,
-        CalculationModal
+        CalculationModal,
+        LogoComponent
     ],
     imports: [
         GraphQLModule,

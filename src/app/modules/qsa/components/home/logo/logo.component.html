@@ -1,0 +1,19 @@
+<div class="font-weight-bold">
+    <div *ngIf="!sticky" class="card rounded border-0 shadow-sm mt-3 p-1 d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row w-100">
+            <img src="assets/res/hun_flag.svg" alt="{{ 'hunFlag' | translate }}" />
+            <div class="flex-column justify-content-between row">
+                <div class="mt-1 text-danger">University of Debrecen</div>
+                <div class="mt-4 text-success">Hungary</div>
+            </div>
+        </div>
+        <img src="assets/res/ud_logo.png" width="90rem" height="90rem" alt="University of Debrecen logo"/>
+    </div>
+        <div *ngIf="sticky && !hidden" class="p-2 d-flex flex-row rounded flag-floating">
+            <img src="assets/res/hun_flag.svg" width="150rem" alt="{{ 'hunFlag' | translate }}" />
+            <div class="flex-column justify-content-between row">
+                <div class="mt-1 text-danger">University of Debrecen</div>
+                <div class="mt-4 text-success">Hungary</div>
+            </div>
+        </div>
+</div>
