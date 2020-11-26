@@ -30,6 +30,7 @@ export class CalculationModal implements OnInit {
     @Input() public systemFeatureId: string
     @Input() public systemId: string
     @Input() public result: string
+    @Input() public calculatedFeatures: SystemFeatureInput[]
 
     generalFormula = ''
     calculationSteps: string[] = []
@@ -49,7 +50,9 @@ export class CalculationModal implements OnInit {
 
         if (this.isResultValid()) {
             const inputValues = this.tablesService.getSystemInputsForm(currentTab).value
-            const inputs: SystemFeatureInput[] = SystemFeatureInput.convertToArray(inputValues)
+            const inputs: SystemFeatureInput[] = SystemFeatureInput.convertToArray(inputValues).concat(
+                this.calculatedFeatures
+            )
             this.formulaBackendService
                 .getFinalResult(this.systemFeatureId, this.systemId, inputs)
                 .subscribe(({ data }) => {

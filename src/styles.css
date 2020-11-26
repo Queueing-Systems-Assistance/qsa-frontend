@@ -141,6 +141,20 @@ body :focus .mjx-chtml[tabindex] {
     outline: 1px solid #aeb6b1;
 }
 
+.flag-floating {
+    position: fixed;
+    top: 4.2rem;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    font-size: 90%;
+    width: 20rem;
+    margin: 1rem;
+    background-image: url('assets/res/ud_logo.png');
+    background-size: 5rem 5rem;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
 /* Animation */
 
 .hover-zoom:hover {
@@ -170,6 +184,12 @@ body :focus .mjx-chtml[tabindex] {
 
 @media (max-width: 767px) {
     .mobile-hide {
+        display: none;
+    }
+}
+
+@media (min-width: 767px) {
+    .desktop-hide {
         display: none;
     }
 }

@@ -49,6 +49,8 @@ export class ChartFigureComponent {
                             yAxis.y.toFixed(3).replace(/\.?0*$/, '') +
                             '<br/>'
                     })
+                    tooltip +=
+                        '<br><strong>' + xAxisName + ':</strong> ' + this.points[0].x.toFixed(3).replace(/\.?0*$/, '')
                     return tooltip
                 },
                 shared: true,
