@@ -8,7 +8,7 @@
     "charts": "Figures",
     "chart": "Chart",
     "tables": "Tables",
-    "systemValues": "System Values",
+    "systemValues": "Performance measures",
     "selectASystem": "Please select a system!",
     "emptyIcon": "Empty icon",
     "selectSystemEnterValues": "First you have to select a system, then enter the values",
