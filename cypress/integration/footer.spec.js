@@ -13,9 +13,10 @@ describe('Footer', () => {
 
     it('has creators', () => {
         cy.get('footer-component')
-            .should('contain.text', 'Dr. Sztrik János')
-            .should('contain.text', 'Szászi Szabolcs')
-            .should('contain.text', 'Szilágyi Zoltán')
+            .should('contain.text', 'Dr. János Sztrik')
+            .should('contain.text', 'Szabolcs Szászi')
+            .should('contain.text', 'Zoltán Szilágyi')
+            .should('contain.text', 'Csanád Kölcsei')
     })
 
 });
