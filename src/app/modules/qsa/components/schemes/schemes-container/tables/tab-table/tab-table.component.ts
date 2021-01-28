@@ -44,7 +44,6 @@ export class TabTableComponent {
     }
 
     public showCalculationModal(systemFeatureId: string, systemFeatureValue: string): void {
-        console.log(this.systemTableView.systemOutputs)
         const systemId = this.systemView.id
         this.formulaBackendService.getDefaultFormula(systemFeatureId, systemId).subscribe(
             () => {

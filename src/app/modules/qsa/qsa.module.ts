@@ -29,7 +29,6 @@ import { TabDetailComponent } from './components/schemes/schemes-container/table
 import { SystemViewService } from './services/system.view.service'
 import { CookieService } from 'ngx-cookie-service'
 import { CookieConsentService } from './services/cookie.consent.service'
-import { DocumentationComponent } from './components/documentation/documentation.component'
 import { NgxJsonViewerModule } from 'ngx-json-viewer'
 import { ClipboardModule } from 'ngx-clipboard'
 import { NumberDirective } from './directives/number.directive'
@@ -41,7 +40,6 @@ import { SystemInputDropDownComponent } from './components/shared/system-input-d
 import { TabTableComponent } from './components/schemes/schemes-container/tables/tab-table/tab-table.component'
 import { JsonCardComponent } from './components/shared/json-card/json-card.component'
 import { DocumentationTableComponent } from './components/shared/documentation-table/documentation-table.component'
-import { DocumentationUrlComponent } from './components/documentation/documentation-url/documentation-url.component'
 import { ChartFigureComponent } from './components/schemes/schemes-container/charts/chart-figure/chart-figure.component'
 import { ExportCsvModal } from './components/modals/export-csv/export-csv.modal'
 import { SchemesComponent } from './components/schemes/schemes.component'
@@ -56,7 +54,6 @@ import { CompareTableDetailComponent } from './components/schemes/schemes-contai
 import { TablesCompareService } from './services/tables-compare.service'
 import { CompareTableSelectionComponent } from './components/schemes/schemes-container/tables-compare/compare-table-selection/compare-table-selection.component'
 import { CompareTableComponent } from './components/schemes/schemes-container/tables-compare/compare-table/compare-table.component'
-import { DocumentationExampleComponent } from './components/documentation/documentation-example/documentation-example.component'
 import { HomeSelectionComponent } from './components/home/selection/home.selection.component'
 import { HomeKendallComponent } from './components/home/kendall/home.kendall.component'
 import { HomeSystemsComponent } from './components/home/systems/home.systems.component'
@@ -74,7 +71,6 @@ require('highcharts/modules/exporting')(Highcharts)
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    { path: 'documentation', component: DocumentationComponent },
     {
         path: 'schemes',
         component: SchemesComponent,
@@ -113,10 +109,6 @@ const appRoutes: Routes = [
         CompareTableDetailComponent,
         CompareTableSelectionComponent,
         CompareTableComponent,
-        // Documentation section
-        DocumentationComponent,
-        DocumentationUrlComponent,
-        DocumentationExampleComponent,
         // Modals
         AboutModal,
         RenameModal,

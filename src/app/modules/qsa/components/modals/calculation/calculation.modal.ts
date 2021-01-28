@@ -31,6 +31,7 @@ export class CalculationModal implements OnInit {
     @Input() public systemId: string
     @Input() public result: string
     @Input() public calculatedFeatures: SystemFeatureInput[]
+    @Input() public inputFeatures: any
 
     generalFormula = ''
     calculationSteps: string[] = []

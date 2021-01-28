@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core'
 import { SystemView } from '../model/system/system.view'
-import { environment } from '../../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { Logger } from './logger'
 import { Observable } from 'rxjs'
 import { TranslateService } from '@ngx-translate/core'
-import { ParamsHelper } from '../helpers/params.helper'
+import { ApolloQueryResult } from 'apollo-client'
+import { LocaleHelper } from '../helpers/locale.helper'
+import gql from 'graphql-tag'
+import { Apollo } from 'apollo-angular'
+
+const systemViewsQuery = gql`
+    query {
+        systemElements {
+            id
+            name
+            status
+            description
+        }
+    }
+`
 
 @Injectable()
 export class SystemViewService {
-    private static SYSTEMS_API = environment.apiUrl + '/systems'
 
     private systemViews = new Array<SystemView>()
 
-    constructor(private http: HttpClient, private translateService: TranslateService) {}
+    constructor(private http: HttpClient, private translateService: TranslateService, private apollo: Apollo) {}
 
     public loadSystemViews(force: boolean) {
         if (!this.isSystemViewsLoaded() || force) {
             Logger.i(this, 'Loading system list')
-            this.getSystemsViewsAsync().subscribe(value => (this.systemViews = value))
+            this.getSystemsViewsAsync().subscribe(value => (this.systemViews = value.data.systemElements))
         }
     }
 
@@ -42,9 +54,21 @@ export class SystemViewService {
         return Boolean(this.getSystemViews().length)
     }
 
-    public getSystemsViewsAsync(): Observable<Array<SystemView>> {
-        const params = ParamsHelper.getParams(this.translateService)
-        Logger.i(this, 'HTTP GET', 'getSystemsViews()', '')
-        return this.http.get<Array<SystemView>>(SystemViewService.SYSTEMS_API, { params })
+    public getSystemsViewsAsync(): Observable<ApolloQueryResult<any>> {
+        Logger.i(this, 'GraphQL', 'SystemView')
+        return this.apollo.query({
+            query: systemViewsQuery,
+            context: {
+                headers: {
+                    'Accept-Language': this.getCurrentLocale(),
+                    'Content-Type': 'application/json'
+                }
+            }
+        })
+    }
+
+    public getCurrentLocale(): string {
+        const correctLocale = LocaleHelper.getCorrectLocale(this.translateService)
+        return correctLocale + '_' + correctLocale.toUpperCase()
     }
 }

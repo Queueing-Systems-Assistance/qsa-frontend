@@ -39,11 +39,11 @@ export class TabDetailComponent implements OnInit {
     }
 
     public getRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.required)
+        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.required === 'true')
     }
 
     public getNonRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(systemViewInput => !systemViewInput.required)
+        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.required === 'false')
     }
 
     public getSystemInputForm(): FormGroup {
@@ -64,15 +64,19 @@ export class TabDetailComponent implements OnInit {
 
     public calculateSystemFeatures(): void {
         this.backendService.getTable(this.getSystemInputForm().value, this.getSystemViewId()).subscribe(value => {
-            value.systemView = this.getSystemView()
-            return this.tablesService.addTableView(this.currentTab, value)
+            const tableView = new TableView()
+            tableView.systemOutputs = value.data.systemElements[0].outputs
+            tableView.systemView = this.getSystemView()
+            return this.tablesService.addTableView(this.currentTab, tableView)
         })
     }
 
     public getSystemInputLayouts(id: string): void {
         this.tablesService.addSystemView(this.currentTab, this.systemViewService.getSystemViewById(id))
         this.tablesService.deleteTableView(this.currentTab)
-        this.backendService.getInput(id).subscribe(result => this.updateSystemInputForms(result))
+        this.backendService
+            .getInput(id)
+            .subscribe(result => this.updateSystemInputForms(result.data.systemElements[0].inputs))
     }
 
     public getSystemView(): SystemView {

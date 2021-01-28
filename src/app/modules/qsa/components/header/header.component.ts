@@ -27,7 +27,8 @@ export class HeaderComponent implements OnInit {
     }
 
     public useLanguage(language: string): void {
-        this.translateService.use(language)
+        localStorage.setItem('locale', language)
+        window.location.reload()
     }
 
     public showAboutModal(): void {
