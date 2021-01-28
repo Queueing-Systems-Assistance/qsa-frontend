@@ -27,7 +27,7 @@ const systemInputsQuery = gql`
 const tableQuery = gql`
     query table($systemIds: [String!]!, $inputFeatureConditions: [FeatureCondition!]!) {
         systemElements(systemIds: $systemIds) {
-            outputs(inputFeatueConditions: $inputFeatureConditions) {
+            outputs(inputFeatureConditions: $inputFeatureConditions) {
                 id
                 name
                 values
