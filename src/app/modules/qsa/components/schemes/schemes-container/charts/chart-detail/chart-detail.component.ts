@@ -46,7 +46,7 @@ export class ChartDetailComponent implements OnInit {
         this.chartsService.deleteChartData(this.currentTab)
         this.backendService.getInput(systemViewId).subscribe(result => {
             // Save selected system inputs
-            this.chartsService.addSystemViewInputs(this.currentTab, result)
+            this.chartsService.addSystemViewInputs(this.currentTab, result.data.systemElements[0].inputs)
             this.updateSystemInputsForms(true)
         })
     }
@@ -69,7 +69,7 @@ export class ChartDetailComponent implements OnInit {
         }
         this.backendService
             .getChart(formData, this.getSystemViewId(), values.xAxis.featureId)
-            .subscribe(value => this.updateChartView(value))
+            .subscribe(value => this.updateChartView(value.data.systemElements[0]))
     }
 
     public getSystemViews(): Array<SystemView> {
@@ -102,11 +102,11 @@ export class ChartDetailComponent implements OnInit {
     }
 
     public getRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter(systemViewInput => systemViewInput.required)
+        return this.createFixSystemInputs().filter(systemViewInput => systemViewInput.required === 'true')
     }
 
     public getNonRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter(systemViewInput => !systemViewInput.required)
+        return this.createFixSystemInputs().filter(systemViewInput => systemViewInput.required === 'false')
     }
 
     public getSelectedSystemFeature(): SystemFeature {
@@ -131,8 +131,14 @@ export class ChartDetailComponent implements OnInit {
     }
 
     private updateChartView(value): void {
-        this.chartsService.addChartData(this.currentTab, value)
-        this.chartFigure.createChart(this.getXAxisName(), value)
+        const chartData = new ChartData()
+        const systemElement = new SystemView()
+        systemElement.name = value.name
+        chartData.systemElement = systemElement
+        chartData.labels = value.outputsStream.stream
+        chartData.systemOutputs = value.outputsStream.outputFeatures
+        this.chartsService.addChartData(this.currentTab, chartData)
+        this.chartFigure.createChart(this.getXAxisName(), chartData)
     }
 
     private subscribeRouteChanging(): void {

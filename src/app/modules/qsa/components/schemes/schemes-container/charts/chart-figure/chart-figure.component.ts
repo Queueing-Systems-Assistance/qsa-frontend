@@ -106,7 +106,6 @@ export class ChartFigureComponent {
         chartData.systemOutputs.forEach(systemFeatureValue => {
             const datas = []
             chartData.labels.forEach((label, index) => {
-                console.log(systemFeatureValue.values[index])
                 datas.push([label, this.getNumValue(systemFeatureValue.values[index])])
             })
             datasets.push({

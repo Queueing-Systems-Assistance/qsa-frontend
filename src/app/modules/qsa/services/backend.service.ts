@@ -1,49 +1,165 @@
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { Observable } from 'rxjs'
-import { ChartData } from '../model/chart/chart.data'
-import { TableView } from '../model/table/table.view'
 import { Logger } from './logger'
-import { SystemFeature } from '../model/system/system.feature'
-import { Build } from '../model/build/build'
 import { environment } from '../../../../environments/environment'
 import { LocaleHelper } from '../helpers/locale.helper'
+import gql from 'graphql-tag'
+import { Apollo } from 'apollo-angular'
+import { ApolloQueryResult } from 'apollo-client'
+import { FeatureCondition } from '../model/system/feature.condition'
+import { StreamOutput } from '../model/system/stream-output'
+
+const systemInputsQuery = gql`
+    query systemElements($systemIds: [String!]!) {
+        systemElements(systemIds: $systemIds) {
+            inputs {
+                id
+                description
+                name
+                typeFraction
+                required
+            }
+        }
+    }
+`
+const tableQuery = gql`
+    query table($systemIds: [String!]!, $inputFeatureConditions: [FeatureCondition!]!) {
+        systemElements(systemIds: $systemIds) {
+            outputs(inputFeatureConditions: $inputFeatureConditions) {
+                id
+                name
+                values
+                description
+            }
+        }
+    }
+`
+
+const chartQuery = gql`
+    query chart($systemIds: [String!]!, $inputFeatureConditions: [FeatureCondition!]!, $requestedOutputFeatureIds: [String!], $stream: StreamOutput!) {
+        systemElements(systemIds: $systemIds) {
+            name
+            outputsStream(inputFeatureConditions: $inputFeatureConditions, requestedOutputFeatureIds: $requestedOutputFeatureIds, stream: $stream) {
+                outputFeatures {
+                    id
+                    name
+                    values
+                    description
+                }
+                stream
+            }
+        }
+    }
+`
+
+const formulaQuery = gql`
+    query formula($systemIds: [String!]!, $inputFeatureConditions: [FeatureCondition!]!, $featureId: String!, $formulaType: FormulaType!) {
+        systemElements(systemIds: $systemIds) {
+            formula(featureId: $featureId, inputFeatureConditions: $inputFeatureConditions, formulaType: $formulaType)
+        }
+    }
+`
+
+export enum FormulaType {
+    DEFAULT = "DEFAULT",
+    STEPS = "STEPS",
+    CALCULATED = "CALCULATED"
+}
 
 @Injectable()
 export class BackendService {
-    private SYSTEM_TABLE_API = environment.apiUrl + '/table'
-    private CHART_API = environment.apiUrl + '/chart'
-    private INFO_API = environment.apiUrl + '/actuator/info'
 
-    constructor(private translateService: TranslateService, private http: HttpClient) {
+    constructor(private translateService: TranslateService, private http: HttpClient, private apollo: Apollo) {
         Logger.i(this, 'API URL [' + environment.apiUrl + ']')
     }
 
-    public getInput(systemId: string): Observable<Array<SystemFeature>> {
-        const params = this.getParams()
-        Logger.i(this, 'HTTP GET', 'getInput()', systemId)
-        return this.http.get<Array<SystemFeature>>(environment.apiUrl + '/systems/' + systemId, { params })
+    public getInput(systemId: string): Observable<ApolloQueryResult<any>> {
+        Logger.i(this, 'GraphQL', 'SystemInputs')
+        return this.apollo.query({
+            query: systemInputsQuery,
+            variables: {
+                systemIds: [systemId]
+            },
+            context: {
+                headers: {
+                    'Accept-Language': this.getCurrentLocale(),
+                    'Content-Type': 'application/json'
+                }
+            }
+        })
     }
 
-    public getTable(values, systemId): Observable<TableView> {
-        const params = this.getParams()
-        Logger.i(this, 'HTTP POST', 'getTable()', values)
-        return this.http.post<TableView>(this.SYSTEM_TABLE_API + '/' + systemId, values, { params })
+    public getTable(values: [any], systemId: string): Observable<ApolloQueryResult<any>> {
+        Logger.i(this, 'GraphQL', 'Table')
+        return this.apollo.query({
+            query: tableQuery,
+            variables: {
+                systemIds: [systemId],
+                inputFeatureConditions: this.assembleFeatureConditions(values)
+            },
+            context: {
+                headers: {
+                    'Accept-Language': this.getCurrentLocale(),
+                    'Content-Type': 'application/json'
+                }
+            }
+        })
     }
 
-    public getChart(values, systemId, xAxisFeatureId): Observable<ChartData> {
-        const params = this.getParams()
-        Logger.i(this, 'HTTP POST', 'getChart()', values)
-        return this.http.post<ChartData>(this.CHART_API + '/' + systemId + '/' + xAxisFeatureId, values, { params })
+    public getChart(values, systemId, xAxisFeatureId): Observable<ApolloQueryResult<any>> {
+        Logger.i(this, 'GraphQL', 'Chart')
+        const stream = {
+            from: values.xAxis.from,
+            to: values.xAxis.to,
+            steps: values.xAxis.steps,
+            featureId: xAxisFeatureId
+        } as StreamOutput
+        return this.apollo.query({
+            query: chartQuery,
+            variables: {
+                systemIds: [systemId],
+                inputFeatureConditions: this.assembleFeatureConditions(values.features),
+                requestedOutputFeatureIds: [],
+                stream: stream
+            },
+            context: {
+                headers: {
+                    'Accept-Language': this.getCurrentLocale(),
+                    'Content-Type': 'application/json'
+                }
+            }
+        })
     }
 
-    public getBackendInfo(): Observable<Build> {
-        Logger.i(this, 'HTTP GET', 'getBackendInfo()')
-        return this.http.get<Build>(this.INFO_API)
+    public getFormula(values: [any], systemId: string, featureId: string, formulaType: string): Observable<ApolloQueryResult<any>> {
+        Logger.i(this, 'GraphQL', 'Formula')
+        return this.apollo.query({
+            query: formulaQuery,
+            variables: {
+                systemIds: [systemId],
+                inputFeatureConditions: this.assembleFeatureConditions(values),
+                featureId: featureId,
+                formulaType: formulaType
+            },
+            context: {
+                headers: {
+                    'Accept-Language': this.getCurrentLocale(),
+                    'Content-Type': 'application/json'
+                }
+            }
+        })
     }
 
-    private getParams(): HttpParams {
-        return new HttpParams().set('locale', LocaleHelper.getCorrectLocale(this.translateService))
+    public getCurrentLocale(): string {
+        const correctLocale = LocaleHelper.getCorrectLocale(this.translateService)
+        return correctLocale + '_' + correctLocale.toUpperCase()
+    }
+
+    private assembleFeatureConditions(conditions): [FeatureCondition] {
+        return Object.keys(conditions).map(id => {
+            return { id: id, value: conditions[id] }
+        }) as [FeatureCondition]
     }
 }

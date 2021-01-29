@@ -7,11 +7,3 @@
 <div class="modal-body">
     <span [innerHTML]="'aboutContent' | translate"></span>
 </div>
-<div class="modal-footer">
-    <div *ngIf="build" class="float-left">
-        <small class="text-sm-right"
-            >{{ 'version' | translate}}: {{build.version}}<br />{{ 'lastBuild' | translate}} : {{build.time |
-            date:'yyyy.MM.dd HH:mm'}}
-        </small>
-    </div>
-</div>

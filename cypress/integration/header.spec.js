@@ -1,11 +1,14 @@
 describe('Header', () => {
 
+    before(() => {
+        cy.visit('http://localhost:4200?locale=en')
+    })
+
     it('has i18n support', () => {
         cy.visit('http://localhost:4200?locale=en')
             .contains('QSA Application')
-            .get('#languageItemHu')
-            .click({force: true});
-        cy.contains('QSA Alkalmazás')
+        cy.visit('http://localhost:4200?locale=hu')
+            .contains('QSA Alkalmazás')
     });
 
     it('has a header [desktop]', () => {
@@ -14,7 +17,7 @@ describe('Header', () => {
             .should('be.visible')
             .get('li.nav-item')
             .should('be.visible')
-            .should('have.length', 8)
+            .should('have.length', 7)
             .get('li.nav-item.active')
             .should('have.length', 1);
         cy.get('header-component')
@@ -27,7 +30,7 @@ describe('Header', () => {
         cy.get('header-component')
             .should('be.visible')
             .get('li.nav-item')
-            .should('have.length', 8)
+            .should('have.length', 7)
             .get('li.nav-item.active')
             .should('have.length', 1);
         cy.get('header-component')
@@ -37,7 +40,7 @@ describe('Header', () => {
     });
 
     it('has an about modal', () => {
-        cy.get('#navbarCollapse > ul > li:nth-child(5) > a')
+        cy.get('#navbarCollapse > ul > li:nth-child(4) > a')
             .click();
         cy.get('about-modal')
             .should('be.visible')
