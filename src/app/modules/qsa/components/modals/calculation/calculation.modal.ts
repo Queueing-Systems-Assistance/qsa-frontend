@@ -1,13 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { Logger } from '../../../services/logger'
-import { TablesService } from '../../../services/tables.service'
-import { SchemesService } from '../../../services/schemes.service'
-import { FormulaBackendService } from '../../../services/formula-backend.service'
-import { SystemFeatureInput } from '../../../model/formula/system-feature-input'
-import { FinalResult } from '../../../model/formula/final-result'
 import { TranslateService } from '@ngx-translate/core'
 import { NumberService } from '../../../services/number.service'
+import { BackendService, FormulaType } from '../../../services/backend.service'
+import { map } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 const LINEBREAK = '\n'
 const EQUALS = ' = '
@@ -20,17 +18,14 @@ const EQUALS = ' = '
 export class CalculationModal implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
-        private formulaBackendService: FormulaBackendService,
-        private schemesService: SchemesService,
-        private tablesService: TablesService,
         private translateService: TranslateService,
-        private numberService: NumberService
+        private numberService: NumberService,
+        private backendService: BackendService
     ) {}
 
-    @Input() public systemFeatureId: string
+    @Input() public featureId: string
     @Input() public systemId: string
     @Input() public result: string
-    @Input() public calculatedFeatures: SystemFeatureInput[]
     @Input() public inputFeatures: any
 
     generalFormula = ''
@@ -39,40 +34,30 @@ export class CalculationModal implements OnInit {
     finalStep = ''
 
     ngOnInit(): void {
-        Logger.i(this, `systemFeatureId: ${this.systemFeatureId}, systemId: ${this.systemId}`)
-        this.formulaBackendService.getDefaultFormula(this.systemFeatureId, this.systemId).subscribe(({ data }) => {
-            this.generalFormula = data.formulaDefault.value
-        })
-
-        const currentTab = this.schemesService.getSelectedTabIndex()
-        this.formulaBackendService.getStepsFormula(this.systemFeatureId, this.systemId).subscribe(({ data }) => {
-            this.calculationSteps = data.formulaSteps.value || []
-        })
-
+        Logger.i(this, `featureId: ${this.featureId}, systemId: ${this.systemId}`)
+        this.getFormula(FormulaType.DEFAULT).subscribe(formula => this.generalFormula = formula)
+        this.getFormula(FormulaType.STEPS).subscribe(
+            formula => this.calculationSteps = formula.split("<br>"),
+            () => this.calculationSteps = []
+        )
         if (this.isResultValid()) {
-            const inputValues = this.tablesService.getSystemInputsForm(currentTab).value
-            const inputs: SystemFeatureInput[] = SystemFeatureInput.convertToArray(inputValues).concat(
-                this.calculatedFeatures
+            this.getFormula(FormulaType.CALCULATED).subscribe(
+                formula => this.finalStep = this.createFinalStep(formula),
+                () => this.finalStep = this.createFinalError()
             )
-            this.formulaBackendService
-                .getFinalResult(this.systemFeatureId, this.systemId, inputs)
-                .subscribe(({ data }) => {
-                    const finalResult: FinalResult = data.finalResult as FinalResult
-                    this.finalStep = this.createFinalStep(finalResult)
-                })
         } else {
             this.finalStep = this.createFinalError()
         }
     }
 
-    private createFinalStep(finalResult: FinalResult): string {
+    private createFinalStep(calculatedFormula: string): string {
         try {
             return (
                 this.translateService.instant('finalResult') +
                 LINEBREAK +
-                finalResult.defaultFormula +
+                this.generalFormula +
                 EQUALS +
-                finalResult.substitutedFormula +
+                calculatedFormula +
                 EQUALS +
                 this.numberService.getSimplestForm(this.result)
             )
@@ -91,5 +76,10 @@ export class CalculationModal implements OnInit {
 
     private isResultValid(): boolean {
         return this.numberService.isNumber(this.result)
+    }
+
+    private getFormula(type: FormulaType): Observable<string> {
+        return this.backendService.getFormula(this.inputFeatures, this.systemId, this.featureId, type)
+            .pipe(map(data => data.data.systemElements[0].formula))
     }
 }

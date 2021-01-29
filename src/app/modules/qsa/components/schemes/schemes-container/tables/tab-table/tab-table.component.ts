@@ -6,8 +6,9 @@ import { SystemView } from '../../../../../model/system/system.view'
 import { CalculationModal } from '../../../../modals/calculation/calculation.modal'
 import { NotificationService } from 'src/app/modules/qsa/services/notification.service'
 import { NumberService } from 'src/app/modules/qsa/services/number.service'
-import { FormulaBackendService } from 'src/app/modules/qsa/services/formula-backend.service'
 import { TranslateService } from '@ngx-translate/core'
+import { BackendService, FormulaType } from 'src/app/modules/qsa/services/backend.service'
+import { TabDetailComponent } from '../tab-detail/tab-detail.component'
 
 @Component({
     selector: 'tab-table-component',
@@ -21,8 +22,9 @@ export class TabTableComponent {
         private modalService: NgbModal,
         private notificationService: NotificationService,
         private numberService: NumberService,
-        private formulaBackendService: FormulaBackendService,
-        private translateService: TranslateService
+        private backendService: BackendService,
+        private translateService: TranslateService,
+        private tabDetailComponent: TabDetailComponent
     ) {}
 
     public exportToCSV(): void {
@@ -43,18 +45,16 @@ export class TabTableComponent {
         this.notificationService.showToastError([{ errorMessage: errorMsg }])
     }
 
-    public showCalculationModal(systemFeatureId: string, systemFeatureValue: string): void {
+    public showCalculationModal(featureId: string, featureValue: string): void {
         const systemId = this.systemView.id
-        this.formulaBackendService.getDefaultFormula(systemFeatureId, systemId).subscribe(
+        const inputFeatures = this.tabDetailComponent.getSystemInputForm().value
+        this.backendService.getFormula(inputFeatures, systemId, featureId, FormulaType.DEFAULT).subscribe(
             () => {
                 const modalRef = this.modalService.open(CalculationModal)
-                modalRef.componentInstance.systemFeatureId = systemFeatureId
+                modalRef.componentInstance.featureId = featureId
                 modalRef.componentInstance.systemId = systemId
-                modalRef.componentInstance.result = systemFeatureValue
-                modalRef.componentInstance.calculatedFeatures = this.systemTableView.systemOutputs.map(element => ({
-                    name: element.id,
-                    value: Number.parseFloat(this.numberService.roundValue(element.values[0], 3))
-                }))
+                modalRef.componentInstance.result = featureValue
+                modalRef.componentInstance.inputFeatures = inputFeatures
             },
             () => this.showErrorMessage(this.translateService.instant('noCalculationAvailable'))
         )

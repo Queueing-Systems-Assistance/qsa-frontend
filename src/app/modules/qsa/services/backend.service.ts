@@ -54,8 +54,23 @@ const chartQuery = gql`
     }
 `
 
+const formulaQuery = gql`
+    query formula($systemIds: [String!]!, $inputFeatureConditions: [FeatureCondition!]!, $featureId: String!, $formulaType: FormulaType!) {
+        systemElements(systemIds: $systemIds) {
+            formula(featureId: $featureId, inputFeatureConditions: $inputFeatureConditions, formulaType: $formulaType)
+        }
+    }
+`
+
+export enum FormulaType {
+    DEFAULT = "DEFAULT",
+    STEPS = "STEPS",
+    CALCULATED = "CALCULATED"
+}
+
 @Injectable()
 export class BackendService {
+
     constructor(private translateService: TranslateService, private http: HttpClient, private apollo: Apollo) {
         Logger.i(this, 'API URL [' + environment.apiUrl + ']')
     }
@@ -82,9 +97,7 @@ export class BackendService {
             query: tableQuery,
             variables: {
                 systemIds: [systemId],
-                inputFeatureConditions: Object.keys(values).map(id => {
-                    return { id: id, value: values[id] }
-                }) as [FeatureCondition]
+                inputFeatureConditions: this.assembleFeatureConditions(values)
             },
             context: {
                 headers: {
@@ -107,11 +120,28 @@ export class BackendService {
             query: chartQuery,
             variables: {
                 systemIds: [systemId],
-                inputFeatureConditions: Object.keys(values.features).map(id => {
-                    return { id: id, value: values.features[id] }
-                }) as [FeatureCondition],
+                inputFeatureConditions: this.assembleFeatureConditions(values.features),
                 requestedOutputFeatureIds: [],
                 stream: stream
+            },
+            context: {
+                headers: {
+                    'Accept-Language': this.getCurrentLocale(),
+                    'Content-Type': 'application/json'
+                }
+            }
+        })
+    }
+
+    public getFormula(values: [any], systemId: string, featureId: string, formulaType: string): Observable<ApolloQueryResult<any>> {
+        Logger.i(this, 'GraphQL', 'Formula')
+        return this.apollo.query({
+            query: formulaQuery,
+            variables: {
+                systemIds: [systemId],
+                inputFeatureConditions: this.assembleFeatureConditions(values),
+                featureId: featureId,
+                formulaType: formulaType
             },
             context: {
                 headers: {
@@ -125,5 +155,11 @@ export class BackendService {
     public getCurrentLocale(): string {
         const correctLocale = LocaleHelper.getCorrectLocale(this.translateService)
         return correctLocale + '_' + correctLocale.toUpperCase()
+    }
+
+    private assembleFeatureConditions(conditions): [FeatureCondition] {
+        return Object.keys(conditions).map(id => {
+            return { id: id, value: conditions[id] }
+        }) as [FeatureCondition]
     }
 }

@@ -86,9 +86,7 @@ export class TabDetailComponent implements OnInit {
     private subscribeRouteChanging(): void {
         this.route.params.subscribe((params: Params) => {
             this.currentTab = +params['id']
-            // System List
             this.updateSystemViewForms()
-            // System View Inputs Forms
             this.updateSystemInputForms(null)
         })
     }

@@ -62,7 +62,6 @@ import * as Highcharts from 'highcharts/highstock'
 import { MathjaxModule } from '../mathjax/mathjax.module'
 import { CalculationModal } from './components/modals/calculation/calculation.modal'
 import { GraphQLModule } from '../graphql/graphql.module'
-import { FormulaBackendService } from './services/formula-backend.service'
 import { NumberService } from './services/number.service'
 import { LogoComponent } from './components/home/logo/logo.component'
 
@@ -163,7 +162,6 @@ const appRoutes: Routes = [
         NotificationService,
         CookieService,
         CookieConsentService,
-        FormulaBackendService,
         NumberService,
         // Interceptors
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
