@@ -33,7 +33,9 @@ export function createApollo(httpLink: HttpLink, toastService: ToastrService, tr
                     .subscribe(translations => this.notificationService.showToastError(translations))
             }
         }).concat(httpLink.create({ uri })),
-        cache: new InMemoryCache()
+        cache: new InMemoryCache({
+            addTypename: false
+        })
     }
 }
 
