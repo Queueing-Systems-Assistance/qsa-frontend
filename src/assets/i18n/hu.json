@@ -124,5 +124,6 @@
     "cannotCalculateFinalResult": "A végeredményt nem sikerült kiszámítani, így nem jeleníthető meg",
     "errorOccured": "A pontos hiba a táblázatban szereplő piros gombra kattintva jeleníthető meg",
     "noCalculationAvailable": "Ehhez a rendszerjellemzőhöz egyelőre nem érhetők el képletek",
-    "hunFlag": "Magyar zászló"
+    "hunFlag": "Magyar zászló",
+    "YAxisGridLineWidth": "Y tengely koordinátavonalak"
 }
