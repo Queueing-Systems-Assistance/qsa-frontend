@@ -19,7 +19,7 @@ export class ChartFigureComponent {
         this.chartOptions = undefined
     }
 
-    public createChart(xAxisName: string, value: ChartData): void {
+    public createChart(xAxisName: string, value: ChartData, yAxisGridEnabled: boolean): void {
         this.chartOptions = {
             exporting: {
                 enabled: true
@@ -72,7 +72,8 @@ export class ChartFigureComponent {
                 opposite: false,
                 title: {
                     text: null
-                }
+                },
+                gridLineWidth: yAxisGridEnabled ? 1 : 0
             },
             title: {
                 text: value.systemElement.name

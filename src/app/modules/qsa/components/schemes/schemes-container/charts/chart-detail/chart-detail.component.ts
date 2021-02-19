@@ -18,6 +18,7 @@ export class ChartDetailComponent implements OnInit {
     @ViewChild(ChartFigureComponent) chartFigure: ChartFigureComponent
 
     currentTab: number
+    yAxisGridEnabled = true
 
     constructor(
         private route: ActivatedRoute,
@@ -25,6 +26,10 @@ export class ChartDetailComponent implements OnInit {
         private backendService: BackendService,
         private systemViewService: SystemViewService
     ) {}
+
+    public toggleYAxisGrid(): void {
+        this.yAxisGridEnabled = !this.yAxisGridEnabled
+    }
 
     public ngOnInit(): void {
         this.subscribeRouteChanging()
@@ -138,7 +143,7 @@ export class ChartDetailComponent implements OnInit {
         chartData.labels = value.outputsStream.stream
         chartData.systemOutputs = value.outputsStream.outputFeatures
         this.chartsService.addChartData(this.currentTab, chartData)
-        this.chartFigure.createChart(this.getXAxisName(), chartData)
+        this.chartFigure.createChart(this.getXAxisName(), chartData, this.yAxisGridEnabled)
     }
 
     private subscribeRouteChanging(): void {
@@ -160,7 +165,7 @@ export class ChartDetailComponent implements OnInit {
             const currentTab = this.currentTab
             setTimeout(() => {
                 if (currentTab === this.currentTab) {
-                    this.chartFigure.createChart(this.getXAxisName(), chart)
+                    this.chartFigure.createChart(this.getXAxisName(), chart, this.yAxisGridEnabled)
                 }
             }, 500)
         }
