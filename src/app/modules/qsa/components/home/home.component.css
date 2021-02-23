@@ -3,5 +3,6 @@
     position: relative;
     background: url('src/assets/res/math.png') center bottom no-repeat;
     background-size: cover;
+    z-index: 1;
     padding: 200px 0 120px 0;
 }
