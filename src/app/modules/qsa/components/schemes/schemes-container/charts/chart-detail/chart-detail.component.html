@@ -47,7 +47,7 @@
                                 </system-input-drop-down-component>
                             </div>
                         </div>
-                        <div class="row" formGroupName="xAxis">
+                        <div *ngIf="isXAxisSelected()" class="row" formGroupName="xAxis">
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <ng-template #fromXAxisInput>{{ 'fromXAxisDescription' | translate }}</ng-template>

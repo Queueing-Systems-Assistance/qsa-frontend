@@ -15,7 +15,7 @@ export class HomeSystemsComponent implements OnInit {
         axis: 'x',
         theme: 'dark-thick',
         contentTouchScroll: 25,
-        documentTouchScroll: true,
+        documentTouchScroll: false,
         scrollButtons: {
             enable: true
         }

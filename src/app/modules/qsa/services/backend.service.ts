@@ -111,9 +111,9 @@ export class BackendService {
     public getChart(values, systemId, xAxisFeatureId): Observable<ApolloQueryResult<any>> {
         Logger.i(this, 'GraphQL', 'Chart')
         const stream = {
-            from: values.xAxis.from,
-            to: values.xAxis.to,
-            steps: values.xAxis.steps,
+            from: values.xAxis.from ? values.xAxis.from : 0,
+            to: values.xAxis.to ? values.xAxis.to : 0,
+            steps: values.xAxis.steps ? values.xAxis.steps : 0,
             featureId: xAxisFeatureId
         } as StreamOutput
         return this.apollo.query({
@@ -159,7 +159,8 @@ export class BackendService {
 
     private assembleFeatureConditions(conditions): [FeatureCondition] {
         return Object.keys(conditions).map(id => {
-            return { id: id, value: conditions[id] }
+            const value = conditions[id] ? conditions[id] : 0
+            return { id: id, value: value }
         }) as [FeatureCondition]
     }
 }

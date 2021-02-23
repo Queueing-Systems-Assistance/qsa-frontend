@@ -3,4 +3,5 @@
     width: 350px;
     display: inline-flex;
     max-height: 400px;
+    overflow-y: auto;
 }

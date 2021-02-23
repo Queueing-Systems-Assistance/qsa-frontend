@@ -59,7 +59,6 @@ export class ChartDetailComponent implements OnInit {
     public selectXAxisSystemInput(): void {
         this.removeChart()
         this.addDynamicInputForms(this.createDynamicInputForms())
-        this.updateXAxisForms()
     }
 
     public calculateSystemFeatures(): void {
