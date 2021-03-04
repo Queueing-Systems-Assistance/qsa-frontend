@@ -67,7 +67,10 @@
     </div>
     <div *ngIf="getSystemTableView()" class="row mt-3 mb-5">
         <div class="col-12">
-            <tab-table-component [systemTableView]="getSystemTableView()" [systemView]="getSystemView()">
+            <tab-table-component [systemTableView]="getSystemTableView()"
+                                 [systemView]="getSystemView()"
+                                 [systemInputs]="getSystemInputForm().value"
+                                 [systemViewInputs]="getSystemViewInputs()">
             </tab-table-component>
         </div>
     </div>

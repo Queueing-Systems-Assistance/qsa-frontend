@@ -125,5 +125,7 @@
     "errorOccured": "A pontos hiba a táblázatban szereplő piros gombra kattintva jeleníthető meg",
     "noCalculationAvailable": "Ehhez a rendszerjellemzőhöz egyelőre nem érhetők el képletek",
     "hunFlag": "Magyar zászló",
-    "YAxisGridLineWidth": "Y tengely koordinátavonalak"
+    "YAxisGridLineWidth": "Y tengely koordinátavonalak",
+    "inputsOfSystemExport": "Bemeneti paraméterek",
+    "outputsOfSystemExport": "Kiemeneti paraméterek"
 }
