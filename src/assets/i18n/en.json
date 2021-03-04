@@ -126,5 +126,7 @@
     "errorOccured": "You can get more information by clicking on the red button in the table",
     "noCalculationAvailable": "Currently there are no calculations available for this system feature",
     "hunFlag": "Hungarian flag",
-    "YAxisGridLineWidth": "Y axis grid"
+    "YAxisGridLineWidth": "Y axis grid",
+    "inputsOfSystemExport": "Input parameters",
+    "outputsOfSystemExport": "Output parameters"
 }

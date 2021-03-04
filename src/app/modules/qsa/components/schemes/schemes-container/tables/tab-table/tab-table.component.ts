@@ -9,6 +9,7 @@ import { NumberService } from 'src/app/modules/qsa/services/number.service'
 import { TranslateService } from '@ngx-translate/core'
 import { BackendService, FormulaType } from 'src/app/modules/qsa/services/backend.service'
 import { TabDetailComponent } from '../tab-detail/tab-detail.component'
+import { SystemFeature } from '../../../../../model/system/system.feature'
 
 @Component({
     selector: 'tab-table-component',
@@ -17,6 +18,8 @@ import { TabDetailComponent } from '../tab-detail/tab-detail.component'
 export class TabTableComponent {
     @Input() systemView: SystemView
     @Input() systemTableView: TableView
+    @Input() systemInputs: any
+    @Input() systemViewInputs: SystemFeature[]
 
     constructor(
         private modalService: NgbModal,
@@ -31,6 +34,8 @@ export class TabTableComponent {
         const modalRef = this.modalService.open(ExportCsvModal)
         modalRef.componentInstance.systemTableView = this.systemTableView
         modalRef.componentInstance.systemView = this.systemView
+        modalRef.componentInstance.systemInputs = this.systemInputs
+        modalRef.componentInstance.systemViewInputs = this.systemViewInputs
     }
 
     public isErrorMessage(value: string): boolean {
