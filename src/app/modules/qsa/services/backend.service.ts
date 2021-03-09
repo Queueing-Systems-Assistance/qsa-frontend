@@ -19,7 +19,7 @@ const systemInputsQuery = gql`
                 description
                 name
                 typeFraction
-                required
+                inputGroup
             }
         }
     }
@@ -38,10 +38,19 @@ const tableQuery = gql`
 `
 
 const chartQuery = gql`
-    query chart($systemIds: [String!]!, $inputFeatureConditions: [FeatureCondition!]!, $requestedOutputFeatureIds: [String!], $stream: StreamOutput!) {
+    query chart(
+        $systemIds: [String!]!
+        $inputFeatureConditions: [FeatureCondition!]!
+        $requestedOutputFeatureIds: [String!]
+        $stream: StreamOutput!
+    ) {
         systemElements(systemIds: $systemIds) {
             name
-            outputsStream(inputFeatureConditions: $inputFeatureConditions, requestedOutputFeatureIds: $requestedOutputFeatureIds, stream: $stream) {
+            outputsStream(
+                inputFeatureConditions: $inputFeatureConditions
+                requestedOutputFeatureIds: $requestedOutputFeatureIds
+                stream: $stream
+            ) {
                 outputFeatures {
                     id
                     name
@@ -55,7 +64,12 @@ const chartQuery = gql`
 `
 
 const formulaQuery = gql`
-    query formula($systemIds: [String!]!, $inputFeatureConditions: [FeatureCondition!]!, $featureId: String!, $formulaType: FormulaType!) {
+    query formula(
+        $systemIds: [String!]!
+        $inputFeatureConditions: [FeatureCondition!]!
+        $featureId: String!
+        $formulaType: FormulaType!
+    ) {
         systemElements(systemIds: $systemIds) {
             formula(featureId: $featureId, inputFeatureConditions: $inputFeatureConditions, formulaType: $formulaType)
         }
@@ -63,14 +77,13 @@ const formulaQuery = gql`
 `
 
 export enum FormulaType {
-    DEFAULT = "DEFAULT",
-    STEPS = "STEPS",
-    CALCULATED = "CALCULATED"
+    DEFAULT = 'DEFAULT',
+    STEPS = 'STEPS',
+    CALCULATED = 'CALCULATED'
 }
 
 @Injectable()
 export class BackendService {
-
     constructor(private translateService: TranslateService, private http: HttpClient, private apollo: Apollo) {
         Logger.i(this, 'API URL [' + environment.apiUrl + ']')
     }
@@ -133,7 +146,12 @@ export class BackendService {
         })
     }
 
-    public getFormula(values: [any], systemId: string, featureId: string, formulaType: string): Observable<ApolloQueryResult<any>> {
+    public getFormula(
+        values: [any],
+        systemId: string,
+        featureId: string,
+        formulaType: string
+    ): Observable<ApolloQueryResult<any>> {
         Logger.i(this, 'GraphQL', 'Formula')
         return this.apollo.query({
             query: formulaQuery,

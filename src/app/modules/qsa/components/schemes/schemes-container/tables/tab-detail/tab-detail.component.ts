@@ -7,6 +7,7 @@ import { SystemFeature } from '../../../../../model/system/system.feature'
 import { SystemViewService } from '../../../../../services/system.view.service'
 import { SystemView } from '../../../../../model/system/system.view'
 import { TableView } from '../../../../../model/table/table.view'
+import { InputGroup } from 'src/app/modules/qsa/model/system/input-group.enum'
 
 @Component({
     selector: 'tab-detail-component',
@@ -39,11 +40,15 @@ export class TabDetailComponent implements OnInit {
     }
 
     public getRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.required === 'true')
+        return this.getSystemViewInputs().filter(
+            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_REQUIRED
+        )
     }
 
     public getNonRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.required === 'false')
+        return this.getSystemViewInputs().filter(
+            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_OPTIONAL
+        )
     }
 
     public getSystemInputForm(): FormGroup {
