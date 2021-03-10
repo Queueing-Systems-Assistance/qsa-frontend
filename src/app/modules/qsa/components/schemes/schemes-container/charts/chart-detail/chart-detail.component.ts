@@ -9,6 +9,7 @@ import { SystemViewService } from '../../../../../services/system.view.service'
 import { SystemView } from '../../../../../model/system/system.view'
 import { ChartFigureComponent } from '../chart-figure/chart-figure.component'
 import { ChartData } from '../../../../../model/chart/chart.data'
+import { InputGroup } from 'src/app/modules/qsa/model/system/input-group.enum'
 
 @Component({
     selector: 'chart-detail-component',
@@ -106,11 +107,15 @@ export class ChartDetailComponent implements OnInit {
     }
 
     public getRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter(systemViewInput => systemViewInput.required === 'true')
+        return this.createFixSystemInputs().filter(
+            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_REQUIRED
+        )
     }
 
     public getNonRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter(systemViewInput => systemViewInput.required === 'false')
+        return this.createFixSystemInputs().filter(
+            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_OPTIONAL
+        )
     }
 
     public getSelectedSystemFeature(): SystemFeature {
