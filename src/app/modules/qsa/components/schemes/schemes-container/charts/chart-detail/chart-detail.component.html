@@ -113,27 +113,53 @@
                         </div>
                         <div *ngIf="isXAxisSelected()" class="col col-12">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yAxisGridEnabled" [checked]="yAxisGridEnabled" (change)="toggleYAxisGrid()">
-                                <label class="custom-control-label" for="yAxisGridEnabled">{{ 'YAxisGridLineWidth' | translate}}</label>
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    id="yAxisGridEnabled"
+                                    [checked]="yAxisGridEnabled"
+                                    (change)="toggleYAxisGrid()"
+                                />
+                                <label class="custom-control-label" for="yAxisGridEnabled">{{
+                                    'YAxisGridLineWidth' | translate
+                                }}</label>
                             </div>
                         </div>
                         <hr *ngIf="isXAxisSelected()" class="mb-4" />
                         <div *ngIf="isXAxisSelected()" class="row" formGroupName="{{ getSystemViewId() }}">
-                            <div *ngIf="getRequiredFixSystemInputs().length" class="col-md-6">
+                            <div
+                                *ngIf="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_REQUIRED).length"
+                                class="col-md-6"
+                            >
                                 <system-input-component
-                                    [systemFeatures]="getRequiredFixSystemInputs()"
+                                    [systemFeatures]="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_REQUIRED)"
                                     [systemInputFormName]="getSystemViewId()"
                                     [systemInputForm]="getSystemInputsForm()"
                                     [systemInputsTitle]="'requiredParameters' | translate"
                                 >
                                 </system-input-component>
                             </div>
-                            <div *ngIf="getNonRequiredFixSystemInputs().length" class="col-md-6">
+                            <div
+                                *ngIf="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_OPTIONAL).length"
+                                class="col-md-6"
+                            >
                                 <system-input-component
-                                    [systemFeatures]="getNonRequiredFixSystemInputs()"
+                                    [systemFeatures]="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_OPTIONAL)"
                                     [systemInputFormName]="getSystemViewId()"
                                     [systemInputForm]="getSystemInputsForm()"
                                     [systemInputsTitle]="'nonRequiredParameters' | translate"
+                                >
+                                </system-input-component>
+                            </div>
+                            <div
+                                *ngIf="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_COST).length"
+                                class="col-md-6 offset-md-6"
+                            >
+                                <system-input-component
+                                    [systemFeatures]="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_COST)"
+                                    [systemInputFormName]="getSystemViewId()"
+                                    [systemInputForm]="getSystemInputsForm()"
+                                    [systemInputsTitle]="'costParameters' | translate"
                                 >
                                 </system-input-component>
                             </div>

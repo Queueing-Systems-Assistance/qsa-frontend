@@ -70,6 +70,7 @@
     "copiedToClipboard": "Vágólapra másolva",
     "nonRequiredParameters": "Nem kötelező paraméterek",
     "requiredParameters": "Kötelező paraméterek",
+    "costParameters": "Költségfüggvény paraméterei",
     "email": "Email",
     "noXAxisValueSelected": "Nincs X tengely érték megadva",
     "fromXAxisDescription": "X tengely kezdő pontja",

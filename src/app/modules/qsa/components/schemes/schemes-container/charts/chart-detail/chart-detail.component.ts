@@ -18,6 +18,7 @@ import { InputGroup } from 'src/app/modules/qsa/model/system/input-group.enum'
 export class ChartDetailComponent implements OnInit {
     @ViewChild(ChartFigureComponent) chartFigure: ChartFigureComponent
 
+    public InputGroupEnum = InputGroup
     currentTab: number
     yAxisGridEnabled = true
 
@@ -106,16 +107,8 @@ export class ChartDetailComponent implements OnInit {
         return featureId && this.chartsService.getSystemInputsForm(this.currentTab).value[this.getSystemViewId()]
     }
 
-    public getRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter(
-            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_REQUIRED
-        )
-    }
-
-    public getNonRequiredFixSystemInputs(): SystemFeature[] {
-        return this.createFixSystemInputs().filter(
-            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_OPTIONAL
-        )
+    public getFixSystemInputs(inputGroup: InputGroup): SystemFeature[] {
+        return this.createFixSystemInputs().filter(systemViewInput => systemViewInput.inputGroup === inputGroup)
     }
 
     public getSelectedSystemFeature(): SystemFeature {

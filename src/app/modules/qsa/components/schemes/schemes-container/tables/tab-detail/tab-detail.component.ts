@@ -14,6 +14,7 @@ import { InputGroup } from 'src/app/modules/qsa/model/system/input-group.enum'
     templateUrl: './tab-detail.component.html'
 })
 export class TabDetailComponent implements OnInit {
+    public InputGroupEnum = InputGroup
     private currentTab: number
 
     constructor(
@@ -39,16 +40,8 @@ export class TabDetailComponent implements OnInit {
         return this.tablesService.getSystemViewInputs(this.currentTab)
     }
 
-    public getRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(
-            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_REQUIRED
-        )
-    }
-
-    public getNonRequiredSystemViewInputs(): SystemFeature[] {
-        return this.getSystemViewInputs().filter(
-            systemViewInput => systemViewInput.inputGroup === InputGroup.INPUT_GROUP_OPTIONAL
-        )
+    public getSystemViewInputsByGroup(inputGroup: InputGroup): SystemFeature[] {
+        return this.getSystemViewInputs().filter(systemViewInput => systemViewInput.inputGroup === inputGroup)
     }
 
     public getSystemInputForm(): FormGroup {
