@@ -70,6 +70,7 @@
     "copiedToClipboard": "Copied to clipboard",
     "nonRequiredParameters": "Non-required parameters",
     "requiredParameters": "Required parameters",
+    "costParameters": "Parameters of the cost function",
     "email": "Email",
     "noXAxisValueSelected": "No X axis value selected",
     "fromXAxisDescription": "X axis starting point",

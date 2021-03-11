@@ -34,19 +34,40 @@
                     <form *ngIf="getSystemViewInputs() && getSystemInputForm()" [formGroup]="getSystemInputForm()">
                         <div class="col-md-12">
                             <div class="row">
-                                <div *ngIf="getRequiredSystemViewInputs().length" class="col-md-6">
+                                <div
+                                    *ngIf="getSystemViewInputsByGroup(InputGroupEnum.INPUT_GROUP_REQUIRED).length"
+                                    class="col-md-6"
+                                >
                                     <system-input-component
-                                        [systemFeatures]="getRequiredSystemViewInputs()"
+                                        [systemFeatures]="
+                                            getSystemViewInputsByGroup(InputGroupEnum.INPUT_GROUP_REQUIRED)
+                                        "
                                         [systemInputForm]="getSystemInputForm()"
                                         [systemInputsTitle]="'requiredParameters' | translate"
                                     >
                                     </system-input-component>
                                 </div>
-                                <div *ngIf="getNonRequiredSystemViewInputs().length" class="col-md-6">
+                                <div
+                                    *ngIf="getSystemViewInputsByGroup(InputGroupEnum.INPUT_GROUP_OPTIONAL).length"
+                                    class="col-md-6"
+                                >
                                     <system-input-component
-                                        [systemFeatures]="getNonRequiredSystemViewInputs()"
+                                        [systemFeatures]="
+                                            getSystemViewInputsByGroup(InputGroupEnum.INPUT_GROUP_OPTIONAL)
+                                        "
                                         [systemInputForm]="getSystemInputForm()"
                                         [systemInputsTitle]="'nonRequiredParameters' | translate"
+                                    >
+                                    </system-input-component>
+                                </div>
+                                <div
+                                    *ngIf="getSystemViewInputsByGroup(InputGroupEnum.INPUT_GROUP_COST).length"
+                                    class="col-md-6 offset-md-6"
+                                >
+                                    <system-input-component
+                                        [systemFeatures]="getSystemViewInputsByGroup(InputGroupEnum.INPUT_GROUP_COST)"
+                                        [systemInputForm]="getSystemInputForm()"
+                                        [systemInputsTitle]="'costParameters' | translate"
                                     >
                                     </system-input-component>
                                 </div>
@@ -67,10 +88,12 @@
     </div>
     <div *ngIf="getSystemTableView()" class="row mt-3 mb-5">
         <div class="col-12">
-            <tab-table-component [systemTableView]="getSystemTableView()"
-                                 [systemView]="getSystemView()"
-                                 [systemInputs]="getSystemInputForm().value"
-                                 [systemViewInputs]="getSystemViewInputs()">
+            <tab-table-component
+                [systemTableView]="getSystemTableView()"
+                [systemView]="getSystemView()"
+                [systemInputs]="getSystemInputForm().value"
+                [systemViewInputs]="getSystemViewInputs()"
+            >
             </tab-table-component>
         </div>
     </div>
