@@ -1,9 +1,33 @@
-import { Component } from '@angular/core'
+import { Component, ElementRef, ViewChild } from '@angular/core'
 import * as Highcharts from 'highcharts/highstock'
 import { ChartData } from '../../../../../model/chart/chart.data'
 import { Logger } from '../../../../../services/logger'
 import { SeriesOptionsType } from 'highcharts'
 import { NumberService } from 'src/app/modules/qsa/services/number.service'
+import HC_exporting from 'highcharts/modules/exporting'
+import HC_exportData from 'highcharts/modules/export-data'
+import customWrap from '../chart-wrapper'
+
+HC_exporting(Highcharts)
+HC_exportData(Highcharts)
+customWrap(Highcharts)
+
+function getSymbol(symbol) {
+    switch (symbol) {
+        case 'circle':
+            return '●'
+        case 'diamond':
+            return '♦'
+        case 'square':
+            return '■'
+        case 'triangle':
+            return '▲'
+        case 'triangle-down':
+            return '▼'
+        default:
+            return ''
+    }
+}
 
 @Component({
     selector: 'chart-figure-component',
@@ -12,17 +36,26 @@ import { NumberService } from 'src/app/modules/qsa/services/number.service'
 export class ChartFigureComponent {
     constructor(private numberService: NumberService) {}
 
+    @ViewChild('chartWrapperContainer') chartWrapperContainer: ElementRef
+
     Highcharts = Highcharts
     chartOptions: Highcharts.Options
+    checkx = []
+    clone = []
 
     public removeChart(): void {
         this.chartOptions = undefined
     }
 
     public createChart(xAxisName: string, value: ChartData, yAxisGridEnabled: boolean): void {
+        const numberService = this.numberService
+        const checkx = this.checkx
+        const clone = this.clone
         this.chartOptions = {
             exporting: {
-                enabled: true
+                enabled: true,
+                allowHTML: true,
+                sourceWidth: this.chartWrapperContainer.nativeElement.offsetWidth
             },
             credits: {
                 enabled: false
@@ -34,62 +67,107 @@ export class ChartFigureComponent {
             legend: {
                 layout: 'vertical',
                 align: 'right',
+                margin: 12,
                 verticalAlign: 'middle',
                 useHTML: true,
                 enabled: true
             },
             tooltip: {
-                formatter: function () {
+                formatter() {
                     let tooltip = ''
                     this.points.forEach(function (yAxis) {
+                        const symbol = getSymbol((yAxis.series as any).symbol)
                         tooltip +=
-                            '<strong>' +
+                            '<span style="color:' +
+                            (yAxis.series as any).color +
+                            '">' +
+                            symbol +
+                            '&nbsp;</span><strong>' +
                             yAxis.series.name +
                             ':</strong> ' +
-                            yAxis.y.toFixed(3).replace(/\.?0*$/, '') +
+                            numberService.getSimplestForm('' + yAxis.y) +
                             '<br/>'
                     })
                     tooltip +=
-                        '<br><strong>' + xAxisName + ':</strong> ' + this.points[0].x.toFixed(3).replace(/\.?0*$/, '')
+                        '<br/><strong>' +
+                        xAxisName +
+                        ':</strong> ' +
+                        numberService.getSimplestForm('' + this.points[0].x)
                     return tooltip
                 },
                 shared: true,
+                split: false,
                 useHTML: true,
-                shape: 'square'
+                shape: 'square',
+                borderRadius: 3,
+                borderColor: 'gray',
+                backgroundColor: 'white'
+            },
+            scrollbar: {
+                enabled: false
             },
             navigator: {
                 enabled: true,
+                margin: 25,
                 xAxis: {
                     type: 'category',
                     labels: {
-                        formatter: function () {
-                            return this.value.toFixed(3).replace(/\.?0*$/, '') + '<br/>'
+                        formatter() {
+                            return numberService.getSimplestForm('' + this.value) + '<br/>'
                         }
-                    }
+                    },
+                    startOnTick: true,
+                    endOnTick: true,
+                    gridLineWidth: 1
                 }
             },
             yAxis: {
                 opposite: false,
-                title: {
-                    text: null
-                },
                 gridLineWidth: yAxisGridEnabled ? 1 : 0
             },
-            title: {
-                text: value.systemElement.name
-            },
             xAxis: {
+                gridLineWidth: 1,
+                tickWidth: 0,
+                startOnTick: true,
+                endOnTick: true,
                 type: 'category',
-                title: {
-                    enabled: 'true',
-                    text: xAxisName,
-                    style: {
-                        fontWeight: 'normal'
-                    }
-                },
                 labels: {
                     formatter: function () {
-                        return this.value.toFixed(3).replace(/\.?0*$/, '') + '<br/>'
+                        return numberService.getSimplestForm('' + this.value) + '<br/>'
+                    }
+                },
+                crosshair: true
+            },
+            plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function (event) {
+                                const x = checkx.indexOf(event.point.x)
+                                if (x >= 0) {
+                                    $(clone[x]).remove()
+                                    clone.splice(x, 1)
+                                    checkx.splice(x, 1)
+                                } else {
+                                    const cloneDiv = (this.series.chart.tooltip as any).label.div.cloneNode(true)
+                                    $(cloneDiv).addClass('highcharts-tooltip-for-export')
+                                    this.series.chart.container.appendChild(cloneDiv)
+                                    $.each($('.highcharts-tooltip-for-export > span'), function (i, span) {
+                                        $(span).css({
+                                            padding: '5px',
+                                            border: '1px solid #3DACD9',
+                                            'box-shadow': '2px 2px 2px #888888',
+                                            'z-index': '9999 !important',
+                                            'background-color': 'white',
+                                            'border-color': 'gray'
+                                        })
+                                    })
+                                    checkx.push(event.point.x)
+                                    clone.push(cloneDiv)
+                                }
+                            }
+                        }
                     }
                 }
             },
