@@ -128,6 +128,7 @@
     "noCalculationAvailable": "Currently there are no calculations available for this system feature",
     "hunFlag": "Hungarian flag",
     "YAxisGridLineWidth": "Y axis grid",
+    "XAxisGridLineWidth": "X axis grid",
     "inputsOfSystemExport": "Input parameters",
     "outputsOfSystemExport": "Output parameters"
 }

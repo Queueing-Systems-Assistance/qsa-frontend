@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core'
 import * as Highcharts from 'highcharts/highstock'
 import { ChartData } from '../../../../../model/chart/chart.data'
 import { Logger } from '../../../../../services/logger'
-import { SeriesOptionsType } from 'highcharts'
+import { PointClickEventObject, SeriesOptionsType } from 'highcharts'
 import { NumberService } from 'src/app/modules/qsa/services/number.service'
 import HC_exporting from 'highcharts/modules/exporting'
 import HC_exportData from 'highcharts/modules/export-data'
@@ -47,10 +47,16 @@ export class ChartFigureComponent {
         this.chartOptions = undefined
     }
 
-    public createChart(xAxisName: string, value: ChartData, yAxisGridEnabled: boolean): void {
+    public createChart(
+        xAxisName: string,
+        value: ChartData,
+        yAxisGridEnabled: boolean,
+        xAxisGridEnabled: boolean
+    ): void {
         const numberService = this.numberService
         const checkx = this.checkx
         const clone = this.clone
+        const addMarker = this.addMarker
         this.chartOptions = {
             exporting: {
                 enabled: true,
@@ -67,10 +73,13 @@ export class ChartFigureComponent {
             legend: {
                 layout: 'vertical',
                 align: 'right',
-                margin: 12,
+                margin: 16,
                 verticalAlign: 'middle',
                 useHTML: true,
                 enabled: true
+            },
+            title: {
+                text: value.systemElement.name
             },
             tooltip: {
                 formatter() {
@@ -126,29 +135,63 @@ export class ChartFigureComponent {
                 gridLineWidth: yAxisGridEnabled ? 1 : 0
             },
             xAxis: {
-                gridLineWidth: 1,
+                gridLineWidth: xAxisGridEnabled ? 1 : 0,
                 tickWidth: 0,
                 startOnTick: true,
                 endOnTick: true,
                 type: 'category',
+                title: {
+                    enabled: 'true',
+                    text: xAxisName,
+                    style: {
+                        fontWeight: 'normal'
+                    }
+                },
                 labels: {
                     formatter: function () {
                         return numberService.getSimplestForm('' + this.value) + '<br/>'
                     }
                 },
-                crosshair: true
+                crosshair: {
+                    color: 'black',
+                    width: 1
+                }
             },
             plotOptions: {
                 series: {
+                    navigatorOptions: {
+                        marker: {
+                            enabled: false,
+                            states: {
+                                select: {
+                                    enabled: false
+                                }
+                            }
+                        }
+                    },
+                    marker: {
+                        enabled: true,
+                        states: {
+                            select: {
+                                enabled: true,
+                                lineColor: undefined,
+                                fillColor: undefined,
+                                lineWidth: 1,
+                                radius: 5
+                            }
+                        }
+                    },
                     cursor: 'pointer',
                     point: {
                         events: {
                             click: function (event) {
-                                const x = checkx.indexOf(event.point.x)
-                                if (x >= 0) {
-                                    $(clone[x]).remove()
-                                    clone.splice(x, 1)
-                                    checkx.splice(x, 1)
+                                const tooltip = checkx.indexOf(event.point.x)
+                                if (tooltip >= 0) {
+                                    $(clone[tooltip]).remove()
+                                    clone.splice(tooltip, 1)
+                                    checkx.splice(tooltip, 1)
+                                    event.point.series.xAxis.removePlotLine('highcharts-plot-line-' + event.point.x)
+                                    addMarker(event, this.series, false)
                                 } else {
                                     const cloneDiv = (this.series.chart.tooltip as any).label.div.cloneNode(true)
                                     $(cloneDiv).addClass('highcharts-tooltip-for-export')
@@ -163,8 +206,16 @@ export class ChartFigureComponent {
                                             'border-color': 'gray'
                                         })
                                     })
+                                    event.point.series.xAxis.addPlotLine({
+                                        value: event.point.x,
+                                        color: 'black',
+                                        zIndex: 1,
+                                        width: 1,
+                                        id: 'highcharts-plot-line-' + event.point.x
+                                    })
                                     checkx.push(event.point.x)
                                     clone.push(cloneDiv)
+                                    addMarker(event, this.series, true)
                                 }
                             }
                         }
@@ -173,6 +224,20 @@ export class ChartFigureComponent {
             },
             series: this.createDataForChart(value)
         }
+    }
+
+    private addMarker(event: PointClickEventObject, series, shouldAdd: boolean): void {
+        series.chart.series
+            .filter(ser => ser.visible)
+            .filter(ser => (ser as any).navigatorSeries)
+            .forEach(function (ser) {
+                const point = ser.points[event.point.x - 1]
+                if (shouldAdd) {
+                    point.select(true, true)
+                } else {
+                    point.select(false)
+                }
+            })
     }
 
     public getNumValue(value: string): number {
@@ -185,7 +250,10 @@ export class ChartFigureComponent {
         chartData.systemOutputs.forEach(systemFeatureValue => {
             const datas = []
             chartData.labels.forEach((label, index) => {
-                datas.push([label, this.getNumValue(systemFeatureValue.values[index])])
+                datas.push({
+                    x: label,
+                    y: this.getNumValue(systemFeatureValue.values[index])
+                })
             })
             datasets.push({
                 name: systemFeatureValue.name,

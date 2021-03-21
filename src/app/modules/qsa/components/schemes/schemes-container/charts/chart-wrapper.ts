@@ -13,7 +13,7 @@ export default function (Highcharts) {
             })
         })
         $.each($('.highcharts-tooltip-for-export'), function (i, t) {
-            ret += t.outerHTML.split('&nbsp').join(' ').split('<br>').join('<br/>')
+            ret += t.outerHTML.split('&nbsp;').join(' ').split('<br>').join('<br/>')
         })
         return ret
     })
