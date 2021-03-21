@@ -1,9 +1,13 @@
-<highcharts-chart
-    *ngIf="chartOptions"
-    class="shadow-sm"
-    style="width: 100%; display: block;"
-    [Highcharts]="Highcharts"
-    [constructorType]="'stockChart'"
-    [options]="chartOptions"
->
-</highcharts-chart>
+<div style="width: 100%; display: block;">
+    <div style="width: 100%; display: block;" #chartWrapperContainer></div>
+    <highcharts-chart
+            *ngIf="chartOptions"
+            class="shadow-sm"
+            id="chartContainer"
+            style="width: 100%; display: block;"
+            [Highcharts]="Highcharts"
+            [constructorType]="'stockChart'"
+            [options]="chartOptions"
+    >
+    </highcharts-chart>
+</div>

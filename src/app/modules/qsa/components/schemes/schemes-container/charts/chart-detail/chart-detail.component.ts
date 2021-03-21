@@ -21,6 +21,7 @@ export class ChartDetailComponent implements OnInit {
     public InputGroupEnum = InputGroup
     currentTab: number
     yAxisGridEnabled = true
+    xAxisGridEnabled = true
 
     constructor(
         private route: ActivatedRoute,
@@ -31,6 +32,10 @@ export class ChartDetailComponent implements OnInit {
 
     public toggleYAxisGrid(): void {
         this.yAxisGridEnabled = !this.yAxisGridEnabled
+    }
+
+    public toggleXAxisGrid(): void {
+        this.xAxisGridEnabled = !this.xAxisGridEnabled
     }
 
     public ngOnInit(): void {
@@ -140,7 +145,7 @@ export class ChartDetailComponent implements OnInit {
         chartData.labels = value.outputsStream.stream
         chartData.systemOutputs = value.outputsStream.outputFeatures
         this.chartsService.addChartData(this.currentTab, chartData)
-        this.chartFigure.createChart(this.getXAxisName(), chartData, this.yAxisGridEnabled)
+        this.chartFigure.createChart(this.getXAxisName(), chartData, this.yAxisGridEnabled, this.xAxisGridEnabled)
     }
 
     private subscribeRouteChanging(): void {
@@ -162,7 +167,12 @@ export class ChartDetailComponent implements OnInit {
             const currentTab = this.currentTab
             setTimeout(() => {
                 if (currentTab === this.currentTab) {
-                    this.chartFigure.createChart(this.getXAxisName(), chart, this.yAxisGridEnabled)
+                    this.chartFigure.createChart(
+                        this.getXAxisName(),
+                        chart,
+                        this.yAxisGridEnabled,
+                        this.xAxisGridEnabled
+                    )
                 }
             }, 500)
         }
@@ -183,14 +193,6 @@ export class ChartDetailComponent implements OnInit {
         if ((!this.getSystemInputsForm() && this.getSystemViewInputs()) || newInputs) {
             this.createXAxisForms()
         }
-    }
-
-    private updateXAxisForms(): void {
-        this.getSystemInputsForm().controls['xAxis'].patchValue({
-            from: 0,
-            to: 0,
-            steps: 0
-        })
     }
 
     private createXAxisForms(): void {

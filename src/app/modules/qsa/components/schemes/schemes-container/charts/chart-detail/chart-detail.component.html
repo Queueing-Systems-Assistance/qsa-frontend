@@ -113,16 +113,20 @@
                         </div>
                         <div *ngIf="isXAxisSelected()" class="col col-12">
                             <div class="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    id="yAxisGridEnabled"
-                                    [checked]="yAxisGridEnabled"
-                                    (change)="toggleYAxisGrid()"
-                                />
-                                <label class="custom-control-label" for="yAxisGridEnabled">{{
-                                    'YAxisGridLineWidth' | translate
-                                }}</label>
+                                <input type="checkbox"
+                                       class="custom-control-input"
+                                       id="xAxisGridEnabled"
+                                       [checked]="xAxisGridEnabled"
+                                       (change)="toggleXAxisGrid()"/>
+                                <label class="custom-control-label" for="xAxisGridEnabled">{{'XAxisGridLineWidth' | translate}}</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox"
+                                       class="custom-control-input"
+                                       id="yAxisGridEnabled"
+                                       [checked]="yAxisGridEnabled"
+                                       (change)="toggleYAxisGrid()"/>
+                                <label class="custom-control-label" for="yAxisGridEnabled">{{'YAxisGridLineWidth' | translate}}</label>
                             </div>
                         </div>
                         <hr *ngIf="isXAxisSelected()" class="mb-4" />

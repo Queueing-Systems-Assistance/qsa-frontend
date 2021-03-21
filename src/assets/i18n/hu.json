@@ -127,6 +127,7 @@
     "noCalculationAvailable": "Ehhez a rendszerjellemzőhöz egyelőre nem érhetők el képletek",
     "hunFlag": "Magyar zászló",
     "YAxisGridLineWidth": "Y tengely koordinátavonalak",
+    "XAxisGridLineWidth": "X tengely koordinátavonalak",
     "inputsOfSystemExport": "Bemeneti paraméterek",
     "outputsOfSystemExport": "Kiemeneti paraméterek"
 }
