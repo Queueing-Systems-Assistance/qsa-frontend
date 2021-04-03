@@ -155,10 +155,7 @@
                                 >
                                 </system-input-component>
                             </div>
-                            <div
-                                *ngIf="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_COST).length"
-                                class="col-md-6 offset-md-6"
-                            >
+                            <div *ngIf="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_COST).length" class="col-md-6">
                                 <system-input-component
                                     [systemFeatures]="getFixSystemInputs(InputGroupEnum.INPUT_GROUP_COST)"
                                     [systemInputFormName]="getSystemViewId()"
