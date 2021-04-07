@@ -53,7 +53,6 @@ export class ChartFigureComponent {
         yAxisGridEnabled: boolean,
         xAxisGridEnabled: boolean
     ): void {
-        const numberService = this.numberService
         const checkx = this.checkx
         const clone = this.clone
         const addMarker = this.addMarker
@@ -94,14 +93,11 @@ export class ChartFigureComponent {
                             '&nbsp;</span><strong>' +
                             yAxis.series.name +
                             ':</strong> ' +
-                            numberService.getSimplestForm('' + yAxis.y) +
+                            yAxis.y.toFixed(3).replace(/\.?0*$/, '') +
                             '<br/>'
                     })
                     tooltip +=
-                        '<br/><strong>' +
-                        xAxisName +
-                        ':</strong> ' +
-                        numberService.getSimplestForm('' + this.points[0].x)
+                        '<br/><strong>' + xAxisName + ':</strong> ' + this.points[0].x.toFixed(3).replace(/\.?0*$/, '')
                     return tooltip
                 },
                 shared: true,
@@ -122,7 +118,7 @@ export class ChartFigureComponent {
                     type: 'category',
                     labels: {
                         formatter() {
-                            return numberService.getSimplestForm('' + this.value) + '<br/>'
+                            return this.value.toFixed(3).replace(/\.?0*$/, '') + '<br/>'
                         }
                     },
                     startOnTick: true,
@@ -149,7 +145,7 @@ export class ChartFigureComponent {
                 },
                 labels: {
                     formatter: function () {
-                        return numberService.getSimplestForm('' + this.value) + '<br/>'
+                        return this.value.toFixed(3).replace(/\.?0*$/, '') + '<br/>'
                     }
                 },
                 crosshair: {

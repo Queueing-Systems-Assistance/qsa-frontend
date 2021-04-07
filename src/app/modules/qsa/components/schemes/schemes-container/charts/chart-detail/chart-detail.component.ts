@@ -80,7 +80,7 @@ export class ChartDetailComponent implements OnInit {
         }
         this.backendService
             .getChart(formData, this.getSystemViewId(), values.xAxis.featureId)
-            .subscribe(value => this.updateChartView(value.data.systemElements[0]))
+            .subscribe(value => this.updateChartView(value.data.systemElements[0], formData.xAxis.steps))
     }
 
     public getSystemViews(): Array<SystemView> {
@@ -137,15 +137,20 @@ export class ChartDetailComponent implements OnInit {
         return this.chartsService.getSystemView(this.currentTab)
     }
 
-    private updateChartView(value): void {
-        const chartData = new ChartData()
-        const systemElement = new SystemView()
-        systemElement.name = value.name
-        chartData.systemElement = systemElement
-        chartData.labels = value.outputsStream.stream
-        chartData.systemOutputs = value.outputsStream.outputFeatures
-        this.chartsService.addChartData(this.currentTab, chartData)
-        this.chartFigure.createChart(this.getXAxisName(), chartData, this.yAxisGridEnabled, this.xAxisGridEnabled)
+    private updateChartView(value, steps): void {
+        this.chartFigure.removeChart()
+        // We have to remove the chart so that the chart will be redrawn completely (fix zooming issues)
+        setTimeout(() => {
+            const chartData = new ChartData()
+            const systemElement = new SystemView()
+            systemElement.name = value.name
+            chartData.systemElement = systemElement
+            chartData.labels = value.outputsStream.stream
+            chartData.systemOutputs = value.outputsStream.outputFeatures
+            chartData.steps = steps
+            this.chartsService.addChartData(this.currentTab, chartData)
+            this.chartFigure.createChart(this.getXAxisName(), chartData, this.yAxisGridEnabled, this.xAxisGridEnabled)
+        }, 500)
     }
 
     private subscribeRouteChanging(): void {
@@ -167,6 +172,7 @@ export class ChartDetailComponent implements OnInit {
             const currentTab = this.currentTab
             setTimeout(() => {
                 if (currentTab === this.currentTab) {
+                    this.chartFigure.removeChart()
                     this.chartFigure.createChart(
                         this.getXAxisName(),
                         chart,

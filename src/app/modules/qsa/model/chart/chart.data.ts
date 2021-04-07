@@ -5,4 +5,5 @@ export class ChartData {
     systemElement: SystemView
     labels: Array<number>
     systemOutputs: Array<SystemFeatureValue>
+    steps: number
 }
