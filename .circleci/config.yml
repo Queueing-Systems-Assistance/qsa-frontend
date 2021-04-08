@@ -38,14 +38,10 @@ jobs:
           command: |
             npm ci
       - run:
-          name: Run E2E tests
-          command: |
-            npm run e2eCI
-      - setup_remote_docker
-      - run:
           name: Build
           command: |
             npm run buildProd
+      - setup_remote_docker
       - run:
           name: Docker
           command: |
@@ -62,12 +58,38 @@ jobs:
             git config --global user.name "Circle CI"
             git tag -a -f "${RELEASE_VERSION}" -m "${RELEASE_VERSION}"
             git push -f "https://${GITHUB_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" refs/tags/"${RELEASE_VERSION}"
-
+  cypress:
+    docker:
+      - image: cypress/browsers:node12.18.3-chrome89-ff86
+        auth:
+          username: $DOCKER_HUB_USERNAME
+          password: $DOCKER_HUB_PASSWORD
+    steps:
+      - checkout
+      - set_local_environment
+      - run:
+          name: Install NPM packages
+          command: |
+            npm ci
+      - run:
+          name: Run E2E tests
+          command: |
+            npm run e2eCI
 workflows:
   version: 2
   workflow:
     jobs:
+      - cypress:
+          context:
+            - Secrets
+          filters:
+            branches:
+              only:
+                - /^master/
+                - /^feature\/QSA-[0-9]+/
       - build:
+          requires:
+            - cypress
           context:
             - Secrets
           filters:
