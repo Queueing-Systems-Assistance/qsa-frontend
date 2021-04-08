@@ -41,11 +41,11 @@ jobs:
           name: Run E2E tests
           command: |
             npm run e2eCI
-      - setup_remote_docker
       - run:
           name: Build
           command: |
             npm run buildProd
+      - setup_remote_docker
       - run:
           name: Docker
           command: |
