@@ -130,5 +130,6 @@
     "YAxisGridLineWidth": "Y axis grid",
     "XAxisGridLineWidth": "X axis grid",
     "inputsOfSystemExport": "Input parameters",
-    "outputsOfSystemExport": "Output parameters"
+    "outputsOfSystemExport": "Output parameters",
+    "integerValidationError": "must be an integer"
 }

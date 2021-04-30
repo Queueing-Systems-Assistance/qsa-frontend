@@ -66,6 +66,7 @@
         "istanbul-instrumenter-loader": "^3.0.1",
         "istanbul-lib-coverage": "^2.0.5",
         "ngx-build-plus": "^7.8.3",
+        "node-sass": "^4.0.0",
         "nyc": "^15.1.0",
         "prettier": "^2.0.5",
         "prettier-eslint": "^11.0.0",

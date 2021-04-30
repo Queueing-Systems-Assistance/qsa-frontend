@@ -129,5 +129,6 @@
     "YAxisGridLineWidth": "Y tengely koordinátavonalak",
     "XAxisGridLineWidth": "X tengely koordinátavonalak",
     "inputsOfSystemExport": "Bemeneti paraméterek",
-    "outputsOfSystemExport": "Kiemeneti paraméterek"
+    "outputsOfSystemExport": "Kiemeneti paraméterek",
+    "integerValidationError": "értéke egész szám kell legyen"
 }
