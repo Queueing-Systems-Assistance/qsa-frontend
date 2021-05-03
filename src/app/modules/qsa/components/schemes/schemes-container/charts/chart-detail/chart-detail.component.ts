@@ -10,6 +10,10 @@ import { SystemView } from '../../../../../model/system/system.view'
 import { ChartFigureComponent } from '../chart-figure/chart-figure.component'
 import { ChartData } from '../../../../../model/chart/chart.data'
 import { InputGroup } from 'src/app/modules/qsa/model/system/input-group.enum'
+import { TranslateService } from '@ngx-translate/core'
+import { NotificationService } from 'src/app/modules/qsa/services/notification.service'
+
+const TRUE_STRING = 'true'
 
 @Component({
     selector: 'chart-detail-component',
@@ -27,7 +31,9 @@ export class ChartDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private chartsService: ChartsService,
         private backendService: BackendService,
-        private systemViewService: SystemViewService
+        private systemViewService: SystemViewService,
+        private translateService: TranslateService,
+        private notificationService: NotificationService
     ) {}
 
     public toggleYAxisGrid(): void {
@@ -68,19 +74,46 @@ export class ChartDetailComponent implements OnInit {
         this.addDynamicInputForms(this.createDynamicInputForms())
     }
 
-    public calculateSystemFeatures(): void {
-        const values = this.getSystemInputsForm().value
-        const formData = {
-            features: values[this.getSystemViewId()],
-            xAxis: {
-                from: values.xAxis.from,
-                to: values.xAxis.to,
-                steps: values.xAxis.steps
+    public validateInput(): void {
+        const systemViewInputs = this.getSystemViewInputs()
+        const inputValues = this.getSystemInputsForm().value
+        Object.keys(inputValues[this.getSystemViewId()]).forEach(inputKey => {
+            const canBeFractional =
+                systemViewInputs.find(systemViewInput => systemViewInput.id === inputKey).typeFraction === TRUE_STRING
+            if (!canBeFractional && !Number.isInteger(inputValues[this.getSystemViewId()][inputKey])) {
+                throw new Error(`<b>${inputKey}</b> ${this.translateService.instant('integerValidationError')}`)
             }
+        })
+        const { featureId, ...stepDefs } = inputValues.xAxis
+        const xAxisCanBeFractional =
+            systemViewInputs.find(systemViewInput => systemViewInput.id === featureId).typeFraction === TRUE_STRING
+        if (!xAxisCanBeFractional) {
+            Object.keys(stepDefs).forEach(stepDefKey => {
+                if (!Number.isInteger(stepDefs[stepDefKey])) {
+                    throw new Error(`<b>${featureId}</b> ${this.translateService.instant('integerValidationError')}`)
+                }
+            })
         }
-        this.backendService
-            .getChart(formData, this.getSystemViewId(), values.xAxis.featureId)
-            .subscribe(value => this.updateChartView(value.data.systemElements[0], formData.xAxis.steps))
+    }
+
+    public calculateSystemFeatures(): void {
+        try {
+            this.validateInput()
+            const values = this.getSystemInputsForm().value
+            const formData = {
+                features: values[this.getSystemViewId()],
+                xAxis: {
+                    from: values.xAxis.from,
+                    to: values.xAxis.to,
+                    steps: values.xAxis.steps
+                }
+            }
+            this.backendService
+                .getChart(formData, this.getSystemViewId(), values.xAxis.featureId)
+                .subscribe(value => this.updateChartView(value.data.systemElements[0], formData.xAxis.steps))
+        } catch (error) {
+            this.notificationService.showToastError([{ errorMessage: error.message }])
+        }
     }
 
     public getSystemViews(): Array<SystemView> {

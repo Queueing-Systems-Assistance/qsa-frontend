@@ -8,6 +8,10 @@ import { SystemViewService } from '../../../../../services/system.view.service'
 import { SystemView } from '../../../../../model/system/system.view'
 import { TableView } from '../../../../../model/table/table.view'
 import { InputGroup } from 'src/app/modules/qsa/model/system/input-group.enum'
+import { TranslateService } from '@ngx-translate/core'
+import { NotificationService } from 'src/app/modules/qsa/services/notification.service'
+
+const TRUE_STRING = 'true'
 
 @Component({
     selector: 'tab-detail-component',
@@ -21,7 +25,9 @@ export class TabDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private tablesService: TablesService,
         private backendService: BackendService,
-        private systemViewService: SystemViewService
+        private systemViewService: SystemViewService,
+        private translateService: TranslateService,
+        private notificationService: NotificationService
     ) {}
 
     public ngOnInit(): void {
@@ -60,13 +66,30 @@ export class TabDetailComponent implements OnInit {
         return this.getSystemView().name
     }
 
-    public calculateSystemFeatures(): void {
-        this.backendService.getTable(this.getSystemInputForm().value, this.getSystemViewId()).subscribe(value => {
-            const tableView = new TableView()
-            tableView.systemOutputs = value.data.systemElements[0].outputs
-            tableView.systemView = this.getSystemView()
-            return this.tablesService.addTableView(this.currentTab, tableView)
+    public validateInput(): void {
+        const systemViewInputs = this.getSystemViewInputs()
+        const inputValues = this.getSystemInputForm().value
+        Object.keys(inputValues).forEach(inputKey => {
+            const canBeFractional =
+                systemViewInputs.find(systemViewInput => systemViewInput.id === inputKey).typeFraction === TRUE_STRING
+            if (!canBeFractional && !Number.isInteger(inputValues[inputKey])) {
+                throw new Error(`<b>${inputKey}</b> ${this.translateService.instant('integerValidationError')}`)
+            }
         })
+    }
+
+    public calculateSystemFeatures(): void {
+        try {
+            this.validateInput()
+            this.backendService.getTable(this.getSystemInputForm().value, this.getSystemViewId()).subscribe(value => {
+                const tableView = new TableView()
+                tableView.systemOutputs = value.data.systemElements[0].outputs
+                tableView.systemView = this.getSystemView()
+                return this.tablesService.addTableView(this.currentTab, tableView)
+            })
+        } catch (error) {
+            this.notificationService.showToastError([{ errorMessage: error.message }])
+        }
     }
 
     public getSystemInputLayouts(id: string): void {

@@ -35,15 +35,15 @@ export class CalculationModal implements OnInit {
 
     ngOnInit(): void {
         Logger.i(this, `featureId: ${this.featureId}, systemId: ${this.systemId}`)
-        this.getFormula(FormulaType.DEFAULT).subscribe(formula => this.generalFormula = formula)
+        this.getFormula(FormulaType.DEFAULT).subscribe(formula => (this.generalFormula = formula))
         this.getFormula(FormulaType.STEPS).subscribe(
-            formula => this.calculationSteps = formula.split("<br>"),
-            () => this.calculationSteps = []
+            formula => (this.calculationSteps = formula.split('<br>')),
+            () => (this.calculationSteps = [])
         )
         if (this.isResultValid()) {
             this.getFormula(FormulaType.CALCULATED).subscribe(
-                formula => this.finalStep = this.createFinalStep(formula),
-                () => this.finalStep = this.createFinalError()
+                formula => (this.finalStep = this.createFinalStep(formula)),
+                () => (this.finalStep = this.createFinalError())
             )
         } else {
             this.finalStep = this.createFinalError()
@@ -79,7 +79,8 @@ export class CalculationModal implements OnInit {
     }
 
     private getFormula(type: FormulaType): Observable<string> {
-        return this.backendService.getFormula(this.inputFeatures, this.systemId, this.featureId, type)
+        return this.backendService
+            .getFormula(this.inputFeatures, this.systemId, this.featureId, type)
             .pipe(map(data => data.data.systemElements[0].formula))
     }
 }
