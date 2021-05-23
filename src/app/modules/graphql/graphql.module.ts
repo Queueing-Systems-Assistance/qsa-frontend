@@ -16,6 +16,7 @@ function filterErrors(graphQLErrors: ReadonlyArray<GraphQLError>) {
         .map(err => err.extensions)
         .flatMap(ext =>
             Object.keys(ext)
+                .filter(key => Array.isArray(ext[key]))
                 .map(key => ext[key][0])
                 .slice()
         )
