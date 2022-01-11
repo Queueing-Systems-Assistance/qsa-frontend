@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  jira: circleci/jira@1.3.0
+  jira: circleci/jira@1.3.1
 
 commands:
   set_local_environment:
@@ -20,6 +20,69 @@ commands:
             echo "RELEASE_VERSION" "${RELEASE_VERSION}"
             echo "export BRANCH_NAME=${BRANCH_NAME}" >> "$BASH_ENV"
             echo "export RELEASE_VERSION=${RELEASE_VERSION}" >> "$BASH_ENV"
+            mkdir -p envs 
+            echo "${RELEASE_VERSION}" > envs/release-version
+  deploy:
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Environment Setup
+          command: |
+            RELEASE_VERSION=$(cat envs/release-version)
+            echo "export RELEASE_VERSION=${RELEASE_VERSION}" >> "$BASH_ENV"
+            
+            echo "export CONTAINER_NAME=${QSA_ENVIRONMENT}-qsa-frontend" >> "$BASH_ENV"
+            echo "export IMAGE_NAME=docker.pkg.github.com/queueing-systems-assistance/qsa-frontend/qsa-frontend" >> "$BASH_ENV"
+
+      - run:
+          name: Pull Image
+          command: |
+            curl --request POST \
+              --url "${ENDPOINT}/images/create?fromImage=${IMAGE_NAME}&tag=${RELEASE_VERSION}" \
+              --header "X-API-Key: ${PTR_TOKEN}" \
+              --header "X-Registry-Auth: ${DCR_TOKEN}" \
+              --header "${HEADER_CONTENT_TYPE}" \
+              --fail \
+              --show-error
+      - run:
+          name: Stop Container
+          command: |
+            curl --request POST \
+              --url "${ENDPOINT}/containers/${CONTAINER_NAME}/stop" \
+              --header "X-API-Key: ${PTR_TOKEN}" \
+              --header "${HEADER_CONTENT_TYPE}"
+      - run:
+          name: Remove Container
+          command: |
+            curl --request DELETE \
+              --url "${ENDPOINT}/containers/${CONTAINER_NAME}" \
+              --header "X-API-Key: ${PTR_TOKEN}" \
+              --header "${HEADER_CONTENT_TYPE}"
+      - run:
+          name: Create Container
+          command: |
+            UPDATED_ENV_NAME=$(echo "${QSA_ENVIRONMENT}" | tr :a-z :A-Z:)
+            BASE_HREF_NAME=BASE_HREF_$UPDATED_ENV_NAME
+            BASE_API_URL_NAME=BASE_API_URL_$UPDATED_ENV_NAME
+            ADDITIONAL_CONFIG="{\"HostConfig\":{\"RestartPolicy\":{\"Name\":\"always\"}},\"Env\":[\"BASE_HREF=${!BASE_HREF_NAME}\",\"BASE_API_URL\"=${!BASE_API_URL_NAME}\"],\"Image\":\"${IMAGE_NAME}:${RELEASE_VERSION}\",\"NetworkingConfig\":{\"EndpointsConfig\":{\"${NETWORK}\":{\"IPAMConfig\":{\"IPv4Address\":\"${!IP_ADDRESS_NAME}\"}}}}}"
+            curl --request POST \
+              --url "${ENDPOINT}/containers/create?name=${CONTAINER_NAME}" \
+              --header "X-API-Key: ${PTR_TOKEN}" \
+              --header "${HEADER_CONTENT_TYPE}" \
+              --data "${ADDITIONAL_CONFIG}" \
+              --fail \
+              --show-error
+      - run:
+          name: Start Container
+          command: |
+            curl --request POST \
+              --url "${ENDPOINT}/containers/${CONTAINER_NAME}/start" \
+              --header "X-API-Key: ${PTR_TOKEN}" \
+              --header "${HEADER_CONTENT_TYPE}" \
+              --data " " \
+              --fail \
+              --show-error
 jobs:
   build:
     environment:
@@ -51,6 +114,10 @@ jobs:
               --build-arg RELEASE_VERSION="${RELEASE_VERSION}"  \
               -t docker.pkg.github.com/queueing-systems-assistance/qsa-frontend/qsa-frontend:"${RELEASE_VERSION}" .
             docker push docker.pkg.github.com/queueing-systems-assistance/qsa-frontend/qsa-frontend:"${RELEASE_VERSION}"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - envs/release-version
       - run:
           name: Git Tagging
           command: |
@@ -75,9 +142,23 @@ jobs:
           name: Run E2E tests
           command: |
             npm run e2eCI
+  deploy-lab:
+    docker:
+      - image: cimg/base:2022.01
+    environment:
+      QSA_ENVIRONMENT: lab
+    steps:
+      - deploy
+  deploy-prod:
+    docker:
+      - image: cimg/base:2022.01
+    environment:
+      QSA_ENVIRONMENT: prod
+    steps:
+      - deploy
 workflows:
   version: 2
-  workflow:
+  default-pipeline:
     jobs:
       - cypress:
           context:
@@ -88,8 +169,6 @@ workflows:
                 - /^master/
                 - /^feature\/QSA-[0-9]+/
       - build:
-          requires:
-            - cypress
           context:
             - Secrets
           filters:
@@ -101,4 +180,47 @@ workflows:
             - jira/notify:
                 scan_commit_body: true
                 job_type: build
+                token_name: CIRCLE_CI_ARTIFACTS
+      - deploy-hold-lab:
+          requires:
+            - build
+          type: approval
+      - deploy-lab:
+          requires:
+            - deploy-hold-lab
+          context:
+            - Secrets
+          filters:
+            branches:
+              only:
+                - /^master/
+                - /^feature\/QSA-[0-9]+/
+          post-steps:
+            - jira/notify:
+                scan_commit_body: true
+                job_type: deployment
+                environment_type: staging
+                token_name: CIRCLE_CI_ARTIFACTS
+      - deploy-hold-prod:
+          requires:
+            - deploy-lab
+          type: approval
+          filters:
+            branches:
+              only:
+                - /^master/
+      - deploy-prod:
+          requires:
+            - deploy-hold-prod
+          context:
+            - Secrets
+          filters:
+            branches:
+              only:
+                - /^master/
+          post-steps:
+            - jira/notify:
+                scan_commit_body: true
+                job_type: deployment
+                environment_type: production
                 token_name: CIRCLE_CI_ARTIFACTS
